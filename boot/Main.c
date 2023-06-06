@@ -65,25 +65,25 @@ static void Kernel_init(void)
     Kernel_msgQ_init();
     Kernel_sem_init(1);
     //Kernel_mutex_init();
+    //TEST GIT22
 
     taskId = Kernel_task_create(User_task0,3);
     if (NOT_ENOUGH_TASK_NUM == taskId)
     {
         putstr("Task0 creation fail\n");
     }
-    /*
     taskId = Kernel_task_create(User_task1,4);
     if (NOT_ENOUGH_TASK_NUM == taskId)
     {
         putstr("Task1 creation fail\n");
     }
-
+    
     taskId = Kernel_task_create(User_task2,1);
     if (NOT_ENOUGH_TASK_NUM == taskId)
     {
         putstr("Task2 creation fail\n");
     }
-    */
+    
     Kernel_start();
    
 }
@@ -91,26 +91,32 @@ static void Kernel_init(void)
 void User_task0(void)
 {
    uint32_t local=0;
-   debug_printf("User task0 SP=0x%x\n", &local);
-   while(1);
-
+   while(true){
+   	debug_printf("User task0 SP=0x%x\n", &local);
+   	Kernel_yield();
+   }
 }
 
 void User_task1(void)
 {
    uint32_t local=0;
-   debug_printf(" User task1 SP=0x%x\n", &local);
-   while(1);
-
+   while(true)
+   {
+   	debug_printf(" User task1 SP=0x%x\n", &local);
+	Kernel_yield();
+   }
 }
 
 void User_task2(void)
 {
    uint32_t local=0;
-   debug_printf(" User task2 SP=0x%x\n", &local);
-   while(1);
+   while(true)
+   {
+   	debug_printf(" User task2 SP=0x%x\n", &local);
+	Kernel_yield();
+   }
 }
- /*
+
 static uint32_t shared_value;
 static void Test_critical_section(uint32_t p, uint32_t taskId){
     Kernel_lock_mutex();
@@ -123,4 +129,4 @@ static void Test_critical_section(uint32_t p, uint32_t taskId){
 
     Kernel_unlock_mutex();
 }
-*/
+
