@@ -35,15 +35,12 @@ void Kernel_task_init(void)
 void Kernel_task_start(void)
 {
 
-    debug_printf("kernel task start 진입\n");
     sNext_tcb = &sTask_list[sCurrent_tcb_index];
-    debug_printf("Set sNext_tcb\n");
     Restore_context();
-    debug_printf("스타트 완\n");
 }
 
 
-uint32_t Kernel_task_create(KernelTaskFunc_t startFunc, uint32_t priority)
+uint32_t Kernel_task_create(KernelTaskFunc_t startFunc)
 {
     KernelTcb_t* new_tcb = &sTask_list[sAllocated_tcb_index++];
 
@@ -52,12 +49,62 @@ uint32_t Kernel_task_create(KernelTaskFunc_t startFunc, uint32_t priority)
         return NOT_ENOUGH_TASK_NUM;
     }
 
-    new_tcb->priority = priority;
+    //new_tcb->priority = priority;
 
-    debug_printf("priority 생성 완료 : %u \n", new_tcb->priority);
+    //debug_printf("priority 생성 완료 : %u \n", new_tcb->priority);
     KernelTaskContext_t* ctx = (KernelTaskContext_t*)new_tcb->sp;
     ctx->pc = (uint32_t)startFunc;
+    //debug_printf("priority 생성 완료 : %u \n", startFunc);
     return (sAllocated_tcb_index - 1);
+}
+
+uint32_t Kernel_task_clear(void)
+{
+	uint32_t  MAX = MAX_TASK_NUM;
+	KernelTcb_t* c_tcb = &sTask_list[sCurrent_tcb_index];
+	c_tcb->priority = MAX_TASK_NUM - 10;		
+	
+	/*
+	if(sCurrent_tcb_index < sAllocated_tcb_index)
+	{	
+        	for(uint32_t i = sCurrent_tcb_index ; i < sAllocated_tcb_index ; i++)
+        	{       
+    			
+    			KernelTaskContext_t* ctx = (KernelTaskContext_t*)sTask_list[i]->sp;
+			//KernelTcb_t* new_tcb = &sTask_list[i+1];
+                	debug_printf("sp : %u \n", ctx->pc);
+                	sTask_list[i] = sTask_list[i+1];
+                	debug_printf("sp : %u \n", sTask_list[i].sp->pc);
+        	}
+        	sAllocated_tcb_index--;
+	}
+	else //마지막요소?
+	{
+        	sAllocated_tcb_index--;
+	}
+	*/
+        debug_printf("sAllo : %u \n", sAllocated_tcb_index);
+	//uint32_t next_index = 0;
+	uint32_t high_prio = sTask_list[0].priority;
+        debug_printf("high prio : %u \n", high_prio);
+	for(uint32_t i = 0 ; i < sAllocated_tcb_index ; i++)
+        {
+                debug_printf("i : %u \n", i);
+                KernelTcb_t* tcb_prio = &sTask_list[i];
+                debug_printf("prio : %u \n", sTask_list[i].priority);
+                if(tcb_prio->priority <= high_prio){
+			high_prio = tcb_prio->priority;
+			sCurrent_tcb_index = i;
+                	debug_printf("change i : %u \n", i);
+		}
+        }
+        debug_printf("current tcb index : %u \n", sCurrent_tcb_index);
+    	sNext_tcb = &sTask_list[sCurrent_tcb_index];
+	//sNext_tcb = &sTask_list[next_index];
+	//Kernel_task_scheduler();
+    	Kernel_task_context_switching();
+	debug_printf("반납?\n");
+	return sCurrent_tcb_index;
 }
 
 uint32_t Kernel_task_get_current_task_id(void)
@@ -68,10 +115,8 @@ uint32_t Kernel_task_get_current_task_id(void)
 void Kernel_task_scheduler(void)
 {
     sCurrent_tcb = &sTask_list[sCurrent_tcb_index];
-    sNext_tcb = Scheduler_priority_algorithm();
-    debug_printf("in scheduler 다음 task priority: %u\n", sNext_tcb->priority);
+    sNext_tcb = Scheduler_round_robin_algorithm();
     Kernel_task_context_switching();
-    debug_printf("context 완료요 %u\n", sCurrent_tcb->priority);
 }
 
 __attribute__ ((naked)) void Kernel_task_context_switching(void)

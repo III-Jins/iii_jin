@@ -58,32 +58,16 @@ uint8_t Hal_uart_get_char(void)
 static void interrupt_handler(void){
     uint32_t taskId;
     uint8_t ch= Hal_uart_get_char();
-    if (ch == 'U')
-    {
-        Kernel_send_events(KernelEventFlag_Unlock);
-	return;
-    }
     
-    if (ch == 'X')
+    if (ch != 'X')
     {
-        Kernel_send_events(KernelEventFlag_CmdOut);
+	Hal_uart_put_char(ch);
+    	Kernel_send_msg(KernelMsgQ_Task0, &ch, 1);
+        Kernel_send_events(KernelEventFlag_UartIn);
 	return;
     }
 
-    //task1,2생성
-
-    if(ch=='1')
-    {
-	taskId = Kernel_task_create(User_task1,4);
-	Kernel_yield();
-	debug_printf("1 생성 \n");
-    	if (NOT_ENOUGH_TASK_NUM == taskId)
-    	{
-        	putstr("Task1 creation fail\n");
-    	}
-    }
-
-    if(ch=='2')
+    /*if(ch=='2')
     {
         taskId = Kernel_task_create(User_task2,1);
 	Kernel_yield();
@@ -92,9 +76,9 @@ static void interrupt_handler(void){
         {
                 putstr("Task1 creation fail\n");
         }
-    }
-
-    Hal_uart_put_char(ch);
+    }*/
+    else{
     //Kernel_send_msg(KernelMsgQ_Task0, &ch, 1);
-    //Kernel_send_events(KernelEventFlag_UartIn);
+    	Kernel_send_events(KernelEventFlag_CmdOut);
+    }
 }
