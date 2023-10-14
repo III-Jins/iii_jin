@@ -1,6 +1,8 @@
 #include "stdint.h"
 #include "stdbool.h"
 
+#include "switch.h"
+
 #include "ARMv7AR.h"
 #include "task.h"
 #include "stdio.h"
@@ -64,31 +66,7 @@ uint32_t Kernel_task_clear(void)
 	KernelTcb_t* c_tcb = &sTask_list[sCurrent_tcb_index];
 	c_tcb->priority = c_tcb->priority + 10;
 	
-        //debug_printf("sAllo : %u \n", sAllocated_tcb_index);
-	//uint32_t next_index = 0;
-	/*
-	uint32_t high_prio = sTask_list[0].priority;
-        debug_printf("high prio : %u \n", high_prio);
-	for(uint32_t i = 0 ; i < sAllocated_tcb_index ; i++)
-        {
-                debug_printf("i : %u \n", i);
-                KernelTcb_t* tcb_prio = &sTask_list[i];
-                debug_printf("prio : %u \n", sTask_list[i].priority);
-                if(tcb_prio->priority <= high_prio){
-			high_prio = tcb_prio->priority;
-			sCurrent_tcb_index = i;
-                	debug_printf("change i : %u \n", i);
-		}
-        }
-        debug_printf("current tcb index : %u \n", sCurrent_tcb_index);
-    	sNext_tcb = &sTask_list[sCurrent_tcb_index];
-        //debug_printf("2 \n");
-	//sNext_tcb = &sTask_list[next_index];
-	*/
 	Kernel_task_scheduler();
-    	//Kernel_task_context_switching();
-	//debug_printf("반납?\n");
-	//return sCurrent_tcb_index;
 }
 
 void Kernel_task_recover(void)
@@ -110,38 +88,6 @@ void Kernel_task_scheduler(void)
     sCurrent_tcb = &sTask_list[sCurrent_tcb_index];
     sNext_tcb = Scheduler_priority_algorithm();
     Kernel_task_context_switching();
-}
-
-__attribute__ ((naked)) void Kernel_task_context_switching(void)
-{
-    __asm__ ("B Save_context");
-    __asm__ ("B Restore_context");
-}
-
-static __attribute__ ((naked)) void Save_context(void)
-{
-    // save current task context into the current task stack
-    __asm__ ("PUSH {lr}");
-    __asm__ ("PUSH {r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12}");
-    __asm__ ("MRS   r0, cpsr");
-    __asm__ ("PUSH {r0}");
-    // save current task stack pointer into the current TCB
-    __asm__ ("LDR   r0, =sCurrent_tcb");
-    __asm__ ("LDR   r0, [r0]");
-    __asm__ ("STMIA r0!, {sp}");
-}
-
-static __attribute__ ((naked)) void Restore_context(void)
-{
-    // restore next task stack pointer from the next TCB
-    __asm__ ("LDR   r0, =sNext_tcb");
-    __asm__ ("LDR   r0, [r0]");
-    __asm__ ("LDMIA r0!, {sp}");
-    // restore next task context from the next task stack
-    __asm__ ("POP  {r0}");
-    __asm__ ("MSR   cpsr, r0");
-    __asm__ ("POP  {r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12}");
-    __asm__ ("POP  {pc}");
 }
 
 static KernelTcb_t* Scheduler_round_robin_algorithm(void)

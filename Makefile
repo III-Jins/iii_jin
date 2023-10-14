@@ -1,5 +1,6 @@
-ARCH = armv7-a
-MCPU = cortex-a8
+ARCH = cortexM
+MCPU = cortex-m3
+ARMTHMODE = thumb
 
 TARGET = rvpb
 
@@ -19,21 +20,42 @@ ASM_OBJS = $(patsubst boot/%.S, build/%.os, $(ASM_SRCS))
 VPATH = boot \
 	hal/$(TARGET) \
 	lib \
-	kernel
+        lib/$(ARCH)				\
+        kernel
+
 
 C_SRCS = $(notdir $(wildcard boot/*.c))
 C_SRCS += $(notdir $(wildcard hal/$(TARGET)/*.c))
 C_SRCS += $(notdir $(wildcard lib/*.c))
+C_SRCS += $(notdir $(wildcard lib/$(ARCH)/*.c))
 C_SRCS += $(notdir $(wildcard kernel/*.c))
 C_OBJS = $(patsubst %.c, build/%.o, $(C_SRCS))
 
 INC_DIRS = -I include   \
 	   -I hal   \
 	   -I hal/$(TARGET) \
-	   -I lib \
-	   -I kernel
+	   -I boot    		\
+           -I hal/$(BOARD) 	\
+           -I lib		\
+           -I lib/$(ARCH)	\
+           -I kernel
 
-CFLAGS = -c -g -std=c11 -mthumb-interwork
+
+
+COMMON_FLG = -mcpu=$(MCPU) -m$(ARMTHMODE)
+
+CCFLAGS = -g
+CCFLAGS += -Os -Wall -fdata-sections -ffunction-sections
+CCFLAGS += $(USR_DEFINE) $(INC_DIRS)
+CCFLAGS += $(COMMON_FLG) 
+
+CFLAGS = -c -g -std=c11 
+CFLAGS += -Os -Wall -fdata-sections -ffunction-sections
+CFLAGS += $(USR_DEFINE) $(INC_DIRS)
+CFLAGS += $(COMMON_FLG)
+
+LDFLAGS = $(COMMON_FLG) -Wl,--cref,--gc-sections
+LDFLAGS += -lc -lm -lnosys
 
 LDFLAGS = -nostartfiles -nostdlib -nodefaultlibs -static -lgcc
 
@@ -48,10 +70,10 @@ clean:
 	@rm -fr build
 
 run: $(iiijin)
-	qemu-system-arm -M realview-pb-a8 -kernel $(iiijin) -nographic
+	qemu-system-arm -M lm3s811evb -kernel $(iiijin) -nographic
 
 debug: $(iiijin)
-	qemu-system-arm -M realview-pb-a8 -kernel $(iiijin) -S -gdb tcp::1234,ipv4
+	qemu-system-arm -M lm3s811evb -kernel $(iiijin) -S -gdb tcp::1234,ipv4
 
 gdb:
 	gdb-multiarch
