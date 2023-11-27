@@ -1,0 +1,15 @@
+
+out/armcpu.o:     file format elf32-littlearm
+
+
+Disassembly of section .text.enable_irq:
+
+00000000 <enable_irq>:
+   0:	b662      	cpsie	i
+   2:	4770      	bx	lr
+
+Disassembly of section .text.disable_irq:
+
+00000000 <disable_irq>:
+   0:	b672      	cpsid	i
+   2:	4770      	bx	lr

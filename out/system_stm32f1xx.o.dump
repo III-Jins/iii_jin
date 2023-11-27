@@ -1,0 +1,47 @@
+
+out/system_stm32f1xx.o:     file format elf32-littlearm
+
+
+Disassembly of section .text.SystemInit:
+
+00000000 <SystemInit>:
+   0:	4770      	bx	lr
+
+Disassembly of section .text.SystemCoreClockUpdate:
+
+00000000 <SystemCoreClockUpdate>:
+   0:	4910      	ldr	r1, [pc, #64]	; (44 <SystemCoreClockUpdate+0x44>)
+   2:	4a11      	ldr	r2, [pc, #68]	; (48 <SystemCoreClockUpdate+0x48>)
+   4:	684b      	ldr	r3, [r1, #4]
+   6:	f003 030c 	and.w	r3, r3, #12
+   a:	2b08      	cmp	r3, #8
+   c:	d00a      	beq.n	24 <SystemCoreClockUpdate+0x24>
+   e:	4b0f      	ldr	r3, [pc, #60]	; (4c <SystemCoreClockUpdate+0x4c>)
+  10:	6013      	str	r3, [r2, #0]
+  12:	684b      	ldr	r3, [r1, #4]
+  14:	490e      	ldr	r1, [pc, #56]	; (50 <SystemCoreClockUpdate+0x50>)
+  16:	f3c3 1303 	ubfx	r3, r3, #4, #4
+  1a:	5cc9      	ldrb	r1, [r1, r3]
+  1c:	6813      	ldr	r3, [r2, #0]
+  1e:	40cb      	lsrs	r3, r1
+  20:	6013      	str	r3, [r2, #0]
+  22:	4770      	bx	lr
+  24:	684b      	ldr	r3, [r1, #4]
+  26:	6848      	ldr	r0, [r1, #4]
+  28:	f3c3 4383 	ubfx	r3, r3, #18, #4
+  2c:	03c0      	lsls	r0, r0, #15
+  2e:	f103 0302 	add.w	r3, r3, #2
+  32:	d402      	bmi.n	3a <SystemCoreClockUpdate+0x3a>
+  34:	4807      	ldr	r0, [pc, #28]	; (54 <SystemCoreClockUpdate+0x54>)
+  36:	4343      	muls	r3, r0
+  38:	e7ea      	b.n	10 <SystemCoreClockUpdate+0x10>
+  3a:	6848      	ldr	r0, [r1, #4]
+  3c:	0380      	lsls	r0, r0, #14
+  3e:	d4f9      	bmi.n	34 <SystemCoreClockUpdate+0x34>
+  40:	4802      	ldr	r0, [pc, #8]	; (4c <SystemCoreClockUpdate+0x4c>)
+  42:	e7f8      	b.n	36 <SystemCoreClockUpdate+0x36>
+  44:	40021000 	.word	0x40021000
+  48:	00000000 	.word	0x00000000
+  4c:	007a1200 	.word	0x007a1200
+  50:	00000000 	.word	0x00000000
+  54:	003d0900 	.word	0x003d0900

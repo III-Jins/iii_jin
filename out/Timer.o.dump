@@ -1,0 +1,14 @@
+
+out/Timer.o:     file format elf32-littlearm
+
+
+Disassembly of section .text.Hal_timer_init:
+
+00000000 <Hal_timer_init>:
+   0:	4770      	bx	lr
+
+Disassembly of section .text.Hal_timer_get_1ms_counter:
+
+00000000 <Hal_timer_get_1ms_counter>:
+   0:	2000      	movs	r0, #0
+   2:	4770      	bx	lr

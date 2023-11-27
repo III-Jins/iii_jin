@@ -1,0 +1,22 @@
+
+out/stdlib.o:     file format elf32-littlearm
+
+
+Disassembly of section .text.delay:
+
+00000000 <delay>:
+   0:	b510      	push	{r4, lr}
+   2:	4604      	mov	r4, r0
+   4:	f7ff fffe 	bl	0 <Hal_timer_get_1ms_counter>
+   8:	4404      	add	r4, r0
+   a:	f7ff fffe 	bl	0 <Hal_timer_get_1ms_counter>
+   e:	42a0      	cmp	r0, r4
+  10:	d1fb      	bne.n	a <delay+0xa>
+  12:	bd10      	pop	{r4, pc}
+
+Disassembly of section .text.memclr:
+
+00000000 <memclr>:
+   0:	460a      	mov	r2, r1
+   2:	2100      	movs	r1, #0
+   4:	f7ff bffe 	b.w	0 <memset>

@@ -1,0 +1,63 @@
+
+out/Main.o:     file format elf32-littlearm
+
+
+Disassembly of section .text.SystemClock_Config:
+
+00000000 <SystemClock_Config>:
+   0:	b510      	push	{r4, lr}
+   2:	b090      	sub	sp, #64	; 0x40
+   4:	2220      	movs	r2, #32
+   6:	2100      	movs	r1, #0
+   8:	a807      	add	r0, sp, #28
+   a:	f7ff fffe 	bl	0 <memset>
+   e:	2214      	movs	r2, #20
+  10:	2100      	movs	r1, #0
+  12:	a801      	add	r0, sp, #4
+  14:	f7ff fffe 	bl	0 <memset>
+  18:	2310      	movs	r3, #16
+  1a:	2201      	movs	r2, #1
+  1c:	2402      	movs	r4, #2
+  1e:	e9cd 230a 	strd	r2, r3, [sp, #40]	; 0x28
+  22:	f44f 1360 	mov.w	r3, #3670016	; 0x380000
+  26:	a806      	add	r0, sp, #24
+  28:	9406      	str	r4, [sp, #24]
+  2a:	940d      	str	r4, [sp, #52]	; 0x34
+  2c:	930f      	str	r3, [sp, #60]	; 0x3c
+  2e:	f7ff fffe 	bl	0 <HAL_RCC_OscConfig>
+  32:	b108      	cbz	r0, 38 <SystemClock_Config+0x38>
+  34:	b672      	cpsid	i
+  36:	e7fe      	b.n	36 <SystemClock_Config+0x36>
+  38:	230f      	movs	r3, #15
+  3a:	e9cd 3401 	strd	r3, r4, [sp, #4]
+  3e:	f44f 6380 	mov.w	r3, #1024	; 0x400
+  42:	9003      	str	r0, [sp, #12]
+  44:	e9cd 3004 	strd	r3, r0, [sp, #16]
+  48:	4621      	mov	r1, r4
+  4a:	a801      	add	r0, sp, #4
+  4c:	f7ff fffe 	bl	0 <HAL_RCC_ClockConfig>
+  50:	b108      	cbz	r0, 56 <SystemClock_Config+0x56>
+  52:	b672      	cpsid	i
+  54:	e7fe      	b.n	54 <SystemClock_Config+0x54>
+  56:	b010      	add	sp, #64	; 0x40
+  58:	bd10      	pop	{r4, pc}
+
+Disassembly of section .text.startup.main:
+
+00000000 <main>:
+   0:	b508      	push	{r3, lr}
+   2:	f7ff fffe 	bl	0 <HAL_Init>
+   6:	f7ff fffe 	bl	0 <main>
+   a:	f7ff fffe 	bl	0 <hal_gpio_init>
+   e:	f7ff fffe 	bl	0 <hal_uart_init>
+  12:	4c02      	ldr	r4, [pc, #8]	; (1c <main+0x1c>)
+  14:	4620      	mov	r0, r4
+  16:	f7ff fffe 	bl	0 <debug_printf>
+  1a:	e7fb      	b.n	14 <main+0x14>
+  1c:	00000000 	.word	0x00000000
+
+Disassembly of section .text.Error_Handler:
+
+00000000 <Error_Handler>:
+   0:	b672      	cpsid	i
+   2:	e7fe      	b.n	2 <Error_Handler+0x2>

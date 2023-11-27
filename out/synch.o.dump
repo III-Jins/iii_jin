@@ -1,0 +1,85 @@
+
+out/synch.o:     file format elf32-littlearm
+
+
+Disassembly of section .text.Kernel_sem_init:
+
+00000000 <Kernel_sem_init>:
+   0:	2808      	cmp	r0, #8
+   2:	bfa8      	it	ge
+   4:	2008      	movge	r0, #8
+   6:	4b02      	ldr	r3, [pc, #8]	; (10 <Kernel_sem_init+0x10>)
+   8:	6018      	str	r0, [r3, #0]
+   a:	4b02      	ldr	r3, [pc, #8]	; (14 <Kernel_sem_init+0x14>)
+   c:	6018      	str	r0, [r3, #0]
+   e:	4770      	bx	lr
+	...
+
+Disassembly of section .text.Kernel_sem_test:
+
+00000000 <Kernel_sem_test>:
+   0:	4a04      	ldr	r2, [pc, #16]	; (14 <Kernel_sem_test+0x14>)
+   2:	6813      	ldr	r3, [r2, #0]
+   4:	2b00      	cmp	r3, #0
+   6:	bfc3      	ittte	gt
+   8:	f103 33ff 	addgt.w	r3, r3, #4294967295	; 0xffffffff
+   c:	2001      	movgt	r0, #1
+   e:	6013      	strgt	r3, [r2, #0]
+  10:	2000      	movle	r0, #0
+  12:	4770      	bx	lr
+  14:	00000000 	.word	0x00000000
+
+Disassembly of section .text.Kernel_sem_release:
+
+00000000 <Kernel_sem_release>:
+   0:	4a04      	ldr	r2, [pc, #16]	; (14 <Kernel_sem_release+0x14>)
+   2:	4905      	ldr	r1, [pc, #20]	; (18 <Kernel_sem_release+0x18>)
+   4:	6813      	ldr	r3, [r2, #0]
+   6:	6809      	ldr	r1, [r1, #0]
+   8:	3301      	adds	r3, #1
+   a:	4299      	cmp	r1, r3
+   c:	bfd4      	ite	le
+   e:	6011      	strle	r1, [r2, #0]
+  10:	6013      	strgt	r3, [r2, #0]
+  12:	4770      	bx	lr
+	...
+
+Disassembly of section .text.Kernel_mutex_init:
+
+00000000 <Kernel_mutex_init>:
+   0:	2200      	movs	r2, #0
+   2:	4b02      	ldr	r3, [pc, #8]	; (c <Kernel_mutex_init+0xc>)
+   4:	601a      	str	r2, [r3, #0]
+   6:	711a      	strb	r2, [r3, #4]
+   8:	4770      	bx	lr
+   a:	bf00      	nop
+   c:	00000000 	.word	0x00000000
+
+Disassembly of section .text.Kernel_mutex_lock:
+
+00000000 <Kernel_mutex_lock>:
+   0:	4b04      	ldr	r3, [pc, #16]	; (14 <Kernel_mutex_lock+0x14>)
+   2:	791a      	ldrb	r2, [r3, #4]
+   4:	b91a      	cbnz	r2, e <Kernel_mutex_lock+0xe>
+   6:	6018      	str	r0, [r3, #0]
+   8:	2001      	movs	r0, #1
+   a:	7118      	strb	r0, [r3, #4]
+   c:	4770      	bx	lr
+   e:	2000      	movs	r0, #0
+  10:	4770      	bx	lr
+  12:	bf00      	nop
+  14:	00000000 	.word	0x00000000
+
+Disassembly of section .text.Kernel_mutex_unlock:
+
+00000000 <Kernel_mutex_unlock>:
+   0:	4b04      	ldr	r3, [pc, #16]	; (14 <Kernel_mutex_unlock+0x14>)
+   2:	681a      	ldr	r2, [r3, #0]
+   4:	4282      	cmp	r2, r0
+   6:	f04f 0000 	mov.w	r0, #0
+   a:	bf04      	itt	eq
+   c:	7118      	strbeq	r0, [r3, #4]
+   e:	2001      	moveq	r0, #1
+  10:	4770      	bx	lr
+  12:	bf00      	nop
+  14:	00000000 	.word	0x00000000

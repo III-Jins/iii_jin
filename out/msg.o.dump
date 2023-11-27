@@ -1,0 +1,114 @@
+
+out/msg.o:     file format elf32-littlearm
+
+
+Disassembly of section .text.Kernel_msgQ_init:
+
+00000000 <Kernel_msgQ_init>:
+   0:	b538      	push	{r3, r4, r5, lr}
+   2:	2500      	movs	r5, #0
+   4:	4c0e      	ldr	r4, [pc, #56]	; (40 <Kernel_msgQ_init+0x40>)
+   6:	f44f 7100 	mov.w	r1, #512	; 0x200
+   a:	f104 0008 	add.w	r0, r4, #8
+   e:	e9c4 5500 	strd	r5, r5, [r4]
+  12:	f7ff fffe 	bl	0 <memclr>
+  16:	f504 7004 	add.w	r0, r4, #528	; 0x210
+  1a:	f44f 7100 	mov.w	r1, #512	; 0x200
+  1e:	e9c4 5582 	strd	r5, r5, [r4, #520]	; 0x208
+  22:	f7ff fffe 	bl	0 <memclr>
+  26:	f8c4 5410 	str.w	r5, [r4, #1040]	; 0x410
+  2a:	f8c4 5414 	str.w	r5, [r4, #1044]	; 0x414
+  2e:	f504 6083 	add.w	r0, r4, #1048	; 0x418
+  32:	f44f 7100 	mov.w	r1, #512	; 0x200
+  36:	e8bd 4038 	ldmia.w	sp!, {r3, r4, r5, lr}
+  3a:	f7ff bffe 	b.w	0 <memclr>
+  3e:	bf00      	nop
+  40:	00000000 	.word	0x00000000
+
+Disassembly of section .text.Kernel_msgQ_is_empty:
+
+00000000 <Kernel_msgQ_is_empty>:
+   0:	2802      	cmp	r0, #2
+   2:	d80a      	bhi.n	1a <Kernel_msgQ_is_empty+0x1a>
+   4:	f44f 7202 	mov.w	r2, #520	; 0x208
+   8:	4350      	muls	r0, r2
+   a:	4b05      	ldr	r3, [pc, #20]	; (20 <Kernel_msgQ_is_empty+0x20>)
+   c:	181a      	adds	r2, r3, r0
+   e:	5818      	ldr	r0, [r3, r0]
+  10:	6853      	ldr	r3, [r2, #4]
+  12:	1ac3      	subs	r3, r0, r3
+  14:	4258      	negs	r0, r3
+  16:	4158      	adcs	r0, r3
+  18:	4770      	bx	lr
+  1a:	2000      	movs	r0, #0
+  1c:	4770      	bx	lr
+  1e:	bf00      	nop
+  20:	00000000 	.word	0x00000000
+
+Disassembly of section .text.Kernel_msgQ_is_full:
+
+00000000 <Kernel_msgQ_is_full>:
+   0:	2802      	cmp	r0, #2
+   2:	d80d      	bhi.n	20 <Kernel_msgQ_is_full+0x20>
+   4:	f44f 7302 	mov.w	r3, #520	; 0x208
+   8:	4343      	muls	r3, r0
+   a:	4a06      	ldr	r2, [pc, #24]	; (24 <Kernel_msgQ_is_full+0x24>)
+   c:	18d1      	adds	r1, r2, r3
+   e:	6848      	ldr	r0, [r1, #4]
+  10:	58d3      	ldr	r3, [r2, r3]
+  12:	3001      	adds	r0, #1
+  14:	f3c0 0008 	ubfx	r0, r0, #0, #9
+  18:	1ac3      	subs	r3, r0, r3
+  1a:	4258      	negs	r0, r3
+  1c:	4158      	adcs	r0, r3
+  1e:	4770      	bx	lr
+  20:	2000      	movs	r0, #0
+  22:	4770      	bx	lr
+  24:	00000000 	.word	0x00000000
+
+Disassembly of section .text.Kernel_msgQ_enqueue:
+
+00000000 <Kernel_msgQ_enqueue>:
+   0:	b538      	push	{r3, r4, r5, lr}
+   2:	4605      	mov	r5, r0
+   4:	460c      	mov	r4, r1
+   6:	f7ff fffe 	bl	0 <Kernel_msgQ_enqueue>
+   a:	b968      	cbnz	r0, 28 <Kernel_msgQ_enqueue+0x28>
+   c:	f44f 7002 	mov.w	r0, #520	; 0x208
+  10:	4b06      	ldr	r3, [pc, #24]	; (2c <Kernel_msgQ_enqueue+0x2c>)
+  12:	fb00 3005 	mla	r0, r0, r5, r3
+  16:	6843      	ldr	r3, [r0, #4]
+  18:	3301      	adds	r3, #1
+  1a:	f3c3 0308 	ubfx	r3, r3, #0, #9
+  1e:	6043      	str	r3, [r0, #4]
+  20:	4418      	add	r0, r3
+  22:	7204      	strb	r4, [r0, #8]
+  24:	2001      	movs	r0, #1
+  26:	bd38      	pop	{r3, r4, r5, pc}
+  28:	2000      	movs	r0, #0
+  2a:	e7fc      	b.n	26 <Kernel_msgQ_enqueue+0x26>
+  2c:	00000000 	.word	0x00000000
+
+Disassembly of section .text.Kernel_msgQ_dequeue:
+
+00000000 <Kernel_msgQ_dequeue>:
+   0:	b538      	push	{r3, r4, r5, lr}
+   2:	4604      	mov	r4, r0
+   4:	f7ff fffe 	bl	0 <Kernel_msgQ_dequeue>
+   8:	b970      	cbnz	r0, 28 <Kernel_msgQ_dequeue+0x28>
+   a:	f44f 7002 	mov.w	r0, #520	; 0x208
+   e:	4360      	muls	r0, r4
+  10:	4d06      	ldr	r5, [pc, #24]	; (2c <Kernel_msgQ_dequeue+0x2c>)
+  12:	582b      	ldr	r3, [r5, r0]
+  14:	182a      	adds	r2, r5, r0
+  16:	3301      	adds	r3, #1
+  18:	f3c3 0308 	ubfx	r3, r3, #0, #9
+  1c:	502b      	str	r3, [r5, r0]
+  1e:	2001      	movs	r0, #1
+  20:	4413      	add	r3, r2
+  22:	7a1b      	ldrb	r3, [r3, #8]
+  24:	700b      	strb	r3, [r1, #0]
+  26:	bd38      	pop	{r3, r4, r5, pc}
+  28:	2000      	movs	r0, #0
+  2a:	e7fc      	b.n	26 <Kernel_msgQ_dequeue+0x26>
+  2c:	00000000 	.word	0x00000000

@@ -1,0 +1,717 @@
+
+out/stm32f1xx_hal_dma.o:     file format elf32-littlearm
+
+
+Disassembly of section .text.HAL_DMA_Init:
+
+00000000 <HAL_DMA_Init>:
+   0:	b510      	push	{r4, lr}
+   2:	b348      	cbz	r0, 58 <HAL_DMA_Init+0x58>
+   4:	2214      	movs	r2, #20
+   6:	6801      	ldr	r1, [r0, #0]
+   8:	4b14      	ldr	r3, [pc, #80]	; (5c <HAL_DMA_Init+0x5c>)
+   a:	440b      	add	r3, r1
+   c:	fbb3 f3f2 	udiv	r3, r3, r2
+  10:	009b      	lsls	r3, r3, #2
+  12:	6403      	str	r3, [r0, #64]	; 0x40
+  14:	4b12      	ldr	r3, [pc, #72]	; (60 <HAL_DMA_Init+0x60>)
+  16:	63c3      	str	r3, [r0, #60]	; 0x3c
+  18:	2302      	movs	r3, #2
+  1a:	f880 3021 	strb.w	r3, [r0, #33]	; 0x21
+  1e:	e9d0 3401 	ldrd	r3, r4, [r0, #4]
+  22:	4323      	orrs	r3, r4
+  24:	68c4      	ldr	r4, [r0, #12]
+  26:	680a      	ldr	r2, [r1, #0]
+  28:	4323      	orrs	r3, r4
+  2a:	6904      	ldr	r4, [r0, #16]
+  2c:	f422 527f 	bic.w	r2, r2, #16320	; 0x3fc0
+  30:	4323      	orrs	r3, r4
+  32:	6944      	ldr	r4, [r0, #20]
+  34:	f022 0230 	bic.w	r2, r2, #48	; 0x30
+  38:	4323      	orrs	r3, r4
+  3a:	6984      	ldr	r4, [r0, #24]
+  3c:	4323      	orrs	r3, r4
+  3e:	69c4      	ldr	r4, [r0, #28]
+  40:	4323      	orrs	r3, r4
+  42:	4313      	orrs	r3, r2
+  44:	600b      	str	r3, [r1, #0]
+  46:	2201      	movs	r2, #1
+  48:	2300      	movs	r3, #0
+  4a:	6383      	str	r3, [r0, #56]	; 0x38
+  4c:	f880 3020 	strb.w	r3, [r0, #32]
+  50:	f880 2021 	strb.w	r2, [r0, #33]	; 0x21
+  54:	4618      	mov	r0, r3
+  56:	bd10      	pop	{r4, pc}
+  58:	2001      	movs	r0, #1
+  5a:	e7fc      	b.n	56 <HAL_DMA_Init+0x56>
+  5c:	bffdfff8 	.word	0xbffdfff8
+  60:	40020000 	.word	0x40020000
+
+Disassembly of section .text.HAL_DMA_DeInit:
+
+00000000 <HAL_DMA_DeInit>:
+   0:	4603      	mov	r3, r0
+   2:	b510      	push	{r4, lr}
+   4:	b300      	cbz	r0, 48 <HAL_DMA_DeInit+0x48>
+   6:	6801      	ldr	r1, [r0, #0]
+   8:	2000      	movs	r0, #0
+   a:	680a      	ldr	r2, [r1, #0]
+   c:	4c0f      	ldr	r4, [pc, #60]	; (4c <HAL_DMA_DeInit+0x4c>)
+   e:	f022 0201 	bic.w	r2, r2, #1
+  12:	600a      	str	r2, [r1, #0]
+  14:	4a0e      	ldr	r2, [pc, #56]	; (50 <HAL_DMA_DeInit+0x50>)
+  16:	6008      	str	r0, [r1, #0]
+  18:	440a      	add	r2, r1
+  1a:	6048      	str	r0, [r1, #4]
+  1c:	6088      	str	r0, [r1, #8]
+  1e:	60c8      	str	r0, [r1, #12]
+  20:	2114      	movs	r1, #20
+  22:	fbb2 f2f1 	udiv	r2, r2, r1
+  26:	2101      	movs	r1, #1
+  28:	0092      	lsls	r2, r2, #2
+  2a:	641a      	str	r2, [r3, #64]	; 0x40
+  2c:	fa01 f202 	lsl.w	r2, r1, r2
+  30:	63dc      	str	r4, [r3, #60]	; 0x3c
+  32:	6062      	str	r2, [r4, #4]
+  34:	e9c3 000a 	strd	r0, r0, [r3, #40]	; 0x28
+  38:	e9c3 000c 	strd	r0, r0, [r3, #48]	; 0x30
+  3c:	6398      	str	r0, [r3, #56]	; 0x38
+  3e:	f883 0020 	strb.w	r0, [r3, #32]
+  42:	f883 0021 	strb.w	r0, [r3, #33]	; 0x21
+  46:	bd10      	pop	{r4, pc}
+  48:	2001      	movs	r0, #1
+  4a:	e7fc      	b.n	46 <HAL_DMA_DeInit+0x46>
+  4c:	40020000 	.word	0x40020000
+  50:	bffdfff8 	.word	0xbffdfff8
+
+Disassembly of section .text.HAL_DMA_Start:
+
+00000000 <HAL_DMA_Start>:
+   0:	b5f0      	push	{r4, r5, r6, r7, lr}
+   2:	f890 4020 	ldrb.w	r4, [r0, #32]
+   6:	2c01      	cmp	r4, #1
+   8:	d026      	beq.n	58 <HAL_DMA_Start+0x58>
+   a:	2401      	movs	r4, #1
+   c:	f880 4020 	strb.w	r4, [r0, #32]
+  10:	f890 4021 	ldrb.w	r4, [r0, #33]	; 0x21
+  14:	2600      	movs	r6, #0
+  16:	2c01      	cmp	r4, #1
+  18:	b2e5      	uxtb	r5, r4
+  1a:	f04f 0402 	mov.w	r4, #2
+  1e:	d119      	bne.n	54 <HAL_DMA_Start+0x54>
+  20:	f880 4021 	strb.w	r4, [r0, #33]	; 0x21
+  24:	6804      	ldr	r4, [r0, #0]
+  26:	6386      	str	r6, [r0, #56]	; 0x38
+  28:	6826      	ldr	r6, [r4, #0]
+  2a:	f026 0601 	bic.w	r6, r6, #1
+  2e:	6026      	str	r6, [r4, #0]
+  30:	e9d0 670f 	ldrd	r6, r7, [r0, #60]	; 0x3c
+  34:	40bd      	lsls	r5, r7
+  36:	6075      	str	r5, [r6, #4]
+  38:	6063      	str	r3, [r4, #4]
+  3a:	6843      	ldr	r3, [r0, #4]
+  3c:	2000      	movs	r0, #0
+  3e:	2b10      	cmp	r3, #16
+  40:	bf0b      	itete	eq
+  42:	60a2      	streq	r2, [r4, #8]
+  44:	60a1      	strne	r1, [r4, #8]
+  46:	60e1      	streq	r1, [r4, #12]
+  48:	60e2      	strne	r2, [r4, #12]
+  4a:	6823      	ldr	r3, [r4, #0]
+  4c:	f043 0301 	orr.w	r3, r3, #1
+  50:	6023      	str	r3, [r4, #0]
+  52:	bdf0      	pop	{r4, r5, r6, r7, pc}
+  54:	f880 6020 	strb.w	r6, [r0, #32]
+  58:	2002      	movs	r0, #2
+  5a:	e7fa      	b.n	52 <HAL_DMA_Start+0x52>
+
+Disassembly of section .text.HAL_DMA_Start_IT:
+
+00000000 <HAL_DMA_Start_IT>:
+   0:	b5f0      	push	{r4, r5, r6, r7, lr}
+   2:	f890 4020 	ldrb.w	r4, [r0, #32]
+   6:	2c01      	cmp	r4, #1
+   8:	d034      	beq.n	74 <HAL_DMA_Start_IT+0x74>
+   a:	2401      	movs	r4, #1
+   c:	f880 4020 	strb.w	r4, [r0, #32]
+  10:	f890 4021 	ldrb.w	r4, [r0, #33]	; 0x21
+  14:	2600      	movs	r6, #0
+  16:	2c01      	cmp	r4, #1
+  18:	b2e5      	uxtb	r5, r4
+  1a:	f04f 0402 	mov.w	r4, #2
+  1e:	d127      	bne.n	70 <HAL_DMA_Start_IT+0x70>
+  20:	f880 4021 	strb.w	r4, [r0, #33]	; 0x21
+  24:	6804      	ldr	r4, [r0, #0]
+  26:	6386      	str	r6, [r0, #56]	; 0x38
+  28:	6826      	ldr	r6, [r4, #0]
+  2a:	f026 0601 	bic.w	r6, r6, #1
+  2e:	6026      	str	r6, [r4, #0]
+  30:	e9d0 670f 	ldrd	r6, r7, [r0, #60]	; 0x3c
+  34:	40bd      	lsls	r5, r7
+  36:	6075      	str	r5, [r6, #4]
+  38:	6063      	str	r3, [r4, #4]
+  3a:	6843      	ldr	r3, [r0, #4]
+  3c:	2b10      	cmp	r3, #16
+  3e:	6ac3      	ldr	r3, [r0, #44]	; 0x2c
+  40:	bf0b      	itete	eq
+  42:	60a2      	streq	r2, [r4, #8]
+  44:	60a1      	strne	r1, [r4, #8]
+  46:	60e1      	streq	r1, [r4, #12]
+  48:	60e2      	strne	r2, [r4, #12]
+  4a:	b14b      	cbz	r3, 60 <HAL_DMA_Start_IT+0x60>
+  4c:	6823      	ldr	r3, [r4, #0]
+  4e:	f043 030e 	orr.w	r3, r3, #14
+  52:	2000      	movs	r0, #0
+  54:	6023      	str	r3, [r4, #0]
+  56:	6823      	ldr	r3, [r4, #0]
+  58:	f043 0301 	orr.w	r3, r3, #1
+  5c:	6023      	str	r3, [r4, #0]
+  5e:	bdf0      	pop	{r4, r5, r6, r7, pc}
+  60:	6823      	ldr	r3, [r4, #0]
+  62:	f023 0304 	bic.w	r3, r3, #4
+  66:	6023      	str	r3, [r4, #0]
+  68:	6823      	ldr	r3, [r4, #0]
+  6a:	f043 030a 	orr.w	r3, r3, #10
+  6e:	e7f0      	b.n	52 <HAL_DMA_Start_IT+0x52>
+  70:	f880 6020 	strb.w	r6, [r0, #32]
+  74:	2002      	movs	r0, #2
+  76:	e7f2      	b.n	5e <HAL_DMA_Start_IT+0x5e>
+
+Disassembly of section .text.HAL_DMA_Abort:
+
+00000000 <HAL_DMA_Abort>:
+   0:	f890 3021 	ldrb.w	r3, [r0, #33]	; 0x21
+   4:	2b02      	cmp	r3, #2
+   6:	d006      	beq.n	16 <HAL_DMA_Abort+0x16>
+   8:	2304      	movs	r3, #4
+   a:	6383      	str	r3, [r0, #56]	; 0x38
+   c:	2300      	movs	r3, #0
+   e:	f880 3020 	strb.w	r3, [r0, #32]
+  12:	2001      	movs	r0, #1
+  14:	4770      	bx	lr
+  16:	6803      	ldr	r3, [r0, #0]
+  18:	6bc1      	ldr	r1, [r0, #60]	; 0x3c
+  1a:	681a      	ldr	r2, [r3, #0]
+  1c:	f022 020e 	bic.w	r2, r2, #14
+  20:	601a      	str	r2, [r3, #0]
+  22:	681a      	ldr	r2, [r3, #0]
+  24:	f022 0201 	bic.w	r2, r2, #1
+  28:	601a      	str	r2, [r3, #0]
+  2a:	2201      	movs	r2, #1
+  2c:	6c03      	ldr	r3, [r0, #64]	; 0x40
+  2e:	fa02 f303 	lsl.w	r3, r2, r3
+  32:	604b      	str	r3, [r1, #4]
+  34:	2300      	movs	r3, #0
+  36:	f880 2021 	strb.w	r2, [r0, #33]	; 0x21
+  3a:	f880 3020 	strb.w	r3, [r0, #32]
+  3e:	4618      	mov	r0, r3
+  40:	4770      	bx	lr
+
+Disassembly of section .text.HAL_DMA_Abort_IT:
+
+00000000 <HAL_DMA_Abort_IT>:
+   0:	b510      	push	{r4, lr}
+   2:	f890 3021 	ldrb.w	r3, [r0, #33]	; 0x21
+   6:	2b02      	cmp	r3, #2
+   8:	d003      	beq.n	12 <HAL_DMA_Abort_IT+0x12>
+   a:	2304      	movs	r3, #4
+   c:	6383      	str	r3, [r0, #56]	; 0x38
+   e:	2001      	movs	r0, #1
+  10:	bd10      	pop	{r4, pc}
+  12:	6803      	ldr	r3, [r0, #0]
+  14:	681a      	ldr	r2, [r3, #0]
+  16:	f022 020e 	bic.w	r2, r2, #14
+  1a:	601a      	str	r2, [r3, #0]
+  1c:	681a      	ldr	r2, [r3, #0]
+  1e:	f022 0201 	bic.w	r2, r2, #1
+  22:	601a      	str	r2, [r3, #0]
+  24:	4a18      	ldr	r2, [pc, #96]	; (88 <HAL_DMA_Abort_IT+0x88>)
+  26:	4293      	cmp	r3, r2
+  28:	d01f      	beq.n	6a <HAL_DMA_Abort_IT+0x6a>
+  2a:	3214      	adds	r2, #20
+  2c:	4293      	cmp	r3, r2
+  2e:	d01e      	beq.n	6e <HAL_DMA_Abort_IT+0x6e>
+  30:	3214      	adds	r2, #20
+  32:	4293      	cmp	r3, r2
+  34:	d01d      	beq.n	72 <HAL_DMA_Abort_IT+0x72>
+  36:	3214      	adds	r2, #20
+  38:	4293      	cmp	r3, r2
+  3a:	d01d      	beq.n	78 <HAL_DMA_Abort_IT+0x78>
+  3c:	3214      	adds	r2, #20
+  3e:	4293      	cmp	r3, r2
+  40:	d01d      	beq.n	7e <HAL_DMA_Abort_IT+0x7e>
+  42:	3214      	adds	r2, #20
+  44:	4293      	cmp	r3, r2
+  46:	bf0c      	ite	eq
+  48:	f44f 1380 	moveq.w	r3, #1048576	; 0x100000
+  4c:	f04f 7380 	movne.w	r3, #16777216	; 0x1000000
+  50:	4a0e      	ldr	r2, [pc, #56]	; (8c <HAL_DMA_Abort_IT+0x8c>)
+  52:	2400      	movs	r4, #0
+  54:	6053      	str	r3, [r2, #4]
+  56:	2301      	movs	r3, #1
+  58:	f880 3021 	strb.w	r3, [r0, #33]	; 0x21
+  5c:	6b43      	ldr	r3, [r0, #52]	; 0x34
+  5e:	f880 4020 	strb.w	r4, [r0, #32]
+  62:	b17b      	cbz	r3, 84 <HAL_DMA_Abort_IT+0x84>
+  64:	4798      	blx	r3
+  66:	4620      	mov	r0, r4
+  68:	e7d2      	b.n	10 <HAL_DMA_Abort_IT+0x10>
+  6a:	2301      	movs	r3, #1
+  6c:	e7f0      	b.n	50 <HAL_DMA_Abort_IT+0x50>
+  6e:	2310      	movs	r3, #16
+  70:	e7ee      	b.n	50 <HAL_DMA_Abort_IT+0x50>
+  72:	f44f 7380 	mov.w	r3, #256	; 0x100
+  76:	e7eb      	b.n	50 <HAL_DMA_Abort_IT+0x50>
+  78:	f44f 5380 	mov.w	r3, #4096	; 0x1000
+  7c:	e7e8      	b.n	50 <HAL_DMA_Abort_IT+0x50>
+  7e:	f44f 3380 	mov.w	r3, #65536	; 0x10000
+  82:	e7e5      	b.n	50 <HAL_DMA_Abort_IT+0x50>
+  84:	4618      	mov	r0, r3
+  86:	e7c3      	b.n	10 <HAL_DMA_Abort_IT+0x10>
+  88:	40020008 	.word	0x40020008
+  8c:	40020000 	.word	0x40020000
+
+Disassembly of section .text.HAL_DMA_PollForTransfer:
+
+00000000 <HAL_DMA_PollForTransfer>:
+   0:	e92d 4ff8 	stmdb	sp!, {r3, r4, r5, r6, r7, r8, r9, sl, fp, lr}
+   4:	f890 3021 	ldrb.w	r3, [r0, #33]	; 0x21
+   8:	4604      	mov	r4, r0
+   a:	2b02      	cmp	r3, #2
+   c:	4688      	mov	r8, r1
+   e:	4617      	mov	r7, r2
+  10:	b2dd      	uxtb	r5, r3
+  12:	d007      	beq.n	24 <HAL_DMA_PollForTransfer+0x24>
+  14:	2304      	movs	r3, #4
+  16:	6383      	str	r3, [r0, #56]	; 0x38
+  18:	2300      	movs	r3, #0
+  1a:	f880 3020 	strb.w	r3, [r0, #32]
+  1e:	2001      	movs	r0, #1
+  20:	e8bd 8ff8 	ldmia.w	sp!, {r3, r4, r5, r6, r7, r8, r9, sl, fp, pc}
+  24:	6803      	ldr	r3, [r0, #0]
+  26:	681a      	ldr	r2, [r3, #0]
+  28:	0696      	lsls	r6, r2, #26
+  2a:	d503      	bpl.n	34 <HAL_DMA_PollForTransfer+0x34>
+  2c:	f44f 7380 	mov.w	r3, #256	; 0x100
+  30:	6383      	str	r3, [r0, #56]	; 0x38
+  32:	e7f4      	b.n	1e <HAL_DMA_PollForTransfer+0x1e>
+  34:	4e78      	ldr	r6, [pc, #480]	; (218 <HAL_DMA_PollForTransfer+0x218>)
+  36:	2900      	cmp	r1, #0
+  38:	d14a      	bne.n	d0 <HAL_DMA_PollForTransfer+0xd0>
+  3a:	42b3      	cmp	r3, r6
+  3c:	d012      	beq.n	64 <HAL_DMA_PollForTransfer+0x64>
+  3e:	4a77      	ldr	r2, [pc, #476]	; (21c <HAL_DMA_PollForTransfer+0x21c>)
+  40:	4293      	cmp	r3, r2
+  42:	d05b      	beq.n	fc <HAL_DMA_PollForTransfer+0xfc>
+  44:	3214      	adds	r2, #20
+  46:	4293      	cmp	r3, r2
+  48:	d05a      	beq.n	100 <HAL_DMA_PollForTransfer+0x100>
+  4a:	3214      	adds	r2, #20
+  4c:	4293      	cmp	r3, r2
+  4e:	d05a      	beq.n	106 <HAL_DMA_PollForTransfer+0x106>
+  50:	3214      	adds	r2, #20
+  52:	4293      	cmp	r3, r2
+  54:	d05a      	beq.n	10c <HAL_DMA_PollForTransfer+0x10c>
+  56:	4d72      	ldr	r5, [pc, #456]	; (220 <HAL_DMA_PollForTransfer+0x220>)
+  58:	42ab      	cmp	r3, r5
+  5a:	bf0c      	ite	eq
+  5c:	f44f 1500 	moveq.w	r5, #2097152	; 0x200000
+  60:	f04f 7500 	movne.w	r5, #33554432	; 0x2000000
+  64:	f7ff fffe 	bl	0 <HAL_GetTick>
+  68:	4681      	mov	r9, r0
+  6a:	f8df a1b8 	ldr.w	sl, [pc, #440]	; 224 <HAL_DMA_PollForTransfer+0x224>
+  6e:	6823      	ldr	r3, [r4, #0]
+  70:	4a6d      	ldr	r2, [pc, #436]	; (228 <HAL_DMA_PollForTransfer+0x228>)
+  72:	496e      	ldr	r1, [pc, #440]	; (22c <HAL_DMA_PollForTransfer+0x22c>)
+  74:	f8df c1b8 	ldr.w	ip, [pc, #440]	; 230 <HAL_DMA_PollForTransfer+0x230>
+  78:	f8df e1a4 	ldr.w	lr, [pc, #420]	; 220 <HAL_DMA_PollForTransfer+0x220>
+  7c:	6810      	ldr	r0, [r2, #0]
+  7e:	4228      	tst	r0, r5
+  80:	d054      	beq.n	12c <HAL_DMA_PollForTransfer+0x12c>
+  82:	f1b8 0f00 	cmp.w	r8, #0
+  86:	f040 80a2 	bne.w	1ce <HAL_DMA_PollForTransfer+0x1ce>
+  8a:	42b3      	cmp	r3, r6
+  8c:	f000 8092 	beq.w	1b4 <HAL_DMA_PollForTransfer+0x1b4>
+  90:	4a62      	ldr	r2, [pc, #392]	; (21c <HAL_DMA_PollForTransfer+0x21c>)
+  92:	4293      	cmp	r3, r2
+  94:	f000 8090 	beq.w	1b8 <HAL_DMA_PollForTransfer+0x1b8>
+  98:	3214      	adds	r2, #20
+  9a:	4293      	cmp	r3, r2
+  9c:	f000 808e 	beq.w	1bc <HAL_DMA_PollForTransfer+0x1bc>
+  a0:	3214      	adds	r2, #20
+  a2:	4293      	cmp	r3, r2
+  a4:	f000 808d 	beq.w	1c2 <HAL_DMA_PollForTransfer+0x1c2>
+  a8:	3214      	adds	r2, #20
+  aa:	4293      	cmp	r3, r2
+  ac:	f000 808c 	beq.w	1c8 <HAL_DMA_PollForTransfer+0x1c8>
+  b0:	3214      	adds	r2, #20
+  b2:	4293      	cmp	r3, r2
+  b4:	bf0c      	ite	eq
+  b6:	f44f 1300 	moveq.w	r3, #2097152	; 0x200000
+  ba:	f04f 7300 	movne.w	r3, #33554432	; 0x2000000
+  be:	4a5a      	ldr	r2, [pc, #360]	; (228 <HAL_DMA_PollForTransfer+0x228>)
+  c0:	6053      	str	r3, [r2, #4]
+  c2:	2301      	movs	r3, #1
+  c4:	f884 3021 	strb.w	r3, [r4, #33]	; 0x21
+  c8:	2000      	movs	r0, #0
+  ca:	f884 0020 	strb.w	r0, [r4, #32]
+  ce:	e7a7      	b.n	20 <HAL_DMA_PollForTransfer+0x20>
+  d0:	42b3      	cmp	r3, r6
+  d2:	d01e      	beq.n	112 <HAL_DMA_PollForTransfer+0x112>
+  d4:	4a51      	ldr	r2, [pc, #324]	; (21c <HAL_DMA_PollForTransfer+0x21c>)
+  d6:	4293      	cmp	r3, r2
+  d8:	d01d      	beq.n	116 <HAL_DMA_PollForTransfer+0x116>
+  da:	3214      	adds	r2, #20
+  dc:	4293      	cmp	r3, r2
+  de:	d01c      	beq.n	11a <HAL_DMA_PollForTransfer+0x11a>
+  e0:	3214      	adds	r2, #20
+  e2:	4293      	cmp	r3, r2
+  e4:	d01c      	beq.n	120 <HAL_DMA_PollForTransfer+0x120>
+  e6:	3214      	adds	r2, #20
+  e8:	4293      	cmp	r3, r2
+  ea:	d01c      	beq.n	126 <HAL_DMA_PollForTransfer+0x126>
+  ec:	4d4c      	ldr	r5, [pc, #304]	; (220 <HAL_DMA_PollForTransfer+0x220>)
+  ee:	42ab      	cmp	r3, r5
+  f0:	bf0c      	ite	eq
+  f2:	f44f 0580 	moveq.w	r5, #4194304	; 0x400000
+  f6:	f04f 6580 	movne.w	r5, #67108864	; 0x4000000
+  fa:	e7b3      	b.n	64 <HAL_DMA_PollForTransfer+0x64>
+  fc:	2520      	movs	r5, #32
+  fe:	e7b1      	b.n	64 <HAL_DMA_PollForTransfer+0x64>
+ 100:	f44f 7500 	mov.w	r5, #512	; 0x200
+ 104:	e7ae      	b.n	64 <HAL_DMA_PollForTransfer+0x64>
+ 106:	f44f 5500 	mov.w	r5, #8192	; 0x2000
+ 10a:	e7ab      	b.n	64 <HAL_DMA_PollForTransfer+0x64>
+ 10c:	f44f 3500 	mov.w	r5, #131072	; 0x20000
+ 110:	e7a8      	b.n	64 <HAL_DMA_PollForTransfer+0x64>
+ 112:	2504      	movs	r5, #4
+ 114:	e7a6      	b.n	64 <HAL_DMA_PollForTransfer+0x64>
+ 116:	2540      	movs	r5, #64	; 0x40
+ 118:	e7a4      	b.n	64 <HAL_DMA_PollForTransfer+0x64>
+ 11a:	f44f 6580 	mov.w	r5, #1024	; 0x400
+ 11e:	e7a1      	b.n	64 <HAL_DMA_PollForTransfer+0x64>
+ 120:	f44f 4580 	mov.w	r5, #16384	; 0x4000
+ 124:	e79e      	b.n	64 <HAL_DMA_PollForTransfer+0x64>
+ 126:	f44f 2580 	mov.w	r5, #262144	; 0x40000
+ 12a:	e79b      	b.n	64 <HAL_DMA_PollForTransfer+0x64>
+ 12c:	42b3      	cmp	r3, r6
+ 12e:	f8d2 b000 	ldr.w	fp, [r2]
+ 132:	d020      	beq.n	176 <HAL_DMA_PollForTransfer+0x176>
+ 134:	4839      	ldr	r0, [pc, #228]	; (21c <HAL_DMA_PollForTransfer+0x21c>)
+ 136:	4283      	cmp	r3, r0
+ 138:	d01f      	beq.n	17a <HAL_DMA_PollForTransfer+0x17a>
+ 13a:	4553      	cmp	r3, sl
+ 13c:	d01f      	beq.n	17e <HAL_DMA_PollForTransfer+0x17e>
+ 13e:	428b      	cmp	r3, r1
+ 140:	d020      	beq.n	184 <HAL_DMA_PollForTransfer+0x184>
+ 142:	4563      	cmp	r3, ip
+ 144:	d021      	beq.n	18a <HAL_DMA_PollForTransfer+0x18a>
+ 146:	4573      	cmp	r3, lr
+ 148:	bf0c      	ite	eq
+ 14a:	f44f 0000 	moveq.w	r0, #8388608	; 0x800000
+ 14e:	f04f 6000 	movne.w	r0, #134217728	; 0x8000000
+ 152:	ea1b 0f00 	tst.w	fp, r0
+ 156:	d01b      	beq.n	190 <HAL_DMA_PollForTransfer+0x190>
+ 158:	2001      	movs	r0, #1
+ 15a:	6c23      	ldr	r3, [r4, #64]	; 0x40
+ 15c:	6be2      	ldr	r2, [r4, #60]	; 0x3c
+ 15e:	fa00 f303 	lsl.w	r3, r0, r3
+ 162:	6053      	str	r3, [r2, #4]
+ 164:	6ba3      	ldr	r3, [r4, #56]	; 0x38
+ 166:	4303      	orrs	r3, r0
+ 168:	63a3      	str	r3, [r4, #56]	; 0x38
+ 16a:	2300      	movs	r3, #0
+ 16c:	f884 0021 	strb.w	r0, [r4, #33]	; 0x21
+ 170:	f884 3020 	strb.w	r3, [r4, #32]
+ 174:	e754      	b.n	20 <HAL_DMA_PollForTransfer+0x20>
+ 176:	2008      	movs	r0, #8
+ 178:	e7eb      	b.n	152 <HAL_DMA_PollForTransfer+0x152>
+ 17a:	2080      	movs	r0, #128	; 0x80
+ 17c:	e7e9      	b.n	152 <HAL_DMA_PollForTransfer+0x152>
+ 17e:	f44f 6000 	mov.w	r0, #2048	; 0x800
+ 182:	e7e6      	b.n	152 <HAL_DMA_PollForTransfer+0x152>
+ 184:	f44f 4000 	mov.w	r0, #32768	; 0x8000
+ 188:	e7e3      	b.n	152 <HAL_DMA_PollForTransfer+0x152>
+ 18a:	f44f 2000 	mov.w	r0, #524288	; 0x80000
+ 18e:	e7e0      	b.n	152 <HAL_DMA_PollForTransfer+0x152>
+ 190:	1c78      	adds	r0, r7, #1
+ 192:	f43f af73 	beq.w	7c <HAL_DMA_PollForTransfer+0x7c>
+ 196:	b92f      	cbnz	r7, 1a4 <HAL_DMA_PollForTransfer+0x1a4>
+ 198:	6ba3      	ldr	r3, [r4, #56]	; 0x38
+ 19a:	2001      	movs	r0, #1
+ 19c:	f043 0320 	orr.w	r3, r3, #32
+ 1a0:	63a3      	str	r3, [r4, #56]	; 0x38
+ 1a2:	e7e2      	b.n	16a <HAL_DMA_PollForTransfer+0x16a>
+ 1a4:	f7ff fffe 	bl	0 <HAL_GetTick>
+ 1a8:	eba0 0009 	sub.w	r0, r0, r9
+ 1ac:	42b8      	cmp	r0, r7
+ 1ae:	f67f af5e 	bls.w	6e <HAL_DMA_PollForTransfer+0x6e>
+ 1b2:	e7f1      	b.n	198 <HAL_DMA_PollForTransfer+0x198>
+ 1b4:	2302      	movs	r3, #2
+ 1b6:	e782      	b.n	be <HAL_DMA_PollForTransfer+0xbe>
+ 1b8:	2320      	movs	r3, #32
+ 1ba:	e780      	b.n	be <HAL_DMA_PollForTransfer+0xbe>
+ 1bc:	f44f 7300 	mov.w	r3, #512	; 0x200
+ 1c0:	e77d      	b.n	be <HAL_DMA_PollForTransfer+0xbe>
+ 1c2:	f44f 5300 	mov.w	r3, #8192	; 0x2000
+ 1c6:	e77a      	b.n	be <HAL_DMA_PollForTransfer+0xbe>
+ 1c8:	f44f 3300 	mov.w	r3, #131072	; 0x20000
+ 1cc:	e777      	b.n	be <HAL_DMA_PollForTransfer+0xbe>
+ 1ce:	42b3      	cmp	r3, r6
+ 1d0:	d015      	beq.n	1fe <HAL_DMA_PollForTransfer+0x1fe>
+ 1d2:	4a12      	ldr	r2, [pc, #72]	; (21c <HAL_DMA_PollForTransfer+0x21c>)
+ 1d4:	4293      	cmp	r3, r2
+ 1d6:	d014      	beq.n	202 <HAL_DMA_PollForTransfer+0x202>
+ 1d8:	3214      	adds	r2, #20
+ 1da:	4293      	cmp	r3, r2
+ 1dc:	d013      	beq.n	206 <HAL_DMA_PollForTransfer+0x206>
+ 1de:	3214      	adds	r2, #20
+ 1e0:	4293      	cmp	r3, r2
+ 1e2:	d013      	beq.n	20c <HAL_DMA_PollForTransfer+0x20c>
+ 1e4:	3214      	adds	r2, #20
+ 1e6:	4293      	cmp	r3, r2
+ 1e8:	d013      	beq.n	212 <HAL_DMA_PollForTransfer+0x212>
+ 1ea:	3214      	adds	r2, #20
+ 1ec:	4293      	cmp	r3, r2
+ 1ee:	bf0c      	ite	eq
+ 1f0:	f44f 0380 	moveq.w	r3, #4194304	; 0x400000
+ 1f4:	f04f 6380 	movne.w	r3, #67108864	; 0x4000000
+ 1f8:	4a0b      	ldr	r2, [pc, #44]	; (228 <HAL_DMA_PollForTransfer+0x228>)
+ 1fa:	6053      	str	r3, [r2, #4]
+ 1fc:	e764      	b.n	c8 <HAL_DMA_PollForTransfer+0xc8>
+ 1fe:	2304      	movs	r3, #4
+ 200:	e7fa      	b.n	1f8 <HAL_DMA_PollForTransfer+0x1f8>
+ 202:	2340      	movs	r3, #64	; 0x40
+ 204:	e7f8      	b.n	1f8 <HAL_DMA_PollForTransfer+0x1f8>
+ 206:	f44f 6380 	mov.w	r3, #1024	; 0x400
+ 20a:	e7f5      	b.n	1f8 <HAL_DMA_PollForTransfer+0x1f8>
+ 20c:	f44f 4380 	mov.w	r3, #16384	; 0x4000
+ 210:	e7f2      	b.n	1f8 <HAL_DMA_PollForTransfer+0x1f8>
+ 212:	f44f 2380 	mov.w	r3, #262144	; 0x40000
+ 216:	e7ef      	b.n	1f8 <HAL_DMA_PollForTransfer+0x1f8>
+ 218:	40020008 	.word	0x40020008
+ 21c:	4002001c 	.word	0x4002001c
+ 220:	4002006c 	.word	0x4002006c
+ 224:	40020030 	.word	0x40020030
+ 228:	40020000 	.word	0x40020000
+ 22c:	40020044 	.word	0x40020044
+ 230:	40020058 	.word	0x40020058
+
+Disassembly of section .text.HAL_DMA_IRQHandler:
+
+00000000 <HAL_DMA_IRQHandler>:
+   0:	b470      	push	{r4, r5, r6}
+   2:	2504      	movs	r5, #4
+   4:	6bc6      	ldr	r6, [r0, #60]	; 0x3c
+   6:	6c02      	ldr	r2, [r0, #64]	; 0x40
+   8:	6834      	ldr	r4, [r6, #0]
+   a:	6803      	ldr	r3, [r0, #0]
+   c:	4095      	lsls	r5, r2
+   e:	4225      	tst	r5, r4
+  10:	6819      	ldr	r1, [r3, #0]
+  12:	d032      	beq.n	7a <HAL_DMA_IRQHandler+0x7a>
+  14:	074d      	lsls	r5, r1, #29
+  16:	d530      	bpl.n	7a <HAL_DMA_IRQHandler+0x7a>
+  18:	681a      	ldr	r2, [r3, #0]
+  1a:	0696      	lsls	r6, r2, #26
+  1c:	bf5e      	ittt	pl
+  1e:	681a      	ldrpl	r2, [r3, #0]
+  20:	f022 0204 	bicpl.w	r2, r2, #4
+  24:	601a      	strpl	r2, [r3, #0]
+  26:	4a3e      	ldr	r2, [pc, #248]	; (120 <HAL_DMA_IRQHandler+0x120>)
+  28:	4293      	cmp	r3, r2
+  2a:	d019      	beq.n	60 <HAL_DMA_IRQHandler+0x60>
+  2c:	3214      	adds	r2, #20
+  2e:	4293      	cmp	r3, r2
+  30:	d018      	beq.n	64 <HAL_DMA_IRQHandler+0x64>
+  32:	3214      	adds	r2, #20
+  34:	4293      	cmp	r3, r2
+  36:	d017      	beq.n	68 <HAL_DMA_IRQHandler+0x68>
+  38:	3214      	adds	r2, #20
+  3a:	4293      	cmp	r3, r2
+  3c:	d017      	beq.n	6e <HAL_DMA_IRQHandler+0x6e>
+  3e:	3214      	adds	r2, #20
+  40:	4293      	cmp	r3, r2
+  42:	d017      	beq.n	74 <HAL_DMA_IRQHandler+0x74>
+  44:	3214      	adds	r2, #20
+  46:	4293      	cmp	r3, r2
+  48:	bf0c      	ite	eq
+  4a:	f44f 0380 	moveq.w	r3, #4194304	; 0x400000
+  4e:	f04f 6380 	movne.w	r3, #67108864	; 0x4000000
+  52:	4a34      	ldr	r2, [pc, #208]	; (124 <HAL_DMA_IRQHandler+0x124>)
+  54:	6053      	str	r3, [r2, #4]
+  56:	6ac3      	ldr	r3, [r0, #44]	; 0x2c
+  58:	2b00      	cmp	r3, #0
+  5a:	d05e      	beq.n	11a <HAL_DMA_IRQHandler+0x11a>
+  5c:	bc70      	pop	{r4, r5, r6}
+  5e:	4718      	bx	r3
+  60:	2304      	movs	r3, #4
+  62:	e7f6      	b.n	52 <HAL_DMA_IRQHandler+0x52>
+  64:	2340      	movs	r3, #64	; 0x40
+  66:	e7f4      	b.n	52 <HAL_DMA_IRQHandler+0x52>
+  68:	f44f 6380 	mov.w	r3, #1024	; 0x400
+  6c:	e7f1      	b.n	52 <HAL_DMA_IRQHandler+0x52>
+  6e:	f44f 4380 	mov.w	r3, #16384	; 0x4000
+  72:	e7ee      	b.n	52 <HAL_DMA_IRQHandler+0x52>
+  74:	f44f 2380 	mov.w	r3, #262144	; 0x40000
+  78:	e7eb      	b.n	52 <HAL_DMA_IRQHandler+0x52>
+  7a:	2502      	movs	r5, #2
+  7c:	4095      	lsls	r5, r2
+  7e:	4225      	tst	r5, r4
+  80:	d035      	beq.n	ee <HAL_DMA_IRQHandler+0xee>
+  82:	078d      	lsls	r5, r1, #30
+  84:	d533      	bpl.n	ee <HAL_DMA_IRQHandler+0xee>
+  86:	681a      	ldr	r2, [r3, #0]
+  88:	0694      	lsls	r4, r2, #26
+  8a:	d406      	bmi.n	9a <HAL_DMA_IRQHandler+0x9a>
+  8c:	681a      	ldr	r2, [r3, #0]
+  8e:	f022 020a 	bic.w	r2, r2, #10
+  92:	601a      	str	r2, [r3, #0]
+  94:	2201      	movs	r2, #1
+  96:	f880 2021 	strb.w	r2, [r0, #33]	; 0x21
+  9a:	4a21      	ldr	r2, [pc, #132]	; (120 <HAL_DMA_IRQHandler+0x120>)
+  9c:	4293      	cmp	r3, r2
+  9e:	d019      	beq.n	d4 <HAL_DMA_IRQHandler+0xd4>
+  a0:	3214      	adds	r2, #20
+  a2:	4293      	cmp	r3, r2
+  a4:	d018      	beq.n	d8 <HAL_DMA_IRQHandler+0xd8>
+  a6:	3214      	adds	r2, #20
+  a8:	4293      	cmp	r3, r2
+  aa:	d017      	beq.n	dc <HAL_DMA_IRQHandler+0xdc>
+  ac:	3214      	adds	r2, #20
+  ae:	4293      	cmp	r3, r2
+  b0:	d017      	beq.n	e2 <HAL_DMA_IRQHandler+0xe2>
+  b2:	3214      	adds	r2, #20
+  b4:	4293      	cmp	r3, r2
+  b6:	d017      	beq.n	e8 <HAL_DMA_IRQHandler+0xe8>
+  b8:	3214      	adds	r2, #20
+  ba:	4293      	cmp	r3, r2
+  bc:	bf0c      	ite	eq
+  be:	f44f 1300 	moveq.w	r3, #2097152	; 0x200000
+  c2:	f04f 7300 	movne.w	r3, #33554432	; 0x2000000
+  c6:	4a17      	ldr	r2, [pc, #92]	; (124 <HAL_DMA_IRQHandler+0x124>)
+  c8:	6053      	str	r3, [r2, #4]
+  ca:	2300      	movs	r3, #0
+  cc:	f880 3020 	strb.w	r3, [r0, #32]
+  d0:	6a83      	ldr	r3, [r0, #40]	; 0x28
+  d2:	e7c1      	b.n	58 <HAL_DMA_IRQHandler+0x58>
+  d4:	2302      	movs	r3, #2
+  d6:	e7f6      	b.n	c6 <HAL_DMA_IRQHandler+0xc6>
+  d8:	2320      	movs	r3, #32
+  da:	e7f4      	b.n	c6 <HAL_DMA_IRQHandler+0xc6>
+  dc:	f44f 7300 	mov.w	r3, #512	; 0x200
+  e0:	e7f1      	b.n	c6 <HAL_DMA_IRQHandler+0xc6>
+  e2:	f44f 5300 	mov.w	r3, #8192	; 0x2000
+  e6:	e7ee      	b.n	c6 <HAL_DMA_IRQHandler+0xc6>
+  e8:	f44f 3300 	mov.w	r3, #131072	; 0x20000
+  ec:	e7eb      	b.n	c6 <HAL_DMA_IRQHandler+0xc6>
+  ee:	2508      	movs	r5, #8
+  f0:	4095      	lsls	r5, r2
+  f2:	4225      	tst	r5, r4
+  f4:	d011      	beq.n	11a <HAL_DMA_IRQHandler+0x11a>
+  f6:	0709      	lsls	r1, r1, #28
+  f8:	d50f      	bpl.n	11a <HAL_DMA_IRQHandler+0x11a>
+  fa:	6819      	ldr	r1, [r3, #0]
+  fc:	f021 010e 	bic.w	r1, r1, #14
+ 100:	6019      	str	r1, [r3, #0]
+ 102:	2301      	movs	r3, #1
+ 104:	fa03 f202 	lsl.w	r2, r3, r2
+ 108:	6072      	str	r2, [r6, #4]
+ 10a:	6383      	str	r3, [r0, #56]	; 0x38
+ 10c:	f880 3021 	strb.w	r3, [r0, #33]	; 0x21
+ 110:	2300      	movs	r3, #0
+ 112:	f880 3020 	strb.w	r3, [r0, #32]
+ 116:	6b03      	ldr	r3, [r0, #48]	; 0x30
+ 118:	e79e      	b.n	58 <HAL_DMA_IRQHandler+0x58>
+ 11a:	bc70      	pop	{r4, r5, r6}
+ 11c:	4770      	bx	lr
+ 11e:	bf00      	nop
+ 120:	40020008 	.word	0x40020008
+ 124:	40020000 	.word	0x40020000
+
+Disassembly of section .text.HAL_DMA_RegisterCallback:
+
+00000000 <HAL_DMA_RegisterCallback>:
+   0:	b510      	push	{r4, lr}
+   2:	4603      	mov	r3, r0
+   4:	f890 0020 	ldrb.w	r0, [r0, #32]
+   8:	2801      	cmp	r0, #1
+   a:	d019      	beq.n	40 <HAL_DMA_RegisterCallback+0x40>
+   c:	f893 4021 	ldrb.w	r4, [r3, #33]	; 0x21
+  10:	2c01      	cmp	r4, #1
+  12:	b2e0      	uxtb	r0, r4
+  14:	d112      	bne.n	3c <HAL_DMA_RegisterCallback+0x3c>
+  16:	2903      	cmp	r1, #3
+  18:	d805      	bhi.n	26 <HAL_DMA_RegisterCallback+0x26>
+  1a:	e8df f001 	tbb	[pc, r1]
+  1e:	0802      	.short	0x0802
+  20:	0d0b      	.short	0x0d0b
+  22:	4608      	mov	r0, r1
+  24:	629a      	str	r2, [r3, #40]	; 0x28
+  26:	2200      	movs	r2, #0
+  28:	f883 2020 	strb.w	r2, [r3, #32]
+  2c:	bd10      	pop	{r4, pc}
+  2e:	62da      	str	r2, [r3, #44]	; 0x2c
+  30:	2000      	movs	r0, #0
+  32:	e7f8      	b.n	26 <HAL_DMA_RegisterCallback+0x26>
+  34:	631a      	str	r2, [r3, #48]	; 0x30
+  36:	e7fb      	b.n	30 <HAL_DMA_RegisterCallback+0x30>
+  38:	635a      	str	r2, [r3, #52]	; 0x34
+  3a:	e7f9      	b.n	30 <HAL_DMA_RegisterCallback+0x30>
+  3c:	2001      	movs	r0, #1
+  3e:	e7f2      	b.n	26 <HAL_DMA_RegisterCallback+0x26>
+  40:	2002      	movs	r0, #2
+  42:	e7f3      	b.n	2c <HAL_DMA_RegisterCallback+0x2c>
+
+Disassembly of section .text.HAL_DMA_UnRegisterCallback:
+
+00000000 <HAL_DMA_UnRegisterCallback>:
+   0:	b510      	push	{r4, lr}
+   2:	f890 2020 	ldrb.w	r2, [r0, #32]
+   6:	4603      	mov	r3, r0
+   8:	2a01      	cmp	r2, #1
+   a:	d021      	beq.n	50 <HAL_DMA_UnRegisterCallback+0x50>
+   c:	2201      	movs	r2, #1
+   e:	f890 4021 	ldrb.w	r4, [r0, #33]	; 0x21
+  12:	f880 2020 	strb.w	r2, [r0, #32]
+  16:	4294      	cmp	r4, r2
+  18:	b2e0      	uxtb	r0, r4
+  1a:	d117      	bne.n	4c <HAL_DMA_UnRegisterCallback+0x4c>
+  1c:	2200      	movs	r2, #0
+  1e:	2904      	cmp	r1, #4
+  20:	d806      	bhi.n	30 <HAL_DMA_UnRegisterCallback+0x30>
+  22:	e8df f001 	tbb	[pc, r1]
+  26:	0903      	.short	0x0903
+  28:	110c      	.short	0x110c
+  2a:	0e          	.byte	0x0e
+  2b:	00          	.byte	0x00
+  2c:	4608      	mov	r0, r1
+  2e:	629a      	str	r2, [r3, #40]	; 0x28
+  30:	2200      	movs	r2, #0
+  32:	f883 2020 	strb.w	r2, [r3, #32]
+  36:	bd10      	pop	{r4, pc}
+  38:	62da      	str	r2, [r3, #44]	; 0x2c
+  3a:	2000      	movs	r0, #0
+  3c:	e7f8      	b.n	30 <HAL_DMA_UnRegisterCallback+0x30>
+  3e:	631a      	str	r2, [r3, #48]	; 0x30
+  40:	e7fb      	b.n	3a <HAL_DMA_UnRegisterCallback+0x3a>
+  42:	e9c3 220a 	strd	r2, r2, [r3, #40]	; 0x28
+  46:	631a      	str	r2, [r3, #48]	; 0x30
+  48:	635a      	str	r2, [r3, #52]	; 0x34
+  4a:	e7f6      	b.n	3a <HAL_DMA_UnRegisterCallback+0x3a>
+  4c:	4610      	mov	r0, r2
+  4e:	e7ef      	b.n	30 <HAL_DMA_UnRegisterCallback+0x30>
+  50:	2002      	movs	r0, #2
+  52:	e7f0      	b.n	36 <HAL_DMA_UnRegisterCallback+0x36>
+
+Disassembly of section .text.HAL_DMA_GetState:
+
+00000000 <HAL_DMA_GetState>:
+   0:	f890 0021 	ldrb.w	r0, [r0, #33]	; 0x21
+   4:	4770      	bx	lr
+
+Disassembly of section .text.HAL_DMA_GetError:
+
+00000000 <HAL_DMA_GetError>:
+   0:	6b80      	ldr	r0, [r0, #56]	; 0x38
+   2:	4770      	bx	lr

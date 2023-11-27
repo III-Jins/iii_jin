@@ -1,0 +1,94 @@
+
+out/stm32f1xx_hal_msp.o:     file format elf32-littlearm
+
+
+Disassembly of section .text.HAL_MspInit:
+
+00000000 <HAL_MspInit>:
+   0:	4b0e      	ldr	r3, [pc, #56]	; (3c <HAL_MspInit+0x3c>)
+   2:	b082      	sub	sp, #8
+   4:	699a      	ldr	r2, [r3, #24]
+   6:	f042 0201 	orr.w	r2, r2, #1
+   a:	619a      	str	r2, [r3, #24]
+   c:	699a      	ldr	r2, [r3, #24]
+   e:	f002 0201 	and.w	r2, r2, #1
+  12:	9200      	str	r2, [sp, #0]
+  14:	9a00      	ldr	r2, [sp, #0]
+  16:	69da      	ldr	r2, [r3, #28]
+  18:	f042 5280 	orr.w	r2, r2, #268435456	; 0x10000000
+  1c:	61da      	str	r2, [r3, #28]
+  1e:	69db      	ldr	r3, [r3, #28]
+  20:	4a07      	ldr	r2, [pc, #28]	; (40 <HAL_MspInit+0x40>)
+  22:	f003 5380 	and.w	r3, r3, #268435456	; 0x10000000
+  26:	9301      	str	r3, [sp, #4]
+  28:	9b01      	ldr	r3, [sp, #4]
+  2a:	6853      	ldr	r3, [r2, #4]
+  2c:	f023 63e0 	bic.w	r3, r3, #117440512	; 0x7000000
+  30:	f043 7300 	orr.w	r3, r3, #33554432	; 0x2000000
+  34:	6053      	str	r3, [r2, #4]
+  36:	b002      	add	sp, #8
+  38:	4770      	bx	lr
+  3a:	bf00      	nop
+  3c:	40021000 	.word	0x40021000
+  40:	40010000 	.word	0x40010000
+
+Disassembly of section .text.HAL_UART_MspInit:
+
+00000000 <HAL_UART_MspInit>:
+   0:	b510      	push	{r4, lr}
+   2:	4604      	mov	r4, r0
+   4:	b086      	sub	sp, #24
+   6:	2210      	movs	r2, #16
+   8:	2100      	movs	r1, #0
+   a:	a802      	add	r0, sp, #8
+   c:	f7ff fffe 	bl	0 <memset>
+  10:	6822      	ldr	r2, [r4, #0]
+  12:	4b11      	ldr	r3, [pc, #68]	; (58 <HAL_UART_MspInit+0x58>)
+  14:	429a      	cmp	r2, r3
+  16:	d11c      	bne.n	52 <HAL_UART_MspInit+0x52>
+  18:	f503 33e6 	add.w	r3, r3, #117760	; 0x1cc00
+  1c:	69da      	ldr	r2, [r3, #28]
+  1e:	480f      	ldr	r0, [pc, #60]	; (5c <HAL_UART_MspInit+0x5c>)
+  20:	f442 3200 	orr.w	r2, r2, #131072	; 0x20000
+  24:	61da      	str	r2, [r3, #28]
+  26:	69da      	ldr	r2, [r3, #28]
+  28:	a902      	add	r1, sp, #8
+  2a:	f402 3200 	and.w	r2, r2, #131072	; 0x20000
+  2e:	9200      	str	r2, [sp, #0]
+  30:	9a00      	ldr	r2, [sp, #0]
+  32:	699a      	ldr	r2, [r3, #24]
+  34:	f042 0204 	orr.w	r2, r2, #4
+  38:	619a      	str	r2, [r3, #24]
+  3a:	699b      	ldr	r3, [r3, #24]
+  3c:	220c      	movs	r2, #12
+  3e:	f003 0304 	and.w	r3, r3, #4
+  42:	9301      	str	r3, [sp, #4]
+  44:	9b01      	ldr	r3, [sp, #4]
+  46:	2302      	movs	r3, #2
+  48:	e9cd 2302 	strd	r2, r3, [sp, #8]
+  4c:	9305      	str	r3, [sp, #20]
+  4e:	f7ff fffe 	bl	0 <HAL_GPIO_Init>
+  52:	b006      	add	sp, #24
+  54:	bd10      	pop	{r4, pc}
+  56:	bf00      	nop
+  58:	40004400 	.word	0x40004400
+  5c:	40010800 	.word	0x40010800
+
+Disassembly of section .text.HAL_UART_MspDeInit:
+
+00000000 <HAL_UART_MspDeInit>:
+   0:	6802      	ldr	r2, [r0, #0]
+   2:	4b06      	ldr	r3, [pc, #24]	; (1c <HAL_UART_MspDeInit+0x1c>)
+   4:	429a      	cmp	r2, r3
+   6:	d108      	bne.n	1a <HAL_UART_MspDeInit+0x1a>
+   8:	4a05      	ldr	r2, [pc, #20]	; (20 <HAL_UART_MspDeInit+0x20>)
+   a:	210c      	movs	r1, #12
+   c:	69d3      	ldr	r3, [r2, #28]
+   e:	4805      	ldr	r0, [pc, #20]	; (24 <HAL_UART_MspDeInit+0x24>)
+  10:	f423 3300 	bic.w	r3, r3, #131072	; 0x20000
+  14:	61d3      	str	r3, [r2, #28]
+  16:	f7ff bffe 	b.w	0 <HAL_GPIO_DeInit>
+  1a:	4770      	bx	lr
+  1c:	40004400 	.word	0x40004400
+  20:	40021000 	.word	0x40021000
+  24:	40010800 	.word	0x40010800

@@ -1,0 +1,325 @@
+
+out/stm32f1xx_hal_gpio.o:     file format elf32-littlearm
+
+
+Disassembly of section .text.HAL_GPIO_Init:
+
+00000000 <HAL_GPIO_Init>:
+   0:	e92d 4ff7 	stmdb	sp!, {r0, r1, r2, r4, r5, r6, r7, r8, r9, sl, fp, lr}
+   4:	2200      	movs	r2, #0
+   6:	4616      	mov	r6, r2
+   8:	4f64      	ldr	r7, [pc, #400]	; (19c <HAL_GPIO_Init+0x19c>)
+   a:	4b65      	ldr	r3, [pc, #404]	; (1a0 <HAL_GPIO_Init+0x1a0>)
+   c:	f8df c194 	ldr.w	ip, [pc, #404]	; 1a4 <HAL_GPIO_Init+0x1a4>
+  10:	f8df e194 	ldr.w	lr, [pc, #404]	; 1a8 <HAL_GPIO_Init+0x1a8>
+  14:	680d      	ldr	r5, [r1, #0]
+  16:	fa35 f406 	lsrs.w	r4, r5, r6
+  1a:	d102      	bne.n	22 <HAL_GPIO_Init+0x22>
+  1c:	b003      	add	sp, #12
+  1e:	e8bd 8ff0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, pc}
+  22:	f04f 0801 	mov.w	r8, #1
+  26:	fa08 f806 	lsl.w	r8, r8, r6
+  2a:	ea05 0408 	and.w	r4, r5, r8
+  2e:	ea38 0505 	bics.w	r5, r8, r5
+  32:	d17b      	bne.n	12c <HAL_GPIO_Init+0x12c>
+  34:	684d      	ldr	r5, [r1, #4]
+  36:	2d03      	cmp	r5, #3
+  38:	d807      	bhi.n	4a <HAL_GPIO_Init+0x4a>
+  3a:	3d01      	subs	r5, #1
+  3c:	2d02      	cmp	r5, #2
+  3e:	f200 8088 	bhi.w	152 <HAL_GPIO_Init+0x152>
+  42:	e8df f005 	tbb	[pc, r5]
+  46:	9b96      	.short	0x9b96
+  48:	a1          	.byte	0xa1
+  49:	00          	.byte	0x00
+  4a:	2d12      	cmp	r5, #18
+  4c:	f000 8099 	beq.w	182 <HAL_GPIO_Init+0x182>
+  50:	d86e      	bhi.n	130 <HAL_GPIO_Init+0x130>
+  52:	2d11      	cmp	r5, #17
+  54:	f000 808f 	beq.w	176 <HAL_GPIO_Init+0x176>
+  58:	2cff      	cmp	r4, #255	; 0xff
+  5a:	bf98      	it	ls
+  5c:	4682      	movls	sl, r0
+  5e:	f04f 090f 	mov.w	r9, #15
+  62:	bf88      	it	hi
+  64:	f100 0a04 	addhi.w	sl, r0, #4
+  68:	ea4f 0586 	mov.w	r5, r6, lsl #2
+  6c:	f8da 8000 	ldr.w	r8, [sl]
+  70:	bf88      	it	hi
+  72:	3d20      	subhi	r5, #32
+  74:	fa09 fb05 	lsl.w	fp, r9, r5
+  78:	ea28 080b 	bic.w	r8, r8, fp
+  7c:	fa02 f505 	lsl.w	r5, r2, r5
+  80:	ea48 0505 	orr.w	r5, r8, r5
+  84:	f8ca 5000 	str.w	r5, [sl]
+  88:	f8d1 a004 	ldr.w	sl, [r1, #4]
+  8c:	f01a 5f80 	tst.w	sl, #268435456	; 0x10000000
+  90:	d04c      	beq.n	12c <HAL_GPIO_Init+0x12c>
+  92:	69bd      	ldr	r5, [r7, #24]
+  94:	f026 0803 	bic.w	r8, r6, #3
+  98:	f045 0501 	orr.w	r5, r5, #1
+  9c:	61bd      	str	r5, [r7, #24]
+  9e:	69bd      	ldr	r5, [r7, #24]
+  a0:	f108 4880 	add.w	r8, r8, #1073741824	; 0x40000000
+  a4:	f005 0501 	and.w	r5, r5, #1
+  a8:	9501      	str	r5, [sp, #4]
+  aa:	f508 3880 	add.w	r8, r8, #65536	; 0x10000
+  ae:	f006 0b03 	and.w	fp, r6, #3
+  b2:	9d01      	ldr	r5, [sp, #4]
+  b4:	ea4f 0b8b 	mov.w	fp, fp, lsl #2
+  b8:	f8d8 5008 	ldr.w	r5, [r8, #8]
+  bc:	fa09 f90b 	lsl.w	r9, r9, fp
+  c0:	ea25 0909 	bic.w	r9, r5, r9
+  c4:	4d39      	ldr	r5, [pc, #228]	; (1ac <HAL_GPIO_Init+0x1ac>)
+  c6:	42a8      	cmp	r0, r5
+  c8:	d062      	beq.n	190 <HAL_GPIO_Init+0x190>
+  ca:	f505 6580 	add.w	r5, r5, #1024	; 0x400
+  ce:	42a8      	cmp	r0, r5
+  d0:	d060      	beq.n	194 <HAL_GPIO_Init+0x194>
+  d2:	f505 6580 	add.w	r5, r5, #1024	; 0x400
+  d6:	42a8      	cmp	r0, r5
+  d8:	d05e      	beq.n	198 <HAL_GPIO_Init+0x198>
+  da:	f505 6580 	add.w	r5, r5, #1024	; 0x400
+  de:	42a8      	cmp	r0, r5
+  e0:	bf0c      	ite	eq
+  e2:	2503      	moveq	r5, #3
+  e4:	2504      	movne	r5, #4
+  e6:	fa05 f50b 	lsl.w	r5, r5, fp
+  ea:	ea45 0509 	orr.w	r5, r5, r9
+  ee:	f8c8 5008 	str.w	r5, [r8, #8]
+  f2:	689d      	ldr	r5, [r3, #8]
+  f4:	f41a 1f80 	tst.w	sl, #1048576	; 0x100000
+  f8:	bf14      	ite	ne
+  fa:	4325      	orrne	r5, r4
+  fc:	43a5      	biceq	r5, r4
+  fe:	609d      	str	r5, [r3, #8]
+ 100:	68dd      	ldr	r5, [r3, #12]
+ 102:	f41a 1f00 	tst.w	sl, #2097152	; 0x200000
+ 106:	bf14      	ite	ne
+ 108:	4325      	orrne	r5, r4
+ 10a:	43a5      	biceq	r5, r4
+ 10c:	60dd      	str	r5, [r3, #12]
+ 10e:	685d      	ldr	r5, [r3, #4]
+ 110:	f41a 3f00 	tst.w	sl, #131072	; 0x20000
+ 114:	bf14      	ite	ne
+ 116:	4325      	orrne	r5, r4
+ 118:	43a5      	biceq	r5, r4
+ 11a:	605d      	str	r5, [r3, #4]
+ 11c:	681d      	ldr	r5, [r3, #0]
+ 11e:	f41a 3f80 	tst.w	sl, #65536	; 0x10000
+ 122:	bf14      	ite	ne
+ 124:	432c      	orrne	r4, r5
+ 126:	ea25 0404 	biceq.w	r4, r5, r4
+ 12a:	601c      	str	r4, [r3, #0]
+ 12c:	3601      	adds	r6, #1
+ 12e:	e771      	b.n	14 <HAL_GPIO_Init+0x14>
+ 130:	f8df 907c 	ldr.w	r9, [pc, #124]	; 1b0 <HAL_GPIO_Init+0x1b0>
+ 134:	454d      	cmp	r5, r9
+ 136:	d00c      	beq.n	152 <HAL_GPIO_Init+0x152>
+ 138:	d817      	bhi.n	16a <HAL_GPIO_Init+0x16a>
+ 13a:	f5a9 1980 	sub.w	r9, r9, #1048576	; 0x100000
+ 13e:	454d      	cmp	r5, r9
+ 140:	d007      	beq.n	152 <HAL_GPIO_Init+0x152>
+ 142:	f509 2970 	add.w	r9, r9, #983040	; 0xf0000
+ 146:	454d      	cmp	r5, r9
+ 148:	d003      	beq.n	152 <HAL_GPIO_Init+0x152>
+ 14a:	f5a9 1980 	sub.w	r9, r9, #1048576	; 0x100000
+ 14e:	454d      	cmp	r5, r9
+ 150:	d182      	bne.n	58 <HAL_GPIO_Init+0x58>
+ 152:	688a      	ldr	r2, [r1, #8]
+ 154:	b1d2      	cbz	r2, 18c <HAL_GPIO_Init+0x18c>
+ 156:	2a01      	cmp	r2, #1
+ 158:	bf08      	it	eq
+ 15a:	f8c0 8010 	streq.w	r8, [r0, #16]
+ 15e:	f04f 0208 	mov.w	r2, #8
+ 162:	bf18      	it	ne
+ 164:	f8c0 8014 	strne.w	r8, [r0, #20]
+ 168:	e776      	b.n	58 <HAL_GPIO_Init+0x58>
+ 16a:	4565      	cmp	r5, ip
+ 16c:	d0f1      	beq.n	152 <HAL_GPIO_Init+0x152>
+ 16e:	4575      	cmp	r5, lr
+ 170:	e7ee      	b.n	150 <HAL_GPIO_Init+0x150>
+ 172:	68ca      	ldr	r2, [r1, #12]
+ 174:	e770      	b.n	58 <HAL_GPIO_Init+0x58>
+ 176:	68ca      	ldr	r2, [r1, #12]
+ 178:	3204      	adds	r2, #4
+ 17a:	e76d      	b.n	58 <HAL_GPIO_Init+0x58>
+ 17c:	68ca      	ldr	r2, [r1, #12]
+ 17e:	3208      	adds	r2, #8
+ 180:	e76a      	b.n	58 <HAL_GPIO_Init+0x58>
+ 182:	68ca      	ldr	r2, [r1, #12]
+ 184:	320c      	adds	r2, #12
+ 186:	e767      	b.n	58 <HAL_GPIO_Init+0x58>
+ 188:	2200      	movs	r2, #0
+ 18a:	e765      	b.n	58 <HAL_GPIO_Init+0x58>
+ 18c:	2204      	movs	r2, #4
+ 18e:	e763      	b.n	58 <HAL_GPIO_Init+0x58>
+ 190:	2500      	movs	r5, #0
+ 192:	e7a8      	b.n	e6 <HAL_GPIO_Init+0xe6>
+ 194:	2501      	movs	r5, #1
+ 196:	e7a6      	b.n	e6 <HAL_GPIO_Init+0xe6>
+ 198:	2502      	movs	r5, #2
+ 19a:	e7a4      	b.n	e6 <HAL_GPIO_Init+0xe6>
+ 19c:	40021000 	.word	0x40021000
+ 1a0:	40010400 	.word	0x40010400
+ 1a4:	10310000 	.word	0x10310000
+ 1a8:	10320000 	.word	0x10320000
+ 1ac:	40010800 	.word	0x40010800
+ 1b0:	10220000 	.word	0x10220000
+
+Disassembly of section .text.HAL_GPIO_DeInit:
+
+00000000 <HAL_GPIO_DeInit>:
+   0:	e92d 4ff7 	stmdb	sp!, {r0, r1, r2, r4, r5, r6, r7, r8, r9, sl, fp, lr}
+   4:	f04f 0b04 	mov.w	fp, #4
+   8:	2200      	movs	r2, #0
+   a:	f04f 0a01 	mov.w	sl, #1
+   e:	f04f 080f 	mov.w	r8, #15
+  12:	eb00 030b 	add.w	r3, r0, fp
+  16:	9301      	str	r3, [sp, #4]
+  18:	4b2e      	ldr	r3, [pc, #184]	; (d4 <HAL_GPIO_DeInit+0xd4>)
+  1a:	fa31 f402 	lsrs.w	r4, r1, r2
+  1e:	d102      	bne.n	26 <HAL_GPIO_DeInit+0x26>
+  20:	b003      	add	sp, #12
+  22:	e8bd 8ff0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, pc}
+  26:	fa0a f702 	lsl.w	r7, sl, r2
+  2a:	400f      	ands	r7, r1
+  2c:	d049      	beq.n	c2 <HAL_GPIO_DeInit+0xc2>
+  2e:	f022 0403 	bic.w	r4, r2, #3
+  32:	f104 4480 	add.w	r4, r4, #1073741824	; 0x40000000
+  36:	f504 3480 	add.w	r4, r4, #65536	; 0x10000
+  3a:	f002 0c03 	and.w	ip, r2, #3
+  3e:	68a5      	ldr	r5, [r4, #8]
+  40:	ea4f 0c8c 	mov.w	ip, ip, lsl #2
+  44:	fa08 f90c 	lsl.w	r9, r8, ip
+  48:	ea09 0e05 	and.w	lr, r9, r5
+  4c:	4d22      	ldr	r5, [pc, #136]	; (d8 <HAL_GPIO_DeInit+0xd8>)
+  4e:	42a8      	cmp	r0, r5
+  50:	d039      	beq.n	c6 <HAL_GPIO_DeInit+0xc6>
+  52:	f505 6580 	add.w	r5, r5, #1024	; 0x400
+  56:	42a8      	cmp	r0, r5
+  58:	d037      	beq.n	ca <HAL_GPIO_DeInit+0xca>
+  5a:	f505 6580 	add.w	r5, r5, #1024	; 0x400
+  5e:	42a8      	cmp	r0, r5
+  60:	d035      	beq.n	ce <HAL_GPIO_DeInit+0xce>
+  62:	f505 6580 	add.w	r5, r5, #1024	; 0x400
+  66:	42a8      	cmp	r0, r5
+  68:	bf0c      	ite	eq
+  6a:	2503      	moveq	r5, #3
+  6c:	2504      	movne	r5, #4
+  6e:	fa05 f50c 	lsl.w	r5, r5, ip
+  72:	4575      	cmp	r5, lr
+  74:	ea6f 0607 	mvn.w	r6, r7
+  78:	d10f      	bne.n	9a <HAL_GPIO_DeInit+0x9a>
+  7a:	681d      	ldr	r5, [r3, #0]
+  7c:	4035      	ands	r5, r6
+  7e:	601d      	str	r5, [r3, #0]
+  80:	685d      	ldr	r5, [r3, #4]
+  82:	4035      	ands	r5, r6
+  84:	605d      	str	r5, [r3, #4]
+  86:	68dd      	ldr	r5, [r3, #12]
+  88:	4035      	ands	r5, r6
+  8a:	60dd      	str	r5, [r3, #12]
+  8c:	689d      	ldr	r5, [r3, #8]
+  8e:	4035      	ands	r5, r6
+  90:	609d      	str	r5, [r3, #8]
+  92:	68a5      	ldr	r5, [r4, #8]
+  94:	ea25 0509 	bic.w	r5, r5, r9
+  98:	60a5      	str	r5, [r4, #8]
+  9a:	2fff      	cmp	r7, #255	; 0xff
+  9c:	bf94      	ite	ls
+  9e:	4607      	movls	r7, r0
+  a0:	9f01      	ldrhi	r7, [sp, #4]
+  a2:	ea4f 0482 	mov.w	r4, r2, lsl #2
+  a6:	683d      	ldr	r5, [r7, #0]
+  a8:	bf88      	it	hi
+  aa:	3c20      	subhi	r4, #32
+  ac:	fa08 fc04 	lsl.w	ip, r8, r4
+  b0:	ea25 050c 	bic.w	r5, r5, ip
+  b4:	fa0b f404 	lsl.w	r4, fp, r4
+  b8:	4325      	orrs	r5, r4
+  ba:	603d      	str	r5, [r7, #0]
+  bc:	68c4      	ldr	r4, [r0, #12]
+  be:	4026      	ands	r6, r4
+  c0:	60c6      	str	r6, [r0, #12]
+  c2:	3201      	adds	r2, #1
+  c4:	e7a9      	b.n	1a <HAL_GPIO_DeInit+0x1a>
+  c6:	2500      	movs	r5, #0
+  c8:	e7d1      	b.n	6e <HAL_GPIO_DeInit+0x6e>
+  ca:	2501      	movs	r5, #1
+  cc:	e7cf      	b.n	6e <HAL_GPIO_DeInit+0x6e>
+  ce:	2502      	movs	r5, #2
+  d0:	e7cd      	b.n	6e <HAL_GPIO_DeInit+0x6e>
+  d2:	bf00      	nop
+  d4:	40010400 	.word	0x40010400
+  d8:	40010800 	.word	0x40010800
+
+Disassembly of section .text.HAL_GPIO_ReadPin:
+
+00000000 <HAL_GPIO_ReadPin>:
+   0:	6883      	ldr	r3, [r0, #8]
+   2:	4219      	tst	r1, r3
+   4:	bf14      	ite	ne
+   6:	2001      	movne	r0, #1
+   8:	2000      	moveq	r0, #0
+   a:	4770      	bx	lr
+
+Disassembly of section .text.HAL_GPIO_WritePin:
+
+00000000 <HAL_GPIO_WritePin>:
+   0:	b10a      	cbz	r2, 6 <HAL_GPIO_WritePin+0x6>
+   2:	6101      	str	r1, [r0, #16]
+   4:	4770      	bx	lr
+   6:	0409      	lsls	r1, r1, #16
+   8:	e7fb      	b.n	2 <HAL_GPIO_WritePin+0x2>
+
+Disassembly of section .text.HAL_GPIO_TogglePin:
+
+00000000 <HAL_GPIO_TogglePin>:
+   0:	68c3      	ldr	r3, [r0, #12]
+   2:	ea01 0203 	and.w	r2, r1, r3
+   6:	ea21 0103 	bic.w	r1, r1, r3
+   a:	ea41 4102 	orr.w	r1, r1, r2, lsl #16
+   e:	6101      	str	r1, [r0, #16]
+  10:	4770      	bx	lr
+
+Disassembly of section .text.HAL_GPIO_LockPin:
+
+00000000 <HAL_GPIO_LockPin>:
+   0:	f44f 3380 	mov.w	r3, #65536	; 0x10000
+   4:	b082      	sub	sp, #8
+   6:	9301      	str	r3, [sp, #4]
+   8:	9b01      	ldr	r3, [sp, #4]
+   a:	430b      	orrs	r3, r1
+   c:	9301      	str	r3, [sp, #4]
+   e:	9b01      	ldr	r3, [sp, #4]
+  10:	6183      	str	r3, [r0, #24]
+  12:	6181      	str	r1, [r0, #24]
+  14:	9b01      	ldr	r3, [sp, #4]
+  16:	6183      	str	r3, [r0, #24]
+  18:	6983      	ldr	r3, [r0, #24]
+  1a:	9301      	str	r3, [sp, #4]
+  1c:	6980      	ldr	r0, [r0, #24]
+  1e:	f480 3080 	eor.w	r0, r0, #65536	; 0x10000
+  22:	f3c0 4000 	ubfx	r0, r0, #16, #1
+  26:	b002      	add	sp, #8
+  28:	4770      	bx	lr
+
+Disassembly of section .text.HAL_GPIO_EXTI_Callback:
+
+00000000 <HAL_GPIO_EXTI_Callback>:
+   0:	4770      	bx	lr
+
+Disassembly of section .text.HAL_GPIO_EXTI_IRQHandler:
+
+00000000 <HAL_GPIO_EXTI_IRQHandler>:
+   0:	4a04      	ldr	r2, [pc, #16]	; (14 <HAL_GPIO_EXTI_IRQHandler+0x14>)
+   2:	b508      	push	{r3, lr}
+   4:	6951      	ldr	r1, [r2, #20]
+   6:	4201      	tst	r1, r0
+   8:	d002      	beq.n	10 <HAL_GPIO_EXTI_IRQHandler+0x10>
+   a:	6150      	str	r0, [r2, #20]
+   c:	f7ff fffe 	bl	0 <HAL_GPIO_EXTI_IRQHandler>
+  10:	bd08      	pop	{r3, pc}
+  12:	bf00      	nop
+  14:	40010400 	.word	0x40010400

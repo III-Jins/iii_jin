@@ -1,0 +1,54 @@
+
+out/Uart.o:     file format elf32-littlearm
+
+
+Disassembly of section .text.hal_uart_init:
+
+00000000 <hal_uart_init>:
+   0:	b508      	push	{r3, lr}
+   2:	f44f 33e1 	mov.w	r3, #115200	; 0x1c200
+   6:	480a      	ldr	r0, [pc, #40]	; (30 <hal_uart_init+0x30>)
+   8:	4a0a      	ldr	r2, [pc, #40]	; (34 <hal_uart_init+0x34>)
+   a:	e9c0 2300 	strd	r2, r3, [r0]
+   e:	2300      	movs	r3, #0
+  10:	220c      	movs	r2, #12
+  12:	e9c0 3302 	strd	r3, r3, [r0, #8]
+  16:	e9c0 2305 	strd	r2, r3, [r0, #20]
+  1a:	6103      	str	r3, [r0, #16]
+  1c:	61c3      	str	r3, [r0, #28]
+  1e:	f7ff fffe 	bl	0 <HAL_UART_Init>
+  22:	b118      	cbz	r0, 2c <hal_uart_init+0x2c>
+  24:	e8bd 4008 	ldmia.w	sp!, {r3, lr}
+  28:	f7ff bffe 	b.w	0 <Error_Handler>
+  2c:	bd08      	pop	{r3, pc}
+  2e:	bf00      	nop
+  30:	00000000 	.word	0x00000000
+  34:	40004400 	.word	0x40004400
+
+Disassembly of section .text.Hal_uart_put_char:
+
+00000000 <Hal_uart_put_char>:
+   0:	b507      	push	{r0, r1, r2, lr}
+   2:	f44f 737a 	mov.w	r3, #1000	; 0x3e8
+   6:	f88d 0007 	strb.w	r0, [sp, #7]
+   a:	2201      	movs	r2, #1
+   c:	f10d 0107 	add.w	r1, sp, #7
+  10:	4802      	ldr	r0, [pc, #8]	; (1c <Hal_uart_put_char+0x1c>)
+  12:	f7ff fffe 	bl	0 <HAL_UART_Transmit>
+  16:	b003      	add	sp, #12
+  18:	f85d fb04 	ldr.w	pc, [sp], #4
+  1c:	00000000 	.word	0x00000000
+
+Disassembly of section .text.Hal_uart_get_char:
+
+00000000 <Hal_uart_get_char>:
+   0:	b507      	push	{r0, r1, r2, lr}
+   2:	f44f 737a 	mov.w	r3, #1000	; 0x3e8
+   6:	2201      	movs	r2, #1
+   8:	f10d 0107 	add.w	r1, sp, #7
+   c:	4803      	ldr	r0, [pc, #12]	; (1c <Hal_uart_get_char+0x1c>)
+   e:	f7ff fffe 	bl	0 <HAL_UART_Receive>
+  12:	f89d 0007 	ldrb.w	r0, [sp, #7]
+  16:	b003      	add	sp, #12
+  18:	f85d fb04 	ldr.w	pc, [sp], #4
+  1c:	00000000 	.word	0x00000000

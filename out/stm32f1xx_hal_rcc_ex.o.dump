@@ -1,0 +1,197 @@
+
+out/stm32f1xx_hal_rcc_ex.o:     file format elf32-littlearm
+
+
+Disassembly of section .text.HAL_RCCEx_PeriphCLKConfig:
+
+00000000 <HAL_RCCEx_PeriphCLKConfig>:
+   0:	6803      	ldr	r3, [r0, #0]
+   2:	e92d 41f3 	stmdb	sp!, {r0, r1, r4, r5, r6, r7, r8, lr}
+   6:	07d9      	lsls	r1, r3, #31
+   8:	4605      	mov	r5, r0
+   a:	d520      	bpl.n	4e <HAL_RCCEx_PeriphCLKConfig+0x4e>
+   c:	4c36      	ldr	r4, [pc, #216]	; (e8 <HAL_RCCEx_PeriphCLKConfig+0xe8>)
+   e:	69e3      	ldr	r3, [r4, #28]
+  10:	00da      	lsls	r2, r3, #3
+  12:	d432      	bmi.n	7a <HAL_RCCEx_PeriphCLKConfig+0x7a>
+  14:	2601      	movs	r6, #1
+  16:	69e3      	ldr	r3, [r4, #28]
+  18:	f043 5380 	orr.w	r3, r3, #268435456	; 0x10000000
+  1c:	61e3      	str	r3, [r4, #28]
+  1e:	69e3      	ldr	r3, [r4, #28]
+  20:	f003 5380 	and.w	r3, r3, #268435456	; 0x10000000
+  24:	9301      	str	r3, [sp, #4]
+  26:	9b01      	ldr	r3, [sp, #4]
+  28:	4f30      	ldr	r7, [pc, #192]	; (ec <HAL_RCCEx_PeriphCLKConfig+0xec>)
+  2a:	683b      	ldr	r3, [r7, #0]
+  2c:	05db      	lsls	r3, r3, #23
+  2e:	d526      	bpl.n	7e <HAL_RCCEx_PeriphCLKConfig+0x7e>
+  30:	6a23      	ldr	r3, [r4, #32]
+  32:	f413 7340 	ands.w	r3, r3, #768	; 0x300
+  36:	d136      	bne.n	a6 <HAL_RCCEx_PeriphCLKConfig+0xa6>
+  38:	6a23      	ldr	r3, [r4, #32]
+  3a:	686a      	ldr	r2, [r5, #4]
+  3c:	f423 7340 	bic.w	r3, r3, #768	; 0x300
+  40:	4313      	orrs	r3, r2
+  42:	6223      	str	r3, [r4, #32]
+  44:	b11e      	cbz	r6, 4e <HAL_RCCEx_PeriphCLKConfig+0x4e>
+  46:	69e3      	ldr	r3, [r4, #28]
+  48:	f023 5380 	bic.w	r3, r3, #268435456	; 0x10000000
+  4c:	61e3      	str	r3, [r4, #28]
+  4e:	6828      	ldr	r0, [r5, #0]
+  50:	0783      	lsls	r3, r0, #30
+  52:	d506      	bpl.n	62 <HAL_RCCEx_PeriphCLKConfig+0x62>
+  54:	4924      	ldr	r1, [pc, #144]	; (e8 <HAL_RCCEx_PeriphCLKConfig+0xe8>)
+  56:	68ab      	ldr	r3, [r5, #8]
+  58:	684a      	ldr	r2, [r1, #4]
+  5a:	f422 4240 	bic.w	r2, r2, #49152	; 0xc000
+  5e:	431a      	orrs	r2, r3
+  60:	604a      	str	r2, [r1, #4]
+  62:	f010 0010 	ands.w	r0, r0, #16
+  66:	d01b      	beq.n	a0 <HAL_RCCEx_PeriphCLKConfig+0xa0>
+  68:	4a1f      	ldr	r2, [pc, #124]	; (e8 <HAL_RCCEx_PeriphCLKConfig+0xe8>)
+  6a:	68e9      	ldr	r1, [r5, #12]
+  6c:	6853      	ldr	r3, [r2, #4]
+  6e:	2000      	movs	r0, #0
+  70:	f423 0380 	bic.w	r3, r3, #4194304	; 0x400000
+  74:	430b      	orrs	r3, r1
+  76:	6053      	str	r3, [r2, #4]
+  78:	e012      	b.n	a0 <HAL_RCCEx_PeriphCLKConfig+0xa0>
+  7a:	2600      	movs	r6, #0
+  7c:	e7d4      	b.n	28 <HAL_RCCEx_PeriphCLKConfig+0x28>
+  7e:	683b      	ldr	r3, [r7, #0]
+  80:	f443 7380 	orr.w	r3, r3, #256	; 0x100
+  84:	603b      	str	r3, [r7, #0]
+  86:	f7ff fffe 	bl	0 <HAL_GetTick>
+  8a:	4680      	mov	r8, r0
+  8c:	683b      	ldr	r3, [r7, #0]
+  8e:	05d8      	lsls	r0, r3, #23
+  90:	d4ce      	bmi.n	30 <HAL_RCCEx_PeriphCLKConfig+0x30>
+  92:	f7ff fffe 	bl	0 <HAL_GetTick>
+  96:	eba0 0008 	sub.w	r0, r0, r8
+  9a:	2864      	cmp	r0, #100	; 0x64
+  9c:	d9f6      	bls.n	8c <HAL_RCCEx_PeriphCLKConfig+0x8c>
+  9e:	2003      	movs	r0, #3
+  a0:	b002      	add	sp, #8
+  a2:	e8bd 81f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, pc}
+  a6:	686a      	ldr	r2, [r5, #4]
+  a8:	f402 7240 	and.w	r2, r2, #768	; 0x300
+  ac:	429a      	cmp	r2, r3
+  ae:	d0c3      	beq.n	38 <HAL_RCCEx_PeriphCLKConfig+0x38>
+  b0:	2001      	movs	r0, #1
+  b2:	4a0f      	ldr	r2, [pc, #60]	; (f0 <HAL_RCCEx_PeriphCLKConfig+0xf0>)
+  b4:	6a23      	ldr	r3, [r4, #32]
+  b6:	f8c2 0440 	str.w	r0, [r2, #1088]	; 0x440
+  ba:	2000      	movs	r0, #0
+  bc:	f423 7140 	bic.w	r1, r3, #768	; 0x300
+  c0:	f8c2 0440 	str.w	r0, [r2, #1088]	; 0x440
+  c4:	6221      	str	r1, [r4, #32]
+  c6:	07d9      	lsls	r1, r3, #31
+  c8:	d5b6      	bpl.n	38 <HAL_RCCEx_PeriphCLKConfig+0x38>
+  ca:	f7ff fffe 	bl	0 <HAL_GetTick>
+  ce:	f241 3888 	movw	r8, #5000	; 0x1388
+  d2:	4607      	mov	r7, r0
+  d4:	6a23      	ldr	r3, [r4, #32]
+  d6:	079a      	lsls	r2, r3, #30
+  d8:	d4ae      	bmi.n	38 <HAL_RCCEx_PeriphCLKConfig+0x38>
+  da:	f7ff fffe 	bl	0 <HAL_GetTick>
+  de:	1bc0      	subs	r0, r0, r7
+  e0:	4540      	cmp	r0, r8
+  e2:	d9f7      	bls.n	d4 <HAL_RCCEx_PeriphCLKConfig+0xd4>
+  e4:	e7db      	b.n	9e <HAL_RCCEx_PeriphCLKConfig+0x9e>
+  e6:	bf00      	nop
+  e8:	40021000 	.word	0x40021000
+  ec:	40007000 	.word	0x40007000
+  f0:	42420000 	.word	0x42420000
+
+Disassembly of section .text.HAL_RCCEx_GetPeriphCLKConfig:
+
+00000000 <HAL_RCCEx_GetPeriphCLKConfig>:
+   0:	4b07      	ldr	r3, [pc, #28]	; (20 <HAL_RCCEx_GetPeriphCLKConfig+0x20>)
+   2:	6a1a      	ldr	r2, [r3, #32]
+   4:	f402 7240 	and.w	r2, r2, #768	; 0x300
+   8:	6042      	str	r2, [r0, #4]
+   a:	685a      	ldr	r2, [r3, #4]
+   c:	f402 4240 	and.w	r2, r2, #49152	; 0xc000
+  10:	6082      	str	r2, [r0, #8]
+  12:	2213      	movs	r2, #19
+  14:	6002      	str	r2, [r0, #0]
+  16:	685b      	ldr	r3, [r3, #4]
+  18:	f403 0380 	and.w	r3, r3, #4194304	; 0x400000
+  1c:	60c3      	str	r3, [r0, #12]
+  1e:	4770      	bx	lr
+  20:	40021000 	.word	0x40021000
+
+Disassembly of section .text.HAL_RCCEx_GetPeriphCLKFreq:
+
+00000000 <HAL_RCCEx_GetPeriphCLKFreq>:
+   0:	2802      	cmp	r0, #2
+   2:	b508      	push	{r3, lr}
+   4:	d044      	beq.n	90 <HAL_RCCEx_GetPeriphCLKFreq+0x90>
+   6:	2810      	cmp	r0, #16
+   8:	d003      	beq.n	12 <HAL_RCCEx_GetPeriphCLKFreq+0x12>
+   a:	2801      	cmp	r0, #1
+   c:	d022      	beq.n	54 <HAL_RCCEx_GetPeriphCLKFreq+0x54>
+   e:	2000      	movs	r0, #0
+  10:	e034      	b.n	7c <HAL_RCCEx_GetPeriphCLKFreq+0x7c>
+  12:	4b25      	ldr	r3, [pc, #148]	; (a8 <HAL_RCCEx_GetPeriphCLKFreq+0xa8>)
+  14:	685a      	ldr	r2, [r3, #4]
+  16:	6818      	ldr	r0, [r3, #0]
+  18:	f010 7080 	ands.w	r0, r0, #16777216	; 0x1000000
+  1c:	d02e      	beq.n	7c <HAL_RCCEx_GetPeriphCLKFreq+0x7c>
+  1e:	f3c2 4183 	ubfx	r1, r2, #18, #4
+  22:	4822      	ldr	r0, [pc, #136]	; (ac <HAL_RCCEx_GetPeriphCLKFreq+0xac>)
+  24:	03d2      	lsls	r2, r2, #15
+  26:	bf48      	it	mi
+  28:	685a      	ldrmi	r2, [r3, #4]
+  2a:	5c40      	ldrb	r0, [r0, r1]
+  2c:	bf41      	itttt	mi
+  2e:	4920      	ldrmi	r1, [pc, #128]	; (b0 <HAL_RCCEx_GetPeriphCLKFreq+0xb0>)
+  30:	f3c2 4240 	ubfxmi	r2, r2, #17, #1
+  34:	5c89      	ldrbmi	r1, [r1, r2]
+  36:	4a1f      	ldrmi	r2, [pc, #124]	; (b4 <HAL_RCCEx_GetPeriphCLKFreq+0xb4>)
+  38:	685b      	ldr	r3, [r3, #4]
+  3a:	bf4c      	ite	mi
+  3c:	fbb2 f2f1 	udivmi	r2, r2, r1
+  40:	4a1d      	ldrpl	r2, [pc, #116]	; (b8 <HAL_RCCEx_GetPeriphCLKFreq+0xb8>)
+  42:	025b      	lsls	r3, r3, #9
+  44:	fb02 f000 	mul.w	r0, r2, r0
+  48:	d418      	bmi.n	7c <HAL_RCCEx_GetPeriphCLKFreq+0x7c>
+  4a:	2303      	movs	r3, #3
+  4c:	0040      	lsls	r0, r0, #1
+  4e:	fbb0 f0f3 	udiv	r0, r0, r3
+  52:	e013      	b.n	7c <HAL_RCCEx_GetPeriphCLKFreq+0x7c>
+  54:	f240 3102 	movw	r1, #770	; 0x302
+  58:	4a13      	ldr	r2, [pc, #76]	; (a8 <HAL_RCCEx_GetPeriphCLKFreq+0xa8>)
+  5a:	6a13      	ldr	r3, [r2, #32]
+  5c:	4019      	ands	r1, r3
+  5e:	f5b1 7f81 	cmp.w	r1, #258	; 0x102
+  62:	d01e      	beq.n	a2 <HAL_RCCEx_GetPeriphCLKFreq+0xa2>
+  64:	f403 7340 	and.w	r3, r3, #768	; 0x300
+  68:	f5b3 7f00 	cmp.w	r3, #512	; 0x200
+  6c:	d107      	bne.n	7e <HAL_RCCEx_GetPeriphCLKFreq+0x7e>
+  6e:	f649 4340 	movw	r3, #40000	; 0x9c40
+  72:	6a50      	ldr	r0, [r2, #36]	; 0x24
+  74:	f010 0002 	ands.w	r0, r0, #2
+  78:	bf18      	it	ne
+  7a:	4618      	movne	r0, r3
+  7c:	bd08      	pop	{r3, pc}
+  7e:	f5b3 7f40 	cmp.w	r3, #768	; 0x300
+  82:	d1c4      	bne.n	e <HAL_RCCEx_GetPeriphCLKFreq+0xe>
+  84:	6810      	ldr	r0, [r2, #0]
+  86:	f24f 4324 	movw	r3, #62500	; 0xf424
+  8a:	f410 3000 	ands.w	r0, r0, #131072	; 0x20000
+  8e:	e7f3      	b.n	78 <HAL_RCCEx_GetPeriphCLKFreq+0x78>
+  90:	f7ff fffe 	bl	0 <HAL_RCC_GetPCLK2Freq>
+  94:	4b04      	ldr	r3, [pc, #16]	; (a8 <HAL_RCCEx_GetPeriphCLKFreq+0xa8>)
+  96:	685b      	ldr	r3, [r3, #4]
+  98:	f3c3 3381 	ubfx	r3, r3, #14, #2
+  9c:	3301      	adds	r3, #1
+  9e:	005b      	lsls	r3, r3, #1
+  a0:	e7d5      	b.n	4e <HAL_RCCEx_GetPeriphCLKFreq+0x4e>
+  a2:	f44f 4000 	mov.w	r0, #32768	; 0x8000
+  a6:	e7e9      	b.n	7c <HAL_RCCEx_GetPeriphCLKFreq+0x7c>
+  a8:	40021000 	.word	0x40021000
+	...
+  b4:	007a1200 	.word	0x007a1200
+  b8:	003d0900 	.word	0x003d0900

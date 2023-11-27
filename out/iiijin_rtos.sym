@@ -1,0 +1,75 @@
+
+./out/iiijin_rtos.axf:     file format elf32-littlearm
+
+SYMBOL TABLE:
+08000000 l    d  .isr_vector	00000000 .isr_vector
+08000000 l    d  .text	00000000 .text
+08000150 l    d  .rodata	00000000 .rodata
+08000154 l    d  .ARM.extab	00000000 .ARM.extab
+08000154 l    d  .ARM	00000000 .ARM
+08000154 l    d  .preinit_array	00000000 .preinit_array
+08000154 l    d  .init_array	00000000 .init_array
+0800015c l    d  .fini_array	00000000 .fini_array
+20000000 l    d  .data	00000000 .data
+20000430 l    d  .bss	00000000 .bss
+2000044c l    d  ._user_heap_stack	00000000 ._user_heap_stack
+00000000 l    d  .ARM.attributes	00000000 .ARM.attributes
+00000000 l    d  .comment	00000000 .comment
+00000000 l    d  .debug_info	00000000 .debug_info
+00000000 l    d  .debug_abbrev	00000000 .debug_abbrev
+00000000 l    d  .debug_loc	00000000 .debug_loc
+00000000 l    d  .debug_aranges	00000000 .debug_aranges
+00000000 l    d  .debug_line	00000000 .debug_line
+00000000 l    d  .debug_str	00000000 .debug_str
+00000000 l    d  .debug_frame	00000000 .debug_frame
+00000000 l    d  .debug_ranges	00000000 .debug_ranges
+00000000 l    df *ABS*	00000000 crtstuff.c
+08000138 l     O .text	00000000 __EH_FRAME_BEGIN__
+08000000 l     F .text	00000000 deregister_tm_clones
+0800001c l     F .text	00000000 register_tm_clones
+08000040 l     F .text	00000000 __do_global_dtors_aux
+20000430 l       .bss	00000001 completed.1
+0800015c l     O .fini_array	00000000 __do_global_dtors_aux_fini_array_entry
+08000068 l     F .text	00000000 frame_dummy
+20000434 l       .bss	00000018 object.0
+08000158 l     O .init_array	00000000 __frame_dummy_init_array_entry
+00000000 l    df *ABS*	00000000 atexit.c
+00000000 l    df *ABS*	00000000 fini.c
+00000000 l    df *ABS*	00000000 __atexit.c
+00000000 l    df *ABS*	00000000 __call_atexit.c
+08000124 l     F .text	00000014 register_fini
+00000000 l    df *ABS*	00000000 crti.o
+00000000 l    df *ABS*	00000000 crtn.o
+00000000 l    df *ABS*	00000000 impure.c
+20000008 l     O .data	00000428 impure_data
+00000000 l    df *ABS*	00000000 
+08000160 l       .fini_array	00000000 __fini_array_end
+0800015c l       .fini_array	00000000 __fini_array_start
+0800015c l       .init_array	00000000 __init_array_end
+08000154 l       .preinit_array	00000000 __preinit_array_end
+08000154 l       .init_array	00000000 __init_array_start
+08000154 l       .preinit_array	00000000 __preinit_array_start
+00000400 g       *ABS*	00000000 _Min_Stack_Size
+08000160 g       *ABS*	00000000 _sidata
+08000154 g       .ARM	00000000 __exidx_end
+08000150 g       .text	00000000 _etext
+20000430 g       .bss	00000000 _sbss
+20000430 g     O .data	00000000 .hidden __TMC_END__
+20000430 g       .bss	00000000 __bss_start__
+20000000 g       .data	00000000 _sdata
+08000154 g       .ARM	00000000 __exidx_start
+08000150 g     O .rodata	00000004 _global_impure_ptr
+08000138 g     F .text	00000000 _init
+08000094 g     F .text	0000002c __libc_fini_array
+2000044c g       .bss	00000000 _ebss
+00000000         *UND*	00000000 Reset_Handler
+2000044c g       .bss	00000000 __bss_end__
+00000200 g       *ABS*	00000000 _Min_Heap_Size
+080000c0 g     F .text	00000064 __register_exitproc
+08000144 g     F .text	00000000 _fini
+08000088 g     F .text	0000000c atexit
+20000000 g     O .data	00000004 _impure_ptr
+20005000 g       *ABS*	00000000 _estack
+20000430 g       .data	00000000 _edata
+
+

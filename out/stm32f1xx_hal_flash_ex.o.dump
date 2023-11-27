@@ -1,0 +1,439 @@
+
+out/stm32f1xx_hal_flash_ex.o:     file format elf32-littlearm
+
+
+Disassembly of section .text.FLASH_OB_RDP_LevelConfig:
+
+00000000 <FLASH_OB_RDP_LevelConfig>:
+   0:	b538      	push	{r3, r4, r5, lr}
+   2:	4605      	mov	r5, r0
+   4:	f24c 3050 	movw	r0, #50000	; 0xc350
+   8:	f7ff fffe 	bl	0 <FLASH_WaitForLastOperation>
+   c:	bb10      	cbnz	r0, 54 <FLASH_OB_RDP_LevelConfig+0x54>
+   e:	4b12      	ldr	r3, [pc, #72]	; (58 <FLASH_OB_RDP_LevelConfig+0x58>)
+  10:	4c12      	ldr	r4, [pc, #72]	; (5c <FLASH_OB_RDP_LevelConfig+0x5c>)
+  12:	61d8      	str	r0, [r3, #28]
+  14:	6923      	ldr	r3, [r4, #16]
+  16:	f24c 3050 	movw	r0, #50000	; 0xc350
+  1a:	f043 0320 	orr.w	r3, r3, #32
+  1e:	6123      	str	r3, [r4, #16]
+  20:	6923      	ldr	r3, [r4, #16]
+  22:	f043 0340 	orr.w	r3, r3, #64	; 0x40
+  26:	6123      	str	r3, [r4, #16]
+  28:	f7ff fffe 	bl	0 <FLASH_WaitForLastOperation>
+  2c:	6923      	ldr	r3, [r4, #16]
+  2e:	f023 0320 	bic.w	r3, r3, #32
+  32:	6123      	str	r3, [r4, #16]
+  34:	b970      	cbnz	r0, 54 <FLASH_OB_RDP_LevelConfig+0x54>
+  36:	6923      	ldr	r3, [r4, #16]
+  38:	b2ad      	uxth	r5, r5
+  3a:	f043 0310 	orr.w	r3, r3, #16
+  3e:	6123      	str	r3, [r4, #16]
+  40:	4b07      	ldr	r3, [pc, #28]	; (60 <FLASH_OB_RDP_LevelConfig+0x60>)
+  42:	f24c 3050 	movw	r0, #50000	; 0xc350
+  46:	801d      	strh	r5, [r3, #0]
+  48:	f7ff fffe 	bl	0 <FLASH_WaitForLastOperation>
+  4c:	6923      	ldr	r3, [r4, #16]
+  4e:	f023 0310 	bic.w	r3, r3, #16
+  52:	6123      	str	r3, [r4, #16]
+  54:	bd38      	pop	{r3, r4, r5, pc}
+  56:	bf00      	nop
+  58:	00000000 	.word	0x00000000
+  5c:	40022000 	.word	0x40022000
+  60:	1ffff800 	.word	0x1ffff800
+
+Disassembly of section .text.HAL_FLASHEx_OBErase:
+
+00000000 <HAL_FLASHEx_OBErase>:
+   0:	b538      	push	{r3, r4, r5, lr}
+   2:	4c12      	ldr	r4, [pc, #72]	; (4c <HAL_FLASHEx_OBErase+0x4c>)
+   4:	f24c 3050 	movw	r0, #50000	; 0xc350
+   8:	69e3      	ldr	r3, [r4, #28]
+   a:	f013 0f02 	tst.w	r3, #2
+   e:	bf14      	ite	ne
+  10:	2500      	movne	r5, #0
+  12:	25a5      	moveq	r5, #165	; 0xa5
+  14:	f7ff fffe 	bl	0 <FLASH_WaitForLastOperation>
+  18:	b9b8      	cbnz	r0, 4a <HAL_FLASHEx_OBErase+0x4a>
+  1a:	4a0d      	ldr	r2, [pc, #52]	; (50 <HAL_FLASHEx_OBErase+0x50>)
+  1c:	61d0      	str	r0, [r2, #28]
+  1e:	6923      	ldr	r3, [r4, #16]
+  20:	f24c 3050 	movw	r0, #50000	; 0xc350
+  24:	f043 0320 	orr.w	r3, r3, #32
+  28:	6123      	str	r3, [r4, #16]
+  2a:	6923      	ldr	r3, [r4, #16]
+  2c:	f043 0340 	orr.w	r3, r3, #64	; 0x40
+  30:	6123      	str	r3, [r4, #16]
+  32:	f7ff fffe 	bl	0 <FLASH_WaitForLastOperation>
+  36:	6923      	ldr	r3, [r4, #16]
+  38:	f023 0320 	bic.w	r3, r3, #32
+  3c:	6123      	str	r3, [r4, #16]
+  3e:	b920      	cbnz	r0, 4a <HAL_FLASHEx_OBErase+0x4a>
+  40:	4628      	mov	r0, r5
+  42:	e8bd 4038 	ldmia.w	sp!, {r3, r4, r5, lr}
+  46:	f7ff bffe 	b.w	0 <HAL_FLASHEx_OBErase>
+  4a:	bd38      	pop	{r3, r4, r5, pc}
+  4c:	40022000 	.word	0x40022000
+  50:	00000000 	.word	0x00000000
+
+Disassembly of section .text.HAL_FLASHEx_OBProgram:
+
+00000000 <HAL_FLASHEx_OBProgram>:
+   0:	e92d 41f0 	stmdb	sp!, {r4, r5, r6, r7, r8, lr}
+   4:	4d76      	ldr	r5, [pc, #472]	; (1e0 <HAL_FLASHEx_OBProgram+0x1e0>)
+   6:	4604      	mov	r4, r0
+   8:	7e2b      	ldrb	r3, [r5, #24]
+   a:	2b01      	cmp	r3, #1
+   c:	f000 80e6 	beq.w	1dc <HAL_FLASHEx_OBProgram+0x1dc>
+  10:	2001      	movs	r0, #1
+  12:	7628      	strb	r0, [r5, #24]
+  14:	6823      	ldr	r3, [r4, #0]
+  16:	07de      	lsls	r6, r3, #31
+  18:	f140 809d 	bpl.w	156 <HAL_FLASHEx_OBProgram+0x156>
+  1c:	e9d4 3601 	ldrd	r3, r6, [r4, #4]
+  20:	4f70      	ldr	r7, [pc, #448]	; (1e4 <HAL_FLASHEx_OBProgram+0x1e4>)
+  22:	4283      	cmp	r3, r0
+  24:	f8d7 8020 	ldr.w	r8, [r7, #32]
+  28:	f24c 3050 	movw	r0, #50000	; 0xc350
+  2c:	d14e      	bne.n	cc <HAL_FLASHEx_OBProgram+0xcc>
+  2e:	f7ff fffe 	bl	0 <FLASH_WaitForLastOperation>
+  32:	2800      	cmp	r0, #0
+  34:	d13d      	bne.n	b2 <HAL_FLASHEx_OBProgram+0xb2>
+  36:	61e8      	str	r0, [r5, #28]
+  38:	f7ff fffe 	bl	0 <HAL_FLASHEx_OBProgram>
+  3c:	2800      	cmp	r0, #0
+  3e:	d138      	bne.n	b2 <HAL_FLASHEx_OBProgram+0xb2>
+  40:	693a      	ldr	r2, [r7, #16]
+  42:	ea28 0606 	bic.w	r6, r8, r6
+  46:	b2f3      	uxtb	r3, r6
+  48:	f042 0210 	orr.w	r2, r2, #16
+  4c:	2bff      	cmp	r3, #255	; 0xff
+  4e:	613a      	str	r2, [r7, #16]
+  50:	d11e      	bne.n	90 <HAL_FLASHEx_OBProgram+0x90>
+  52:	f3c6 2307 	ubfx	r3, r6, #8, #8
+  56:	2bff      	cmp	r3, #255	; 0xff
+  58:	d008      	beq.n	6c <HAL_FLASHEx_OBProgram+0x6c>
+  5a:	4a63      	ldr	r2, [pc, #396]	; (1e8 <HAL_FLASHEx_OBProgram+0x1e8>)
+  5c:	f24c 3050 	movw	r0, #50000	; 0xc350
+  60:	8951      	ldrh	r1, [r2, #10]
+  62:	400b      	ands	r3, r1
+  64:	8153      	strh	r3, [r2, #10]
+  66:	f7ff fffe 	bl	0 <FLASH_WaitForLastOperation>
+  6a:	b9d8      	cbnz	r0, a4 <HAL_FLASHEx_OBProgram+0xa4>
+  6c:	f3c6 4307 	ubfx	r3, r6, #16, #8
+  70:	2bff      	cmp	r3, #255	; 0xff
+  72:	d008      	beq.n	86 <HAL_FLASHEx_OBProgram+0x86>
+  74:	4a5c      	ldr	r2, [pc, #368]	; (1e8 <HAL_FLASHEx_OBProgram+0x1e8>)
+  76:	f24c 3050 	movw	r0, #50000	; 0xc350
+  7a:	8991      	ldrh	r1, [r2, #12]
+  7c:	400b      	ands	r3, r1
+  7e:	8193      	strh	r3, [r2, #12]
+  80:	f7ff fffe 	bl	0 <FLASH_WaitForLastOperation>
+  84:	b970      	cbnz	r0, a4 <HAL_FLASHEx_OBProgram+0xa4>
+  86:	0e36      	lsrs	r6, r6, #24
+  88:	2eff      	cmp	r6, #255	; 0xff
+  8a:	d116      	bne.n	ba <HAL_FLASHEx_OBProgram+0xba>
+  8c:	2000      	movs	r0, #0
+  8e:	e009      	b.n	a4 <HAL_FLASHEx_OBProgram+0xa4>
+  90:	4a55      	ldr	r2, [pc, #340]	; (1e8 <HAL_FLASHEx_OBProgram+0x1e8>)
+  92:	f24c 3050 	movw	r0, #50000	; 0xc350
+  96:	8911      	ldrh	r1, [r2, #8]
+  98:	400b      	ands	r3, r1
+  9a:	8113      	strh	r3, [r2, #8]
+  9c:	f7ff fffe 	bl	0 <FLASH_WaitForLastOperation>
+  a0:	2800      	cmp	r0, #0
+  a2:	d0d6      	beq.n	52 <HAL_FLASHEx_OBProgram+0x52>
+  a4:	4a4f      	ldr	r2, [pc, #316]	; (1e4 <HAL_FLASHEx_OBProgram+0x1e4>)
+  a6:	6913      	ldr	r3, [r2, #16]
+  a8:	f023 0310 	bic.w	r3, r3, #16
+  ac:	6113      	str	r3, [r2, #16]
+  ae:	2800      	cmp	r0, #0
+  b0:	d051      	beq.n	156 <HAL_FLASHEx_OBProgram+0x156>
+  b2:	2300      	movs	r3, #0
+  b4:	762b      	strb	r3, [r5, #24]
+  b6:	e8bd 81f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, pc}
+  ba:	4b4b      	ldr	r3, [pc, #300]	; (1e8 <HAL_FLASHEx_OBProgram+0x1e8>)
+  bc:	89da      	ldrh	r2, [r3, #14]
+  be:	4016      	ands	r6, r2
+  c0:	81de      	strh	r6, [r3, #14]
+  c2:	f24c 3050 	movw	r0, #50000	; 0xc350
+  c6:	f7ff fffe 	bl	0 <FLASH_WaitForLastOperation>
+  ca:	e7eb      	b.n	a4 <HAL_FLASHEx_OBProgram+0xa4>
+  cc:	f7ff fffe 	bl	0 <FLASH_WaitForLastOperation>
+  d0:	2800      	cmp	r0, #0
+  d2:	d1ee      	bne.n	b2 <HAL_FLASHEx_OBProgram+0xb2>
+  d4:	61e8      	str	r0, [r5, #28]
+  d6:	f7ff fffe 	bl	0 <HAL_FLASHEx_OBProgram>
+  da:	2800      	cmp	r0, #0
+  dc:	d1e9      	bne.n	b2 <HAL_FLASHEx_OBProgram+0xb2>
+  de:	693a      	ldr	r2, [r7, #16]
+  e0:	ea48 0606 	orr.w	r6, r8, r6
+  e4:	b2f3      	uxtb	r3, r6
+  e6:	f042 0210 	orr.w	r2, r2, #16
+  ea:	2bff      	cmp	r3, #255	; 0xff
+  ec:	613a      	str	r2, [r7, #16]
+  ee:	d126      	bne.n	13e <HAL_FLASHEx_OBProgram+0x13e>
+  f0:	f3c6 2307 	ubfx	r3, r6, #8, #8
+  f4:	2bff      	cmp	r3, #255	; 0xff
+  f6:	d00a      	beq.n	10e <HAL_FLASHEx_OBProgram+0x10e>
+  f8:	493b      	ldr	r1, [pc, #236]	; (1e8 <HAL_FLASHEx_OBProgram+0x1e8>)
+  fa:	f24c 3050 	movw	r0, #50000	; 0xc350
+  fe:	894a      	ldrh	r2, [r1, #10]
+ 100:	b292      	uxth	r2, r2
+ 102:	4313      	orrs	r3, r2
+ 104:	814b      	strh	r3, [r1, #10]
+ 106:	f7ff fffe 	bl	0 <FLASH_WaitForLastOperation>
+ 10a:	2800      	cmp	r0, #0
+ 10c:	d1ca      	bne.n	a4 <HAL_FLASHEx_OBProgram+0xa4>
+ 10e:	f3c6 4307 	ubfx	r3, r6, #16, #8
+ 112:	2bff      	cmp	r3, #255	; 0xff
+ 114:	d00a      	beq.n	12c <HAL_FLASHEx_OBProgram+0x12c>
+ 116:	4934      	ldr	r1, [pc, #208]	; (1e8 <HAL_FLASHEx_OBProgram+0x1e8>)
+ 118:	f24c 3050 	movw	r0, #50000	; 0xc350
+ 11c:	898a      	ldrh	r2, [r1, #12]
+ 11e:	b292      	uxth	r2, r2
+ 120:	4313      	orrs	r3, r2
+ 122:	818b      	strh	r3, [r1, #12]
+ 124:	f7ff fffe 	bl	0 <FLASH_WaitForLastOperation>
+ 128:	2800      	cmp	r0, #0
+ 12a:	d1bb      	bne.n	a4 <HAL_FLASHEx_OBProgram+0xa4>
+ 12c:	0e36      	lsrs	r6, r6, #24
+ 12e:	2eff      	cmp	r6, #255	; 0xff
+ 130:	d0ac      	beq.n	8c <HAL_FLASHEx_OBProgram+0x8c>
+ 132:	4a2d      	ldr	r2, [pc, #180]	; (1e8 <HAL_FLASHEx_OBProgram+0x1e8>)
+ 134:	89d3      	ldrh	r3, [r2, #14]
+ 136:	b29b      	uxth	r3, r3
+ 138:	431e      	orrs	r6, r3
+ 13a:	81d6      	strh	r6, [r2, #14]
+ 13c:	e7c1      	b.n	c2 <HAL_FLASHEx_OBProgram+0xc2>
+ 13e:	492a      	ldr	r1, [pc, #168]	; (1e8 <HAL_FLASHEx_OBProgram+0x1e8>)
+ 140:	f24c 3050 	movw	r0, #50000	; 0xc350
+ 144:	890a      	ldrh	r2, [r1, #8]
+ 146:	b292      	uxth	r2, r2
+ 148:	4313      	orrs	r3, r2
+ 14a:	810b      	strh	r3, [r1, #8]
+ 14c:	f7ff fffe 	bl	0 <FLASH_WaitForLastOperation>
+ 150:	2800      	cmp	r0, #0
+ 152:	d1a7      	bne.n	a4 <HAL_FLASHEx_OBProgram+0xa4>
+ 154:	e7cc      	b.n	f0 <HAL_FLASHEx_OBProgram+0xf0>
+ 156:	6823      	ldr	r3, [r4, #0]
+ 158:	0799      	lsls	r1, r3, #30
+ 15a:	d504      	bpl.n	166 <HAL_FLASHEx_OBProgram+0x166>
+ 15c:	7c20      	ldrb	r0, [r4, #16]
+ 15e:	f7ff fffe 	bl	0 <HAL_FLASHEx_OBProgram>
+ 162:	2800      	cmp	r0, #0
+ 164:	d1a5      	bne.n	b2 <HAL_FLASHEx_OBProgram+0xb2>
+ 166:	6823      	ldr	r3, [r4, #0]
+ 168:	075a      	lsls	r2, r3, #29
+ 16a:	d51a      	bpl.n	1a2 <HAL_FLASHEx_OBProgram+0x1a2>
+ 16c:	f24c 3050 	movw	r0, #50000	; 0xc350
+ 170:	7c67      	ldrb	r7, [r4, #17]
+ 172:	f7ff fffe 	bl	0 <FLASH_WaitForLastOperation>
+ 176:	2800      	cmp	r0, #0
+ 178:	d19b      	bne.n	b2 <HAL_FLASHEx_OBProgram+0xb2>
+ 17a:	4e1a      	ldr	r6, [pc, #104]	; (1e4 <HAL_FLASHEx_OBProgram+0x1e4>)
+ 17c:	61e8      	str	r0, [r5, #28]
+ 17e:	6933      	ldr	r3, [r6, #16]
+ 180:	f047 0788 	orr.w	r7, r7, #136	; 0x88
+ 184:	f043 0310 	orr.w	r3, r3, #16
+ 188:	6133      	str	r3, [r6, #16]
+ 18a:	4b17      	ldr	r3, [pc, #92]	; (1e8 <HAL_FLASHEx_OBProgram+0x1e8>)
+ 18c:	f24c 3050 	movw	r0, #50000	; 0xc350
+ 190:	805f      	strh	r7, [r3, #2]
+ 192:	f7ff fffe 	bl	0 <FLASH_WaitForLastOperation>
+ 196:	6933      	ldr	r3, [r6, #16]
+ 198:	f023 0310 	bic.w	r3, r3, #16
+ 19c:	6133      	str	r3, [r6, #16]
+ 19e:	2800      	cmp	r0, #0
+ 1a0:	d187      	bne.n	b2 <HAL_FLASHEx_OBProgram+0xb2>
+ 1a2:	6823      	ldr	r3, [r4, #0]
+ 1a4:	071b      	lsls	r3, r3, #28
+ 1a6:	d584      	bpl.n	b2 <HAL_FLASHEx_OBProgram+0xb2>
+ 1a8:	f24c 3050 	movw	r0, #50000	; 0xc350
+ 1ac:	6967      	ldr	r7, [r4, #20]
+ 1ae:	7e26      	ldrb	r6, [r4, #24]
+ 1b0:	f7ff fffe 	bl	0 <FLASH_WaitForLastOperation>
+ 1b4:	2800      	cmp	r0, #0
+ 1b6:	f47f af7c 	bne.w	b2 <HAL_FLASHEx_OBProgram+0xb2>
+ 1ba:	4c0a      	ldr	r4, [pc, #40]	; (1e4 <HAL_FLASHEx_OBProgram+0x1e4>)
+ 1bc:	61e8      	str	r0, [r5, #28]
+ 1be:	6923      	ldr	r3, [r4, #16]
+ 1c0:	b2b6      	uxth	r6, r6
+ 1c2:	f043 0310 	orr.w	r3, r3, #16
+ 1c6:	6123      	str	r3, [r4, #16]
+ 1c8:	f24c 3050 	movw	r0, #50000	; 0xc350
+ 1cc:	803e      	strh	r6, [r7, #0]
+ 1ce:	f7ff fffe 	bl	0 <FLASH_WaitForLastOperation>
+ 1d2:	6923      	ldr	r3, [r4, #16]
+ 1d4:	f023 0310 	bic.w	r3, r3, #16
+ 1d8:	6123      	str	r3, [r4, #16]
+ 1da:	e76a      	b.n	b2 <HAL_FLASHEx_OBProgram+0xb2>
+ 1dc:	2002      	movs	r0, #2
+ 1de:	e76a      	b.n	b6 <HAL_FLASHEx_OBProgram+0xb6>
+ 1e0:	00000000 	.word	0x00000000
+ 1e4:	40022000 	.word	0x40022000
+ 1e8:	1ffff800 	.word	0x1ffff800
+
+Disassembly of section .text.HAL_FLASHEx_OBGetConfig:
+
+00000000 <HAL_FLASHEx_OBGetConfig>:
+   0:	2307      	movs	r3, #7
+   2:	6003      	str	r3, [r0, #0]
+   4:	4b07      	ldr	r3, [pc, #28]	; (24 <HAL_FLASHEx_OBGetConfig+0x24>)
+   6:	6a1a      	ldr	r2, [r3, #32]
+   8:	6082      	str	r2, [r0, #8]
+   a:	69da      	ldr	r2, [r3, #28]
+   c:	f012 0f02 	tst.w	r2, #2
+  10:	bf14      	ite	ne
+  12:	2200      	movne	r2, #0
+  14:	22a5      	moveq	r2, #165	; 0xa5
+  16:	7402      	strb	r2, [r0, #16]
+  18:	69db      	ldr	r3, [r3, #28]
+  1a:	f3c3 0382 	ubfx	r3, r3, #2, #3
+  1e:	7443      	strb	r3, [r0, #17]
+  20:	4770      	bx	lr
+  22:	bf00      	nop
+  24:	40022000 	.word	0x40022000
+
+Disassembly of section .text.HAL_FLASHEx_OBGetUserData:
+
+00000000 <HAL_FLASHEx_OBGetUserData>:
+   0:	4b04      	ldr	r3, [pc, #16]	; (14 <HAL_FLASHEx_OBGetUserData+0x14>)
+   2:	4298      	cmp	r0, r3
+   4:	4b04      	ldr	r3, [pc, #16]	; (18 <HAL_FLASHEx_OBGetUserData+0x18>)
+   6:	69d8      	ldr	r0, [r3, #28]
+   8:	bf0c      	ite	eq
+   a:	f3c0 2087 	ubfxeq	r0, r0, #10, #8
+   e:	f3c0 4087 	ubfxne	r0, r0, #18, #8
+  12:	4770      	bx	lr
+  14:	1ffff804 	.word	0x1ffff804
+  18:	40022000 	.word	0x40022000
+
+Disassembly of section .text.FLASH_PageErase:
+
+00000000 <FLASH_PageErase>:
+   0:	2200      	movs	r2, #0
+   2:	4b06      	ldr	r3, [pc, #24]	; (1c <FLASH_PageErase+0x1c>)
+   4:	61da      	str	r2, [r3, #28]
+   6:	4b06      	ldr	r3, [pc, #24]	; (20 <FLASH_PageErase+0x20>)
+   8:	691a      	ldr	r2, [r3, #16]
+   a:	f042 0202 	orr.w	r2, r2, #2
+   e:	611a      	str	r2, [r3, #16]
+  10:	6158      	str	r0, [r3, #20]
+  12:	691a      	ldr	r2, [r3, #16]
+  14:	f042 0240 	orr.w	r2, r2, #64	; 0x40
+  18:	611a      	str	r2, [r3, #16]
+  1a:	4770      	bx	lr
+  1c:	00000000 	.word	0x00000000
+  20:	40022000 	.word	0x40022000
+
+Disassembly of section .text.HAL_FLASHEx_Erase:
+
+00000000 <HAL_FLASHEx_Erase>:
+   0:	e92d 41f0 	stmdb	sp!, {r4, r5, r6, r7, r8, lr}
+   4:	4f26      	ldr	r7, [pc, #152]	; (a0 <HAL_FLASHEx_Erase+0xa0>)
+   6:	4605      	mov	r5, r0
+   8:	7e3b      	ldrb	r3, [r7, #24]
+   a:	4688      	mov	r8, r1
+   c:	2b01      	cmp	r3, #1
+   e:	d044      	beq.n	9a <HAL_FLASHEx_Erase+0x9a>
+  10:	2401      	movs	r4, #1
+  12:	763c      	strb	r4, [r7, #24]
+  14:	6803      	ldr	r3, [r0, #0]
+  16:	f24c 3050 	movw	r0, #50000	; 0xc350
+  1a:	2b02      	cmp	r3, #2
+  1c:	d11a      	bne.n	54 <HAL_FLASHEx_Erase+0x54>
+  1e:	f7ff fffe 	bl	0 <FLASH_WaitForLastOperation>
+  22:	b120      	cbz	r0, 2e <HAL_FLASHEx_Erase+0x2e>
+  24:	2001      	movs	r0, #1
+  26:	2300      	movs	r3, #0
+  28:	763b      	strb	r3, [r7, #24]
+  2a:	e8bd 81f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, pc}
+  2e:	4c1d      	ldr	r4, [pc, #116]	; (a4 <HAL_FLASHEx_Erase+0xa4>)
+  30:	61f8      	str	r0, [r7, #28]
+  32:	6923      	ldr	r3, [r4, #16]
+  34:	f24c 3050 	movw	r0, #50000	; 0xc350
+  38:	f043 0304 	orr.w	r3, r3, #4
+  3c:	6123      	str	r3, [r4, #16]
+  3e:	6923      	ldr	r3, [r4, #16]
+  40:	f043 0340 	orr.w	r3, r3, #64	; 0x40
+  44:	6123      	str	r3, [r4, #16]
+  46:	f7ff fffe 	bl	0 <FLASH_WaitForLastOperation>
+  4a:	6923      	ldr	r3, [r4, #16]
+  4c:	f023 0304 	bic.w	r3, r3, #4
+  50:	6123      	str	r3, [r4, #16]
+  52:	e7e8      	b.n	26 <HAL_FLASHEx_Erase+0x26>
+  54:	f7ff fffe 	bl	0 <FLASH_WaitForLastOperation>
+  58:	2800      	cmp	r0, #0
+  5a:	d1e3      	bne.n	24 <HAL_FLASHEx_Erase+0x24>
+  5c:	f04f 33ff 	mov.w	r3, #4294967295	; 0xffffffff
+  60:	f8c8 3000 	str.w	r3, [r8]
+  64:	4620      	mov	r0, r4
+  66:	68ae      	ldr	r6, [r5, #8]
+  68:	4c0e      	ldr	r4, [pc, #56]	; (a4 <HAL_FLASHEx_Erase+0xa4>)
+  6a:	e9d5 3202 	ldrd	r3, r2, [r5, #8]
+  6e:	eb03 2382 	add.w	r3, r3, r2, lsl #10
+  72:	42b3      	cmp	r3, r6
+  74:	d9d7      	bls.n	26 <HAL_FLASHEx_Erase+0x26>
+  76:	4630      	mov	r0, r6
+  78:	f7ff fffe 	bl	0 <HAL_FLASHEx_Erase>
+  7c:	f24c 3050 	movw	r0, #50000	; 0xc350
+  80:	f7ff fffe 	bl	0 <FLASH_WaitForLastOperation>
+  84:	6923      	ldr	r3, [r4, #16]
+  86:	f023 0302 	bic.w	r3, r3, #2
+  8a:	6123      	str	r3, [r4, #16]
+  8c:	b110      	cbz	r0, 94 <HAL_FLASHEx_Erase+0x94>
+  8e:	f8c8 6000 	str.w	r6, [r8]
+  92:	e7c8      	b.n	26 <HAL_FLASHEx_Erase+0x26>
+  94:	f506 6680 	add.w	r6, r6, #1024	; 0x400
+  98:	e7e7      	b.n	6a <HAL_FLASHEx_Erase+0x6a>
+  9a:	2002      	movs	r0, #2
+  9c:	e7c5      	b.n	2a <HAL_FLASHEx_Erase+0x2a>
+  9e:	bf00      	nop
+  a0:	00000000 	.word	0x00000000
+  a4:	40022000 	.word	0x40022000
+
+Disassembly of section .text.HAL_FLASHEx_Erase_IT:
+
+00000000 <HAL_FLASHEx_Erase_IT>:
+   0:	b538      	push	{r3, r4, r5, lr}
+   2:	4b15      	ldr	r3, [pc, #84]	; (58 <HAL_FLASHEx_Erase_IT+0x58>)
+   4:	7e1a      	ldrb	r2, [r3, #24]
+   6:	2a01      	cmp	r2, #1
+   8:	d021      	beq.n	4e <HAL_FLASHEx_Erase_IT+0x4e>
+   a:	2401      	movs	r4, #1
+   c:	781a      	ldrb	r2, [r3, #0]
+   e:	761c      	strb	r4, [r3, #24]
+  10:	f002 01ff 	and.w	r1, r2, #255	; 0xff
+  14:	b9ea      	cbnz	r2, 52 <HAL_FLASHEx_Erase_IT+0x52>
+  16:	4a11      	ldr	r2, [pc, #68]	; (5c <HAL_FLASHEx_Erase_IT+0x5c>)
+  18:	6915      	ldr	r5, [r2, #16]
+  1a:	f445 55a0 	orr.w	r5, r5, #5120	; 0x1400
+  1e:	6115      	str	r5, [r2, #16]
+  20:	6805      	ldr	r5, [r0, #0]
+  22:	2d02      	cmp	r5, #2
+  24:	d10b      	bne.n	3e <HAL_FLASHEx_Erase_IT+0x3e>
+  26:	701d      	strb	r5, [r3, #0]
+  28:	61d9      	str	r1, [r3, #28]
+  2a:	6913      	ldr	r3, [r2, #16]
+  2c:	f043 0304 	orr.w	r3, r3, #4
+  30:	6113      	str	r3, [r2, #16]
+  32:	6913      	ldr	r3, [r2, #16]
+  34:	f043 0340 	orr.w	r3, r3, #64	; 0x40
+  38:	6113      	str	r3, [r2, #16]
+  3a:	4608      	mov	r0, r1
+  3c:	bd38      	pop	{r3, r4, r5, pc}
+  3e:	68c2      	ldr	r2, [r0, #12]
+  40:	6880      	ldr	r0, [r0, #8]
+  42:	701c      	strb	r4, [r3, #0]
+  44:	605a      	str	r2, [r3, #4]
+  46:	6098      	str	r0, [r3, #8]
+  48:	f7ff fffe 	bl	0 <HAL_FLASHEx_Erase_IT>
+  4c:	e7f5      	b.n	3a <HAL_FLASHEx_Erase_IT+0x3a>
+  4e:	2102      	movs	r1, #2
+  50:	e7f3      	b.n	3a <HAL_FLASHEx_Erase_IT+0x3a>
+  52:	4621      	mov	r1, r4
+  54:	e7f1      	b.n	3a <HAL_FLASHEx_Erase_IT+0x3a>
+  56:	bf00      	nop
+  58:	00000000 	.word	0x00000000
+  5c:	40022000 	.word	0x40022000

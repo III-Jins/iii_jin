@@ -1,0 +1,35 @@
+
+out/stm32f1xx_hal_gpio_ex.o:     file format elf32-littlearm
+
+
+Disassembly of section .text.HAL_GPIOEx_ConfigEventout:
+
+00000000 <HAL_GPIOEx_ConfigEventout>:
+   0:	4a03      	ldr	r2, [pc, #12]	; (10 <HAL_GPIOEx_ConfigEventout+0x10>)
+   2:	6813      	ldr	r3, [r2, #0]
+   4:	f023 037f 	bic.w	r3, r3, #127	; 0x7f
+   8:	430b      	orrs	r3, r1
+   a:	4303      	orrs	r3, r0
+   c:	6013      	str	r3, [r2, #0]
+   e:	4770      	bx	lr
+  10:	40010000 	.word	0x40010000
+
+Disassembly of section .text.HAL_GPIOEx_EnableEventout:
+
+00000000 <HAL_GPIOEx_EnableEventout>:
+   0:	4a02      	ldr	r2, [pc, #8]	; (c <HAL_GPIOEx_EnableEventout+0xc>)
+   2:	6813      	ldr	r3, [r2, #0]
+   4:	f043 0380 	orr.w	r3, r3, #128	; 0x80
+   8:	6013      	str	r3, [r2, #0]
+   a:	4770      	bx	lr
+   c:	40010000 	.word	0x40010000
+
+Disassembly of section .text.HAL_GPIOEx_DisableEventout:
+
+00000000 <HAL_GPIOEx_DisableEventout>:
+   0:	4a02      	ldr	r2, [pc, #8]	; (c <HAL_GPIOEx_DisableEventout+0xc>)
+   2:	6813      	ldr	r3, [r2, #0]
+   4:	f023 0380 	bic.w	r3, r3, #128	; 0x80
+   8:	6013      	str	r3, [r2, #0]
+   a:	4770      	bx	lr
+   c:	40010000 	.word	0x40010000

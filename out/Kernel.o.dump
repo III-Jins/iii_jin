@@ -1,0 +1,144 @@
+
+out/Kernel.o:     file format elf32-littlearm
+
+
+Disassembly of section .text.Kernel_start:
+
+00000000 <Kernel_start>:
+   0:	b508      	push	{r3, lr}
+   2:	f7ff fffe 	bl	0 <enable_irq>
+   6:	e8bd 4008 	ldmia.w	sp!, {r3, lr}
+   a:	f7ff bffe 	b.w	0 <Kernel_task_start>
+
+Disassembly of section .text.Kernel_yield:
+
+00000000 <Kernel_yield>:
+   0:	f7ff bffe 	b.w	0 <Kernel_task_scheduler>
+
+Disassembly of section .text.Kernel_send_events:
+
+00000000 <Kernel_send_events>:
+   0:	b570      	push	{r4, r5, r6, lr}
+   2:	4605      	mov	r5, r0
+   4:	2400      	movs	r4, #0
+   6:	2601      	movs	r6, #1
+   8:	fa25 f304 	lsr.w	r3, r5, r4
+   c:	07db      	lsls	r3, r3, #31
+   e:	d503      	bpl.n	18 <Kernel_send_events+0x18>
+  10:	fa06 f004 	lsl.w	r0, r6, r4
+  14:	f7ff fffe 	bl	0 <Kernel_event_flag_set>
+  18:	3401      	adds	r4, #1
+  1a:	2c20      	cmp	r4, #32
+  1c:	d1f4      	bne.n	8 <Kernel_send_events+0x8>
+  1e:	bd70      	pop	{r4, r5, r6, pc}
+
+Disassembly of section .text.Kernel_wait_events:
+
+00000000 <Kernel_wait_events>:
+   0:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+   2:	4606      	mov	r6, r0
+   4:	2400      	movs	r4, #0
+   6:	2701      	movs	r7, #1
+   8:	fa26 f304 	lsr.w	r3, r6, r4
+   c:	07db      	lsls	r3, r3, #31
+   e:	d405      	bmi.n	1c <Kernel_wait_events+0x1c>
+  10:	3401      	adds	r4, #1
+  12:	2c20      	cmp	r4, #32
+  14:	d1f8      	bne.n	8 <Kernel_wait_events+0x8>
+  16:	2500      	movs	r5, #0
+  18:	4628      	mov	r0, r5
+  1a:	bdf8      	pop	{r3, r4, r5, r6, r7, pc}
+  1c:	fa07 f504 	lsl.w	r5, r7, r4
+  20:	4628      	mov	r0, r5
+  22:	f7ff fffe 	bl	0 <Kernel_event_flag_check>
+  26:	2800      	cmp	r0, #0
+  28:	d0f2      	beq.n	10 <Kernel_wait_events+0x10>
+  2a:	e7f5      	b.n	18 <Kernel_wait_events+0x18>
+
+Disassembly of section .text.Kernel_send_msg:
+
+00000000 <Kernel_send_msg>:
+   0:	e92d 41f3 	stmdb	sp!, {r0, r1, r4, r5, r6, r7, r8, lr}
+   4:	4606      	mov	r6, r0
+   6:	4688      	mov	r8, r1
+   8:	4617      	mov	r7, r2
+   a:	2500      	movs	r5, #0
+   c:	42bd      	cmp	r5, r7
+   e:	d101      	bne.n	14 <Kernel_send_msg+0x14>
+  10:	2401      	movs	r4, #1
+  12:	e009      	b.n	28 <Kernel_send_msg+0x28>
+  14:	4630      	mov	r0, r6
+  16:	f818 1005 	ldrb.w	r1, [r8, r5]
+  1a:	f7ff fffe 	bl	0 <Kernel_msgQ_enqueue>
+  1e:	4604      	mov	r4, r0
+  20:	b968      	cbnz	r0, 3e <Kernel_send_msg+0x3e>
+  22:	4607      	mov	r7, r0
+  24:	42bd      	cmp	r5, r7
+  26:	d103      	bne.n	30 <Kernel_send_msg+0x30>
+  28:	4620      	mov	r0, r4
+  2a:	b002      	add	sp, #8
+  2c:	e8bd 81f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, pc}
+  30:	4630      	mov	r0, r6
+  32:	f10d 0107 	add.w	r1, sp, #7
+  36:	f7ff fffe 	bl	0 <Kernel_msgQ_dequeue>
+  3a:	3701      	adds	r7, #1
+  3c:	e7f2      	b.n	24 <Kernel_send_msg+0x24>
+  3e:	3501      	adds	r5, #1
+  40:	e7e4      	b.n	c <Kernel_send_msg+0xc>
+
+Disassembly of section .text.Kernel_recv_msg:
+
+00000000 <Kernel_recv_msg>:
+   0:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+   2:	4607      	mov	r7, r0
+   4:	460e      	mov	r6, r1
+   6:	4615      	mov	r5, r2
+   8:	2400      	movs	r4, #0
+   a:	42ac      	cmp	r4, r5
+   c:	eb06 0104 	add.w	r1, r6, r4
+  10:	d101      	bne.n	16 <Kernel_recv_msg+0x16>
+  12:	4620      	mov	r0, r4
+  14:	bdf8      	pop	{r3, r4, r5, r6, r7, pc}
+  16:	4638      	mov	r0, r7
+  18:	f7ff fffe 	bl	0 <Kernel_msgQ_dequeue>
+  1c:	2800      	cmp	r0, #0
+  1e:	d0f8      	beq.n	12 <Kernel_recv_msg+0x12>
+  20:	3401      	adds	r4, #1
+  22:	e7f2      	b.n	a <Kernel_recv_msg+0xa>
+
+Disassembly of section .text.Kernel_lock_sem:
+
+00000000 <Kernel_lock_sem>:
+   0:	b508      	push	{r3, lr}
+   2:	f7ff fffe 	bl	0 <Kernel_sem_test>
+   6:	b100      	cbz	r0, a <Kernel_lock_sem+0xa>
+   8:	bd08      	pop	{r3, pc}
+   a:	f7ff fffe 	bl	0 <Kernel_task_scheduler>
+   e:	e7f8      	b.n	2 <Kernel_lock_sem+0x2>
+
+Disassembly of section .text.Kernel_unlock_sem:
+
+00000000 <Kernel_unlock_sem>:
+   0:	f7ff bffe 	b.w	0 <Kernel_sem_release>
+
+Disassembly of section .text.Kernel_lock_mutex:
+
+00000000 <Kernel_lock_mutex>:
+   0:	b508      	push	{r3, lr}
+   2:	f7ff fffe 	bl	0 <Kernel_task_get_current_task_id>
+   6:	f7ff fffe 	bl	0 <Kernel_mutex_lock>
+   a:	b910      	cbnz	r0, 12 <Kernel_lock_mutex+0x12>
+   c:	f7ff fffe 	bl	0 <Kernel_task_scheduler>
+  10:	e7f7      	b.n	2 <Kernel_lock_mutex+0x2>
+  12:	bd08      	pop	{r3, pc}
+
+Disassembly of section .text.Kernel_unlock_mutex:
+
+00000000 <Kernel_unlock_mutex>:
+   0:	b508      	push	{r3, lr}
+   2:	f7ff fffe 	bl	0 <Kernel_task_get_current_task_id>
+   6:	f7ff fffe 	bl	0 <Kernel_mutex_unlock>
+   a:	b918      	cbnz	r0, 14 <Kernel_unlock_mutex+0x14>
+   c:	e8bd 4008 	ldmia.w	sp!, {r3, lr}
+  10:	f7ff bffe 	b.w	0 <Kernel_task_scheduler>
+  14:	bd08      	pop	{r3, pc}

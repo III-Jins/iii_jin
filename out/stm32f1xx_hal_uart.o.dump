@@ -1,0 +1,2192 @@
+
+out/stm32f1xx_hal_uart.o:     file format elf32-littlearm
+
+
+Disassembly of section .text.UART_EndRxTransfer:
+
+00000000 <UART_EndRxTransfer>:
+   0:	6802      	ldr	r2, [r0, #0]
+   2:	f102 030c 	add.w	r3, r2, #12
+   6:	e853 3f00 	ldrex	r3, [r3]
+   a:	f423 7390 	bic.w	r3, r3, #288	; 0x120
+   e:	320c      	adds	r2, #12
+  10:	e842 3100 	strex	r1, r3, [r2]
+  14:	6802      	ldr	r2, [r0, #0]
+  16:	2900      	cmp	r1, #0
+  18:	d1f2      	bne.n	0 <UART_EndRxTransfer>
+  1a:	f102 0314 	add.w	r3, r2, #20
+  1e:	e853 3f00 	ldrex	r3, [r3]
+  22:	f023 0301 	bic.w	r3, r3, #1
+  26:	f102 0c14 	add.w	ip, r2, #20
+  2a:	e84c 3100 	strex	r1, r3, [ip]
+  2e:	2900      	cmp	r1, #0
+  30:	d1f3      	bne.n	1a <UART_EndRxTransfer+0x1a>
+  32:	6b03      	ldr	r3, [r0, #48]	; 0x30
+  34:	2b01      	cmp	r3, #1
+  36:	d10b      	bne.n	50 <UART_EndRxTransfer+0x50>
+  38:	f102 030c 	add.w	r3, r2, #12
+  3c:	e853 3f00 	ldrex	r3, [r3]
+  40:	f023 0310 	bic.w	r3, r3, #16
+  44:	f102 0c0c 	add.w	ip, r2, #12
+  48:	e84c 3100 	strex	r1, r3, [ip]
+  4c:	2900      	cmp	r1, #0
+  4e:	d1f3      	bne.n	38 <UART_EndRxTransfer+0x38>
+  50:	2320      	movs	r3, #32
+  52:	f880 3042 	strb.w	r3, [r0, #66]	; 0x42
+  56:	2300      	movs	r3, #0
+  58:	6303      	str	r3, [r0, #48]	; 0x30
+  5a:	4770      	bx	lr
+
+Disassembly of section .text.UART_SetConfig:
+
+00000000 <UART_SetConfig>:
+   0:	b510      	push	{r4, lr}
+   2:	4604      	mov	r4, r0
+   4:	6803      	ldr	r3, [r0, #0]
+   6:	68c1      	ldr	r1, [r0, #12]
+   8:	691a      	ldr	r2, [r3, #16]
+   a:	f422 5240 	bic.w	r2, r2, #12288	; 0x3000
+   e:	430a      	orrs	r2, r1
+  10:	611a      	str	r2, [r3, #16]
+  12:	6882      	ldr	r2, [r0, #8]
+  14:	6900      	ldr	r0, [r0, #16]
+  16:	68d9      	ldr	r1, [r3, #12]
+  18:	4302      	orrs	r2, r0
+  1a:	6960      	ldr	r0, [r4, #20]
+  1c:	f421 51b0 	bic.w	r1, r1, #5632	; 0x1600
+  20:	f021 010c 	bic.w	r1, r1, #12
+  24:	4302      	orrs	r2, r0
+  26:	430a      	orrs	r2, r1
+  28:	60da      	str	r2, [r3, #12]
+  2a:	695a      	ldr	r2, [r3, #20]
+  2c:	69a1      	ldr	r1, [r4, #24]
+  2e:	f422 7240 	bic.w	r2, r2, #768	; 0x300
+  32:	430a      	orrs	r2, r1
+  34:	615a      	str	r2, [r3, #20]
+  36:	4a0e      	ldr	r2, [pc, #56]	; (70 <UART_SetConfig+0x70>)
+  38:	4293      	cmp	r3, r2
+  3a:	d115      	bne.n	68 <UART_SetConfig+0x68>
+  3c:	f7ff fffe 	bl	0 <HAL_RCC_GetPCLK2Freq>
+  40:	2319      	movs	r3, #25
+  42:	4343      	muls	r3, r0
+  44:	6862      	ldr	r2, [r4, #4]
+  46:	6820      	ldr	r0, [r4, #0]
+  48:	0092      	lsls	r2, r2, #2
+  4a:	fbb3 f3f2 	udiv	r3, r3, r2
+  4e:	2264      	movs	r2, #100	; 0x64
+  50:	fbb3 f1f2 	udiv	r1, r3, r2
+  54:	fb02 3311 	mls	r3, r2, r1, r3
+  58:	011b      	lsls	r3, r3, #4
+  5a:	3332      	adds	r3, #50	; 0x32
+  5c:	fbb3 f3f2 	udiv	r3, r3, r2
+  60:	eb03 1301 	add.w	r3, r3, r1, lsl #4
+  64:	6083      	str	r3, [r0, #8]
+  66:	bd10      	pop	{r4, pc}
+  68:	f7ff fffe 	bl	0 <HAL_RCC_GetPCLK1Freq>
+  6c:	e7e8      	b.n	40 <UART_SetConfig+0x40>
+  6e:	bf00      	nop
+  70:	40013800 	.word	0x40013800
+
+Disassembly of section .text.UART_WaitOnFlagUntilTimeout.constprop.0:
+
+00000000 <UART_WaitOnFlagUntilTimeout.constprop.0>:
+   0:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+   2:	4604      	mov	r4, r0
+   4:	460e      	mov	r6, r1
+   6:	4617      	mov	r7, r2
+   8:	461d      	mov	r5, r3
+   a:	6822      	ldr	r2, [r4, #0]
+   c:	6813      	ldr	r3, [r2, #0]
+   e:	ea36 0303 	bics.w	r3, r6, r3
+  12:	d101      	bne.n	18 <UART_WaitOnFlagUntilTimeout.constprop.0+0x18>
+  14:	2000      	movs	r0, #0
+  16:	e028      	b.n	6a <UART_WaitOnFlagUntilTimeout.constprop.0+0x6a>
+  18:	1c6b      	adds	r3, r5, #1
+  1a:	d0f7      	beq.n	c <UART_WaitOnFlagUntilTimeout.constprop.0+0xc>
+  1c:	b125      	cbz	r5, 28 <UART_WaitOnFlagUntilTimeout.constprop.0+0x28>
+  1e:	f7ff fffe 	bl	0 <HAL_GetTick>
+  22:	1bc0      	subs	r0, r0, r7
+  24:	4285      	cmp	r5, r0
+  26:	d2f0      	bcs.n	a <UART_WaitOnFlagUntilTimeout.constprop.0+0xa>
+  28:	6822      	ldr	r2, [r4, #0]
+  2a:	f102 030c 	add.w	r3, r2, #12
+  2e:	e853 3f00 	ldrex	r3, [r3]
+  32:	f423 73d0 	bic.w	r3, r3, #416	; 0x1a0
+  36:	320c      	adds	r2, #12
+  38:	e842 3000 	strex	r0, r3, [r2]
+  3c:	6821      	ldr	r1, [r4, #0]
+  3e:	2800      	cmp	r0, #0
+  40:	d1f2      	bne.n	28 <UART_WaitOnFlagUntilTimeout.constprop.0+0x28>
+  42:	f101 0314 	add.w	r3, r1, #20
+  46:	e853 3f00 	ldrex	r3, [r3]
+  4a:	f023 0301 	bic.w	r3, r3, #1
+  4e:	f101 0014 	add.w	r0, r1, #20
+  52:	e840 3200 	strex	r2, r3, [r0]
+  56:	2a00      	cmp	r2, #0
+  58:	d1f3      	bne.n	42 <UART_WaitOnFlagUntilTimeout.constprop.0+0x42>
+  5a:	2320      	movs	r3, #32
+  5c:	2003      	movs	r0, #3
+  5e:	f884 3041 	strb.w	r3, [r4, #65]	; 0x41
+  62:	f884 2040 	strb.w	r2, [r4, #64]	; 0x40
+  66:	f884 3042 	strb.w	r3, [r4, #66]	; 0x42
+  6a:	bdf8      	pop	{r3, r4, r5, r6, r7, pc}
+
+Disassembly of section .text.HAL_UART_MspInit:
+
+00000000 <HAL_UART_MspInit>:
+   0:	4770      	bx	lr
+
+Disassembly of section .text.HAL_UART_Init:
+
+00000000 <HAL_UART_Init>:
+   0:	b510      	push	{r4, lr}
+   2:	4604      	mov	r4, r0
+   4:	b348      	cbz	r0, 5a <HAL_UART_Init+0x5a>
+   6:	f890 3041 	ldrb.w	r3, [r0, #65]	; 0x41
+   a:	f003 02ff 	and.w	r2, r3, #255	; 0xff
+   e:	b91b      	cbnz	r3, 18 <HAL_UART_Init+0x18>
+  10:	f880 2040 	strb.w	r2, [r0, #64]	; 0x40
+  14:	f7ff fffe 	bl	0 <HAL_UART_Init>
+  18:	2324      	movs	r3, #36	; 0x24
+  1a:	6822      	ldr	r2, [r4, #0]
+  1c:	f884 3041 	strb.w	r3, [r4, #65]	; 0x41
+  20:	68d3      	ldr	r3, [r2, #12]
+  22:	4620      	mov	r0, r4
+  24:	f423 5300 	bic.w	r3, r3, #8192	; 0x2000
+  28:	60d3      	str	r3, [r2, #12]
+  2a:	f7ff fffe 	bl	0 <HAL_UART_Init>
+  2e:	6823      	ldr	r3, [r4, #0]
+  30:	2000      	movs	r0, #0
+  32:	691a      	ldr	r2, [r3, #16]
+  34:	f422 4290 	bic.w	r2, r2, #18432	; 0x4800
+  38:	611a      	str	r2, [r3, #16]
+  3a:	695a      	ldr	r2, [r3, #20]
+  3c:	f022 022a 	bic.w	r2, r2, #42	; 0x2a
+  40:	615a      	str	r2, [r3, #20]
+  42:	68da      	ldr	r2, [r3, #12]
+  44:	f442 5200 	orr.w	r2, r2, #8192	; 0x2000
+  48:	60da      	str	r2, [r3, #12]
+  4a:	2320      	movs	r3, #32
+  4c:	6460      	str	r0, [r4, #68]	; 0x44
+  4e:	f884 3041 	strb.w	r3, [r4, #65]	; 0x41
+  52:	f884 3042 	strb.w	r3, [r4, #66]	; 0x42
+  56:	6360      	str	r0, [r4, #52]	; 0x34
+  58:	bd10      	pop	{r4, pc}
+  5a:	2001      	movs	r0, #1
+  5c:	e7fc      	b.n	58 <HAL_UART_Init+0x58>
+
+Disassembly of section .text.HAL_HalfDuplex_Init:
+
+00000000 <HAL_HalfDuplex_Init>:
+   0:	b510      	push	{r4, lr}
+   2:	4604      	mov	r4, r0
+   4:	b368      	cbz	r0, 62 <HAL_HalfDuplex_Init+0x62>
+   6:	f890 3041 	ldrb.w	r3, [r0, #65]	; 0x41
+   a:	f003 02ff 	and.w	r2, r3, #255	; 0xff
+   e:	b91b      	cbnz	r3, 18 <HAL_HalfDuplex_Init+0x18>
+  10:	f880 2040 	strb.w	r2, [r0, #64]	; 0x40
+  14:	f7ff fffe 	bl	0 <HAL_HalfDuplex_Init>
+  18:	2324      	movs	r3, #36	; 0x24
+  1a:	6822      	ldr	r2, [r4, #0]
+  1c:	f884 3041 	strb.w	r3, [r4, #65]	; 0x41
+  20:	68d3      	ldr	r3, [r2, #12]
+  22:	4620      	mov	r0, r4
+  24:	f423 5300 	bic.w	r3, r3, #8192	; 0x2000
+  28:	60d3      	str	r3, [r2, #12]
+  2a:	f7ff fffe 	bl	0 <HAL_HalfDuplex_Init>
+  2e:	6823      	ldr	r3, [r4, #0]
+  30:	2000      	movs	r0, #0
+  32:	691a      	ldr	r2, [r3, #16]
+  34:	f422 4290 	bic.w	r2, r2, #18432	; 0x4800
+  38:	611a      	str	r2, [r3, #16]
+  3a:	695a      	ldr	r2, [r3, #20]
+  3c:	f022 0222 	bic.w	r2, r2, #34	; 0x22
+  40:	615a      	str	r2, [r3, #20]
+  42:	695a      	ldr	r2, [r3, #20]
+  44:	f042 0208 	orr.w	r2, r2, #8
+  48:	615a      	str	r2, [r3, #20]
+  4a:	68da      	ldr	r2, [r3, #12]
+  4c:	f442 5200 	orr.w	r2, r2, #8192	; 0x2000
+  50:	60da      	str	r2, [r3, #12]
+  52:	2320      	movs	r3, #32
+  54:	6460      	str	r0, [r4, #68]	; 0x44
+  56:	f884 3041 	strb.w	r3, [r4, #65]	; 0x41
+  5a:	f884 3042 	strb.w	r3, [r4, #66]	; 0x42
+  5e:	6360      	str	r0, [r4, #52]	; 0x34
+  60:	bd10      	pop	{r4, pc}
+  62:	2001      	movs	r0, #1
+  64:	e7fc      	b.n	60 <HAL_HalfDuplex_Init+0x60>
+
+Disassembly of section .text.HAL_LIN_Init:
+
+00000000 <HAL_LIN_Init>:
+   0:	b538      	push	{r3, r4, r5, lr}
+   2:	460d      	mov	r5, r1
+   4:	4604      	mov	r4, r0
+   6:	2800      	cmp	r0, #0
+   8:	d034      	beq.n	74 <HAL_LIN_Init+0x74>
+   a:	f890 3041 	ldrb.w	r3, [r0, #65]	; 0x41
+   e:	f003 02ff 	and.w	r2, r3, #255	; 0xff
+  12:	b91b      	cbnz	r3, 1c <HAL_LIN_Init+0x1c>
+  14:	f880 2040 	strb.w	r2, [r0, #64]	; 0x40
+  18:	f7ff fffe 	bl	0 <HAL_LIN_Init>
+  1c:	2324      	movs	r3, #36	; 0x24
+  1e:	6822      	ldr	r2, [r4, #0]
+  20:	f884 3041 	strb.w	r3, [r4, #65]	; 0x41
+  24:	68d3      	ldr	r3, [r2, #12]
+  26:	4620      	mov	r0, r4
+  28:	f423 5300 	bic.w	r3, r3, #8192	; 0x2000
+  2c:	60d3      	str	r3, [r2, #12]
+  2e:	f7ff fffe 	bl	0 <HAL_LIN_Init>
+  32:	6823      	ldr	r3, [r4, #0]
+  34:	2000      	movs	r0, #0
+  36:	691a      	ldr	r2, [r3, #16]
+  38:	f422 6200 	bic.w	r2, r2, #2048	; 0x800
+  3c:	611a      	str	r2, [r3, #16]
+  3e:	695a      	ldr	r2, [r3, #20]
+  40:	f022 022a 	bic.w	r2, r2, #42	; 0x2a
+  44:	615a      	str	r2, [r3, #20]
+  46:	691a      	ldr	r2, [r3, #16]
+  48:	f442 4280 	orr.w	r2, r2, #16384	; 0x4000
+  4c:	611a      	str	r2, [r3, #16]
+  4e:	691a      	ldr	r2, [r3, #16]
+  50:	f022 0220 	bic.w	r2, r2, #32
+  54:	611a      	str	r2, [r3, #16]
+  56:	691a      	ldr	r2, [r3, #16]
+  58:	432a      	orrs	r2, r5
+  5a:	611a      	str	r2, [r3, #16]
+  5c:	68da      	ldr	r2, [r3, #12]
+  5e:	f442 5200 	orr.w	r2, r2, #8192	; 0x2000
+  62:	60da      	str	r2, [r3, #12]
+  64:	2320      	movs	r3, #32
+  66:	6460      	str	r0, [r4, #68]	; 0x44
+  68:	f884 3041 	strb.w	r3, [r4, #65]	; 0x41
+  6c:	f884 3042 	strb.w	r3, [r4, #66]	; 0x42
+  70:	6360      	str	r0, [r4, #52]	; 0x34
+  72:	bd38      	pop	{r3, r4, r5, pc}
+  74:	2001      	movs	r0, #1
+  76:	e7fc      	b.n	72 <HAL_LIN_Init+0x72>
+
+Disassembly of section .text.HAL_MultiProcessor_Init:
+
+00000000 <HAL_MultiProcessor_Init>:
+   0:	b570      	push	{r4, r5, r6, lr}
+   2:	460d      	mov	r5, r1
+   4:	4616      	mov	r6, r2
+   6:	4604      	mov	r4, r0
+   8:	2800      	cmp	r0, #0
+   a:	d037      	beq.n	7c <HAL_MultiProcessor_Init+0x7c>
+   c:	f890 3041 	ldrb.w	r3, [r0, #65]	; 0x41
+  10:	f003 02ff 	and.w	r2, r3, #255	; 0xff
+  14:	b91b      	cbnz	r3, 1e <HAL_MultiProcessor_Init+0x1e>
+  16:	f880 2040 	strb.w	r2, [r0, #64]	; 0x40
+  1a:	f7ff fffe 	bl	0 <HAL_MultiProcessor_Init>
+  1e:	2324      	movs	r3, #36	; 0x24
+  20:	6822      	ldr	r2, [r4, #0]
+  22:	f884 3041 	strb.w	r3, [r4, #65]	; 0x41
+  26:	68d3      	ldr	r3, [r2, #12]
+  28:	4620      	mov	r0, r4
+  2a:	f423 5300 	bic.w	r3, r3, #8192	; 0x2000
+  2e:	60d3      	str	r3, [r2, #12]
+  30:	f7ff fffe 	bl	0 <HAL_MultiProcessor_Init>
+  34:	6823      	ldr	r3, [r4, #0]
+  36:	2000      	movs	r0, #0
+  38:	691a      	ldr	r2, [r3, #16]
+  3a:	f422 4290 	bic.w	r2, r2, #18432	; 0x4800
+  3e:	611a      	str	r2, [r3, #16]
+  40:	695a      	ldr	r2, [r3, #20]
+  42:	f022 022a 	bic.w	r2, r2, #42	; 0x2a
+  46:	615a      	str	r2, [r3, #20]
+  48:	691a      	ldr	r2, [r3, #16]
+  4a:	f022 020f 	bic.w	r2, r2, #15
+  4e:	611a      	str	r2, [r3, #16]
+  50:	6919      	ldr	r1, [r3, #16]
+  52:	430d      	orrs	r5, r1
+  54:	611d      	str	r5, [r3, #16]
+  56:	68d9      	ldr	r1, [r3, #12]
+  58:	f421 6100 	bic.w	r1, r1, #2048	; 0x800
+  5c:	60d9      	str	r1, [r3, #12]
+  5e:	68d9      	ldr	r1, [r3, #12]
+  60:	4331      	orrs	r1, r6
+  62:	60d9      	str	r1, [r3, #12]
+  64:	68da      	ldr	r2, [r3, #12]
+  66:	f442 5200 	orr.w	r2, r2, #8192	; 0x2000
+  6a:	60da      	str	r2, [r3, #12]
+  6c:	2320      	movs	r3, #32
+  6e:	6460      	str	r0, [r4, #68]	; 0x44
+  70:	f884 3041 	strb.w	r3, [r4, #65]	; 0x41
+  74:	f884 3042 	strb.w	r3, [r4, #66]	; 0x42
+  78:	6360      	str	r0, [r4, #52]	; 0x34
+  7a:	bd70      	pop	{r4, r5, r6, pc}
+  7c:	2001      	movs	r0, #1
+  7e:	e7fc      	b.n	7a <HAL_MultiProcessor_Init+0x7a>
+
+Disassembly of section .text.HAL_UART_MspDeInit:
+
+00000000 <HAL_UART_MspDeInit>:
+   0:	4770      	bx	lr
+
+Disassembly of section .text.HAL_UART_DeInit:
+
+00000000 <HAL_UART_DeInit>:
+   0:	b510      	push	{r4, lr}
+   2:	4604      	mov	r4, r0
+   4:	b1a0      	cbz	r0, 30 <HAL_UART_DeInit+0x30>
+   6:	2324      	movs	r3, #36	; 0x24
+   8:	6802      	ldr	r2, [r0, #0]
+   a:	f880 3041 	strb.w	r3, [r0, #65]	; 0x41
+   e:	68d3      	ldr	r3, [r2, #12]
+  10:	f423 5300 	bic.w	r3, r3, #8192	; 0x2000
+  14:	60d3      	str	r3, [r2, #12]
+  16:	f7ff fffe 	bl	0 <HAL_UART_DeInit>
+  1a:	2000      	movs	r0, #0
+  1c:	6460      	str	r0, [r4, #68]	; 0x44
+  1e:	f884 0040 	strb.w	r0, [r4, #64]	; 0x40
+  22:	f884 0041 	strb.w	r0, [r4, #65]	; 0x41
+  26:	f884 0042 	strb.w	r0, [r4, #66]	; 0x42
+  2a:	6320      	str	r0, [r4, #48]	; 0x30
+  2c:	6360      	str	r0, [r4, #52]	; 0x34
+  2e:	bd10      	pop	{r4, pc}
+  30:	2001      	movs	r0, #1
+  32:	e7fc      	b.n	2e <HAL_UART_DeInit+0x2e>
+
+Disassembly of section .text.HAL_UART_Transmit:
+
+00000000 <HAL_UART_Transmit>:
+   0:	e92d 43f8 	stmdb	sp!, {r3, r4, r5, r6, r7, r8, r9, lr}
+   4:	4699      	mov	r9, r3
+   6:	f890 3041 	ldrb.w	r3, [r0, #65]	; 0x41
+   a:	4604      	mov	r4, r0
+   c:	2b20      	cmp	r3, #32
+   e:	460e      	mov	r6, r1
+  10:	4617      	mov	r7, r2
+  12:	d13c      	bne.n	8e <HAL_UART_Transmit+0x8e>
+  14:	2900      	cmp	r1, #0
+  16:	d03c      	beq.n	92 <HAL_UART_Transmit+0x92>
+  18:	2a00      	cmp	r2, #0
+  1a:	d03a      	beq.n	92 <HAL_UART_Transmit+0x92>
+  1c:	2321      	movs	r3, #33	; 0x21
+  1e:	2500      	movs	r5, #0
+  20:	6445      	str	r5, [r0, #68]	; 0x44
+  22:	f880 3041 	strb.w	r3, [r0, #65]	; 0x41
+  26:	f7ff fffe 	bl	0 <HAL_GetTick>
+  2a:	68a3      	ldr	r3, [r4, #8]
+  2c:	4680      	mov	r8, r0
+  2e:	f5b3 5f80 	cmp.w	r3, #4096	; 0x1000
+  32:	84a7      	strh	r7, [r4, #36]	; 0x24
+  34:	84e7      	strh	r7, [r4, #38]	; 0x26
+  36:	d103      	bne.n	40 <HAL_UART_Transmit+0x40>
+  38:	6923      	ldr	r3, [r4, #16]
+  3a:	b90b      	cbnz	r3, 40 <HAL_UART_Transmit+0x40>
+  3c:	4635      	mov	r5, r6
+  3e:	461e      	mov	r6, r3
+  40:	8ce3      	ldrh	r3, [r4, #38]	; 0x26
+  42:	b29b      	uxth	r3, r3
+  44:	b953      	cbnz	r3, 5c <HAL_UART_Transmit+0x5c>
+  46:	464b      	mov	r3, r9
+  48:	4642      	mov	r2, r8
+  4a:	2140      	movs	r1, #64	; 0x40
+  4c:	4620      	mov	r0, r4
+  4e:	f7ff fffe 	bl	0 <HAL_UART_Transmit>
+  52:	b950      	cbnz	r0, 6a <HAL_UART_Transmit+0x6a>
+  54:	2320      	movs	r3, #32
+  56:	f884 3041 	strb.w	r3, [r4, #65]	; 0x41
+  5a:	e007      	b.n	6c <HAL_UART_Transmit+0x6c>
+  5c:	464b      	mov	r3, r9
+  5e:	4642      	mov	r2, r8
+  60:	2180      	movs	r1, #128	; 0x80
+  62:	4620      	mov	r0, r4
+  64:	f7ff fffe 	bl	0 <HAL_UART_Transmit>
+  68:	b110      	cbz	r0, 70 <HAL_UART_Transmit+0x70>
+  6a:	2003      	movs	r0, #3
+  6c:	e8bd 83f8 	ldmia.w	sp!, {r3, r4, r5, r6, r7, r8, r9, pc}
+  70:	6822      	ldr	r2, [r4, #0]
+  72:	b94e      	cbnz	r6, 88 <HAL_UART_Transmit+0x88>
+  74:	f835 3b02 	ldrh.w	r3, [r5], #2
+  78:	f3c3 0308 	ubfx	r3, r3, #0, #9
+  7c:	6053      	str	r3, [r2, #4]
+  7e:	8ce1      	ldrh	r1, [r4, #38]	; 0x26
+  80:	3901      	subs	r1, #1
+  82:	b289      	uxth	r1, r1
+  84:	84e1      	strh	r1, [r4, #38]	; 0x26
+  86:	e7db      	b.n	40 <HAL_UART_Transmit+0x40>
+  88:	f816 3b01 	ldrb.w	r3, [r6], #1
+  8c:	e7f6      	b.n	7c <HAL_UART_Transmit+0x7c>
+  8e:	2002      	movs	r0, #2
+  90:	e7ec      	b.n	6c <HAL_UART_Transmit+0x6c>
+  92:	2001      	movs	r0, #1
+  94:	e7ea      	b.n	6c <HAL_UART_Transmit+0x6c>
+
+Disassembly of section .text.HAL_UART_Receive:
+
+00000000 <HAL_UART_Receive>:
+   0:	e92d 43f8 	stmdb	sp!, {r3, r4, r5, r6, r7, r8, r9, lr}
+   4:	461f      	mov	r7, r3
+   6:	f890 3042 	ldrb.w	r3, [r0, #66]	; 0x42
+   a:	4604      	mov	r4, r0
+   c:	2b20      	cmp	r3, #32
+   e:	460e      	mov	r6, r1
+  10:	4691      	mov	r9, r2
+  12:	d143      	bne.n	9c <HAL_UART_Receive+0x9c>
+  14:	2900      	cmp	r1, #0
+  16:	d043      	beq.n	a0 <HAL_UART_Receive+0xa0>
+  18:	2a00      	cmp	r2, #0
+  1a:	d041      	beq.n	a0 <HAL_UART_Receive+0xa0>
+  1c:	2322      	movs	r3, #34	; 0x22
+  1e:	2500      	movs	r5, #0
+  20:	6445      	str	r5, [r0, #68]	; 0x44
+  22:	f880 3042 	strb.w	r3, [r0, #66]	; 0x42
+  26:	6305      	str	r5, [r0, #48]	; 0x30
+  28:	f7ff fffe 	bl	0 <HAL_GetTick>
+  2c:	68a3      	ldr	r3, [r4, #8]
+  2e:	4680      	mov	r8, r0
+  30:	f5b3 5f80 	cmp.w	r3, #4096	; 0x1000
+  34:	f8a4 902c 	strh.w	r9, [r4, #44]	; 0x2c
+  38:	f8a4 902e 	strh.w	r9, [r4, #46]	; 0x2e
+  3c:	d103      	bne.n	46 <HAL_UART_Receive+0x46>
+  3e:	6923      	ldr	r3, [r4, #16]
+  40:	b90b      	cbnz	r3, 46 <HAL_UART_Receive+0x46>
+  42:	4635      	mov	r5, r6
+  44:	461e      	mov	r6, r3
+  46:	8de0      	ldrh	r0, [r4, #46]	; 0x2e
+  48:	b280      	uxth	r0, r0
+  4a:	b920      	cbnz	r0, 56 <HAL_UART_Receive+0x56>
+  4c:	2320      	movs	r3, #32
+  4e:	f884 3042 	strb.w	r3, [r4, #66]	; 0x42
+  52:	e8bd 83f8 	ldmia.w	sp!, {r3, r4, r5, r6, r7, r8, r9, pc}
+  56:	463b      	mov	r3, r7
+  58:	4642      	mov	r2, r8
+  5a:	2120      	movs	r1, #32
+  5c:	4620      	mov	r0, r4
+  5e:	f7ff fffe 	bl	0 <HAL_UART_Receive>
+  62:	b9f8      	cbnz	r0, a4 <HAL_UART_Receive+0xa4>
+  64:	6823      	ldr	r3, [r4, #0]
+  66:	b94e      	cbnz	r6, 7c <HAL_UART_Receive+0x7c>
+  68:	685b      	ldr	r3, [r3, #4]
+  6a:	f3c3 0308 	ubfx	r3, r3, #0, #9
+  6e:	f825 3b02 	strh.w	r3, [r5], #2
+  72:	8de3      	ldrh	r3, [r4, #46]	; 0x2e
+  74:	3b01      	subs	r3, #1
+  76:	b29b      	uxth	r3, r3
+  78:	85e3      	strh	r3, [r4, #46]	; 0x2e
+  7a:	e7e4      	b.n	46 <HAL_UART_Receive+0x46>
+  7c:	68a2      	ldr	r2, [r4, #8]
+  7e:	f5b2 5f80 	cmp.w	r2, #4096	; 0x1000
+  82:	d002      	beq.n	8a <HAL_UART_Receive+0x8a>
+  84:	b932      	cbnz	r2, 94 <HAL_UART_Receive+0x94>
+  86:	6922      	ldr	r2, [r4, #16]
+  88:	b922      	cbnz	r2, 94 <HAL_UART_Receive+0x94>
+  8a:	6859      	ldr	r1, [r3, #4]
+  8c:	b2c9      	uxtb	r1, r1
+  8e:	f806 1b01 	strb.w	r1, [r6], #1
+  92:	e7ee      	b.n	72 <HAL_UART_Receive+0x72>
+  94:	6859      	ldr	r1, [r3, #4]
+  96:	f001 017f 	and.w	r1, r1, #127	; 0x7f
+  9a:	e7f8      	b.n	8e <HAL_UART_Receive+0x8e>
+  9c:	2002      	movs	r0, #2
+  9e:	e7d8      	b.n	52 <HAL_UART_Receive+0x52>
+  a0:	2001      	movs	r0, #1
+  a2:	e7d6      	b.n	52 <HAL_UART_Receive+0x52>
+  a4:	2003      	movs	r0, #3
+  a6:	e7d4      	b.n	52 <HAL_UART_Receive+0x52>
+
+Disassembly of section .text.HAL_UART_Transmit_IT:
+
+00000000 <HAL_UART_Transmit_IT>:
+   0:	f890 3041 	ldrb.w	r3, [r0, #65]	; 0x41
+   4:	2b20      	cmp	r3, #32
+   6:	d110      	bne.n	2a <HAL_UART_Transmit_IT+0x2a>
+   8:	b189      	cbz	r1, 2e <HAL_UART_Transmit_IT+0x2e>
+   a:	b182      	cbz	r2, 2e <HAL_UART_Transmit_IT+0x2e>
+   c:	84c2      	strh	r2, [r0, #38]	; 0x26
+   e:	8482      	strh	r2, [r0, #36]	; 0x24
+  10:	2300      	movs	r3, #0
+  12:	2221      	movs	r2, #33	; 0x21
+  14:	6201      	str	r1, [r0, #32]
+  16:	6801      	ldr	r1, [r0, #0]
+  18:	6443      	str	r3, [r0, #68]	; 0x44
+  1a:	f880 2041 	strb.w	r2, [r0, #65]	; 0x41
+  1e:	68ca      	ldr	r2, [r1, #12]
+  20:	4618      	mov	r0, r3
+  22:	f042 0280 	orr.w	r2, r2, #128	; 0x80
+  26:	60ca      	str	r2, [r1, #12]
+  28:	4770      	bx	lr
+  2a:	2002      	movs	r0, #2
+  2c:	4770      	bx	lr
+  2e:	2001      	movs	r0, #1
+  30:	4770      	bx	lr
+
+Disassembly of section .text.HAL_UART_Transmit_DMA:
+
+00000000 <HAL_UART_Transmit_DMA>:
+   0:	b538      	push	{r3, r4, r5, lr}
+   2:	4604      	mov	r4, r0
+   4:	4613      	mov	r3, r2
+   6:	f894 2041 	ldrb.w	r2, [r4, #65]	; 0x41
+   a:	2a20      	cmp	r2, #32
+   c:	d127      	bne.n	5e <HAL_UART_Transmit_DMA+0x5e>
+   e:	b341      	cbz	r1, 62 <HAL_UART_Transmit_DMA+0x62>
+  10:	b33b      	cbz	r3, 62 <HAL_UART_Transmit_DMA+0x62>
+  12:	2200      	movs	r2, #0
+  14:	2021      	movs	r0, #33	; 0x21
+  16:	84e3      	strh	r3, [r4, #38]	; 0x26
+  18:	4d13      	ldr	r5, [pc, #76]	; (68 <HAL_UART_Transmit_DMA+0x68>)
+  1a:	6462      	str	r2, [r4, #68]	; 0x44
+  1c:	f884 0041 	strb.w	r0, [r4, #65]	; 0x41
+  20:	6ba0      	ldr	r0, [r4, #56]	; 0x38
+  22:	84a3      	strh	r3, [r4, #36]	; 0x24
+  24:	6221      	str	r1, [r4, #32]
+  26:	6285      	str	r5, [r0, #40]	; 0x28
+  28:	4d10      	ldr	r5, [pc, #64]	; (6c <HAL_UART_Transmit_DMA+0x6c>)
+  2a:	62c5      	str	r5, [r0, #44]	; 0x2c
+  2c:	4d10      	ldr	r5, [pc, #64]	; (70 <HAL_UART_Transmit_DMA+0x70>)
+  2e:	e9c0 520c 	strd	r5, r2, [r0, #48]	; 0x30
+  32:	6822      	ldr	r2, [r4, #0]
+  34:	3204      	adds	r2, #4
+  36:	f7ff fffe 	bl	0 <HAL_DMA_Start_IT>
+  3a:	f06f 0240 	mvn.w	r2, #64	; 0x40
+  3e:	6823      	ldr	r3, [r4, #0]
+  40:	601a      	str	r2, [r3, #0]
+  42:	6822      	ldr	r2, [r4, #0]
+  44:	f102 0314 	add.w	r3, r2, #20
+  48:	e853 3f00 	ldrex	r3, [r3]
+  4c:	f043 0380 	orr.w	r3, r3, #128	; 0x80
+  50:	f102 0114 	add.w	r1, r2, #20
+  54:	e841 3000 	strex	r0, r3, [r1]
+  58:	2800      	cmp	r0, #0
+  5a:	d1f3      	bne.n	44 <HAL_UART_Transmit_DMA+0x44>
+  5c:	bd38      	pop	{r3, r4, r5, pc}
+  5e:	2002      	movs	r0, #2
+  60:	e7fc      	b.n	5c <HAL_UART_Transmit_DMA+0x5c>
+  62:	2001      	movs	r0, #1
+  64:	e7fa      	b.n	5c <HAL_UART_Transmit_DMA+0x5c>
+  66:	bf00      	nop
+	...
+
+Disassembly of section .text.HAL_UART_DMAPause:
+
+00000000 <HAL_UART_DMAPause>:
+   0:	6803      	ldr	r3, [r0, #0]
+   2:	695a      	ldr	r2, [r3, #20]
+   4:	f890 1041 	ldrb.w	r1, [r0, #65]	; 0x41
+   8:	2921      	cmp	r1, #33	; 0x21
+   a:	d10d      	bne.n	28 <HAL_UART_DMAPause+0x28>
+   c:	0611      	lsls	r1, r2, #24
+   e:	d50b      	bpl.n	28 <HAL_UART_DMAPause+0x28>
+  10:	f103 0214 	add.w	r2, r3, #20
+  14:	e852 2f00 	ldrex	r2, [r2]
+  18:	f022 0280 	bic.w	r2, r2, #128	; 0x80
+  1c:	f103 0c14 	add.w	ip, r3, #20
+  20:	e84c 2100 	strex	r1, r2, [ip]
+  24:	2900      	cmp	r1, #0
+  26:	d1f3      	bne.n	10 <HAL_UART_DMAPause+0x10>
+  28:	695a      	ldr	r2, [r3, #20]
+  2a:	f890 1042 	ldrb.w	r1, [r0, #66]	; 0x42
+  2e:	2922      	cmp	r1, #34	; 0x22
+  30:	d125      	bne.n	7e <HAL_UART_DMAPause+0x7e>
+  32:	0652      	lsls	r2, r2, #25
+  34:	d523      	bpl.n	7e <HAL_UART_DMAPause+0x7e>
+  36:	f103 020c 	add.w	r2, r3, #12
+  3a:	e852 2f00 	ldrex	r2, [r2]
+  3e:	f422 7280 	bic.w	r2, r2, #256	; 0x100
+  42:	f103 000c 	add.w	r0, r3, #12
+  46:	e840 2100 	strex	r1, r2, [r0]
+  4a:	2900      	cmp	r1, #0
+  4c:	d1f3      	bne.n	36 <HAL_UART_DMAPause+0x36>
+  4e:	f103 0214 	add.w	r2, r3, #20
+  52:	e852 2f00 	ldrex	r2, [r2]
+  56:	f022 0201 	bic.w	r2, r2, #1
+  5a:	f103 0014 	add.w	r0, r3, #20
+  5e:	e840 2100 	strex	r1, r2, [r0]
+  62:	2900      	cmp	r1, #0
+  64:	d1f3      	bne.n	4e <HAL_UART_DMAPause+0x4e>
+  66:	f103 0214 	add.w	r2, r3, #20
+  6a:	e852 2f00 	ldrex	r2, [r2]
+  6e:	f022 0240 	bic.w	r2, r2, #64	; 0x40
+  72:	f103 0014 	add.w	r0, r3, #20
+  76:	e840 2100 	strex	r1, r2, [r0]
+  7a:	2900      	cmp	r1, #0
+  7c:	d1f3      	bne.n	66 <HAL_UART_DMAPause+0x66>
+  7e:	2000      	movs	r0, #0
+  80:	4770      	bx	lr
+
+Disassembly of section .text.HAL_UART_DMAResume:
+
+00000000 <HAL_UART_DMAResume>:
+   0:	f890 3041 	ldrb.w	r3, [r0, #65]	; 0x41
+   4:	b082      	sub	sp, #8
+   6:	2b21      	cmp	r3, #33	; 0x21
+   8:	d10b      	bne.n	22 <HAL_UART_DMAResume+0x22>
+   a:	6802      	ldr	r2, [r0, #0]
+   c:	f102 0314 	add.w	r3, r2, #20
+  10:	e853 3f00 	ldrex	r3, [r3]
+  14:	f043 0380 	orr.w	r3, r3, #128	; 0x80
+  18:	3214      	adds	r2, #20
+  1a:	e842 3100 	strex	r1, r3, [r2]
+  1e:	2900      	cmp	r1, #0
+  20:	d1f3      	bne.n	a <HAL_UART_DMAResume+0xa>
+  22:	f890 3042 	ldrb.w	r3, [r0, #66]	; 0x42
+  26:	2b22      	cmp	r3, #34	; 0x22
+  28:	d12d      	bne.n	86 <HAL_UART_DMAResume+0x86>
+  2a:	2300      	movs	r3, #0
+  2c:	9301      	str	r3, [sp, #4]
+  2e:	6803      	ldr	r3, [r0, #0]
+  30:	681a      	ldr	r2, [r3, #0]
+  32:	9201      	str	r2, [sp, #4]
+  34:	685a      	ldr	r2, [r3, #4]
+  36:	9201      	str	r2, [sp, #4]
+  38:	9a01      	ldr	r2, [sp, #4]
+  3a:	6902      	ldr	r2, [r0, #16]
+  3c:	b15a      	cbz	r2, 56 <HAL_UART_DMAResume+0x56>
+  3e:	f103 020c 	add.w	r2, r3, #12
+  42:	e852 2f00 	ldrex	r2, [r2]
+  46:	f442 7280 	orr.w	r2, r2, #256	; 0x100
+  4a:	f103 000c 	add.w	r0, r3, #12
+  4e:	e840 2100 	strex	r1, r2, [r0]
+  52:	2900      	cmp	r1, #0
+  54:	d1f3      	bne.n	3e <HAL_UART_DMAResume+0x3e>
+  56:	f103 0214 	add.w	r2, r3, #20
+  5a:	e852 2f00 	ldrex	r2, [r2]
+  5e:	f042 0201 	orr.w	r2, r2, #1
+  62:	f103 0014 	add.w	r0, r3, #20
+  66:	e840 2100 	strex	r1, r2, [r0]
+  6a:	2900      	cmp	r1, #0
+  6c:	d1f3      	bne.n	56 <HAL_UART_DMAResume+0x56>
+  6e:	f103 0214 	add.w	r2, r3, #20
+  72:	e852 2f00 	ldrex	r2, [r2]
+  76:	f042 0240 	orr.w	r2, r2, #64	; 0x40
+  7a:	f103 0014 	add.w	r0, r3, #20
+  7e:	e840 2100 	strex	r1, r2, [r0]
+  82:	2900      	cmp	r1, #0
+  84:	d1f3      	bne.n	6e <HAL_UART_DMAResume+0x6e>
+  86:	2000      	movs	r0, #0
+  88:	b002      	add	sp, #8
+  8a:	4770      	bx	lr
+
+Disassembly of section .text.HAL_UART_DMAStop:
+
+00000000 <HAL_UART_DMAStop>:
+   0:	b510      	push	{r4, lr}
+   2:	6802      	ldr	r2, [r0, #0]
+   4:	4604      	mov	r4, r0
+   6:	6953      	ldr	r3, [r2, #20]
+   8:	f890 1041 	ldrb.w	r1, [r0, #65]	; 0x41
+   c:	2921      	cmp	r1, #33	; 0x21
+   e:	d120      	bne.n	52 <HAL_UART_DMAStop+0x52>
+  10:	0619      	lsls	r1, r3, #24
+  12:	d51e      	bpl.n	52 <HAL_UART_DMAStop+0x52>
+  14:	f102 0314 	add.w	r3, r2, #20
+  18:	e853 3f00 	ldrex	r3, [r3]
+  1c:	f023 0380 	bic.w	r3, r3, #128	; 0x80
+  20:	f102 0014 	add.w	r0, r2, #20
+  24:	e840 3100 	strex	r1, r3, [r0]
+  28:	2900      	cmp	r1, #0
+  2a:	d1f3      	bne.n	14 <HAL_UART_DMAStop+0x14>
+  2c:	6ba0      	ldr	r0, [r4, #56]	; 0x38
+  2e:	b108      	cbz	r0, 34 <HAL_UART_DMAStop+0x34>
+  30:	f7ff fffe 	bl	0 <HAL_DMA_Abort>
+  34:	6822      	ldr	r2, [r4, #0]
+  36:	f102 030c 	add.w	r3, r2, #12
+  3a:	e853 3f00 	ldrex	r3, [r3]
+  3e:	f023 03c0 	bic.w	r3, r3, #192	; 0xc0
+  42:	320c      	adds	r2, #12
+  44:	e842 3100 	strex	r1, r3, [r2]
+  48:	2900      	cmp	r1, #0
+  4a:	d1f3      	bne.n	34 <HAL_UART_DMAStop+0x34>
+  4c:	2320      	movs	r3, #32
+  4e:	f884 3041 	strb.w	r3, [r4, #65]	; 0x41
+  52:	6822      	ldr	r2, [r4, #0]
+  54:	6953      	ldr	r3, [r2, #20]
+  56:	f894 1042 	ldrb.w	r1, [r4, #66]	; 0x42
+  5a:	2922      	cmp	r1, #34	; 0x22
+  5c:	d114      	bne.n	88 <HAL_UART_DMAStop+0x88>
+  5e:	065b      	lsls	r3, r3, #25
+  60:	d512      	bpl.n	88 <HAL_UART_DMAStop+0x88>
+  62:	f102 0314 	add.w	r3, r2, #20
+  66:	e853 3f00 	ldrex	r3, [r3]
+  6a:	f023 0340 	bic.w	r3, r3, #64	; 0x40
+  6e:	f102 0014 	add.w	r0, r2, #20
+  72:	e840 3100 	strex	r1, r3, [r0]
+  76:	2900      	cmp	r1, #0
+  78:	d1f3      	bne.n	62 <HAL_UART_DMAStop+0x62>
+  7a:	6be0      	ldr	r0, [r4, #60]	; 0x3c
+  7c:	b108      	cbz	r0, 82 <HAL_UART_DMAStop+0x82>
+  7e:	f7ff fffe 	bl	0 <HAL_DMA_Abort>
+  82:	4620      	mov	r0, r4
+  84:	f7ff fffe 	bl	0 <HAL_UART_DMAStop>
+  88:	2000      	movs	r0, #0
+  8a:	bd10      	pop	{r4, pc}
+
+Disassembly of section .text.HAL_UARTEx_ReceiveToIdle:
+
+00000000 <HAL_UARTEx_ReceiveToIdle>:
+   0:	e92d 47f3 	stmdb	sp!, {r0, r1, r4, r5, r6, r7, r8, r9, sl, lr}
+   4:	461f      	mov	r7, r3
+   6:	f890 3042 	ldrb.w	r3, [r0, #66]	; 0x42
+   a:	4604      	mov	r4, r0
+   c:	2b20      	cmp	r3, #32
+   e:	460e      	mov	r6, r1
+  10:	4692      	mov	sl, r2
+  12:	f8dd 8028 	ldr.w	r8, [sp, #40]	; 0x28
+  16:	d170      	bne.n	fa <HAL_UARTEx_ReceiveToIdle+0xfa>
+  18:	2900      	cmp	r1, #0
+  1a:	d070      	beq.n	fe <HAL_UARTEx_ReceiveToIdle+0xfe>
+  1c:	2a00      	cmp	r2, #0
+  1e:	d06e      	beq.n	fe <HAL_UARTEx_ReceiveToIdle+0xfe>
+  20:	2500      	movs	r5, #0
+  22:	2322      	movs	r3, #34	; 0x22
+  24:	6445      	str	r5, [r0, #68]	; 0x44
+  26:	f880 3042 	strb.w	r3, [r0, #66]	; 0x42
+  2a:	2301      	movs	r3, #1
+  2c:	6303      	str	r3, [r0, #48]	; 0x30
+  2e:	6345      	str	r5, [r0, #52]	; 0x34
+  30:	f7ff fffe 	bl	0 <HAL_GetTick>
+  34:	68a3      	ldr	r3, [r4, #8]
+  36:	4681      	mov	r9, r0
+  38:	f5b3 5f80 	cmp.w	r3, #4096	; 0x1000
+  3c:	f8a4 a02c 	strh.w	sl, [r4, #44]	; 0x2c
+  40:	f8a4 a02e 	strh.w	sl, [r4, #46]	; 0x2e
+  44:	d103      	bne.n	4e <HAL_UARTEx_ReceiveToIdle+0x4e>
+  46:	6923      	ldr	r3, [r4, #16]
+  48:	b90b      	cbnz	r3, 4e <HAL_UARTEx_ReceiveToIdle+0x4e>
+  4a:	4635      	mov	r5, r6
+  4c:	461e      	mov	r6, r3
+  4e:	f04f 0a00 	mov.w	sl, #0
+  52:	f8a7 a000 	strh.w	sl, [r7]
+  56:	8de0      	ldrh	r0, [r4, #46]	; 0x2e
+  58:	b280      	uxth	r0, r0
+  5a:	b938      	cbnz	r0, 6c <HAL_UARTEx_ReceiveToIdle+0x6c>
+  5c:	8de2      	ldrh	r2, [r4, #46]	; 0x2e
+  5e:	8da3      	ldrh	r3, [r4, #44]	; 0x2c
+  60:	1a9b      	subs	r3, r3, r2
+  62:	803b      	strh	r3, [r7, #0]
+  64:	2320      	movs	r3, #32
+  66:	f884 3042 	strb.w	r3, [r4, #66]	; 0x42
+  6a:	e012      	b.n	92 <HAL_UARTEx_ReceiveToIdle+0x92>
+  6c:	6823      	ldr	r3, [r4, #0]
+  6e:	681a      	ldr	r2, [r3, #0]
+  70:	06d1      	lsls	r1, r2, #27
+  72:	d511      	bpl.n	98 <HAL_UARTEx_ReceiveToIdle+0x98>
+  74:	f8cd a004 	str.w	sl, [sp, #4]
+  78:	681a      	ldr	r2, [r3, #0]
+  7a:	9201      	str	r2, [sp, #4]
+  7c:	685a      	ldr	r2, [r3, #4]
+  7e:	9201      	str	r2, [sp, #4]
+  80:	9a01      	ldr	r2, [sp, #4]
+  82:	883a      	ldrh	r2, [r7, #0]
+  84:	b142      	cbz	r2, 98 <HAL_UARTEx_ReceiveToIdle+0x98>
+  86:	2302      	movs	r3, #2
+  88:	6363      	str	r3, [r4, #52]	; 0x34
+  8a:	2320      	movs	r3, #32
+  8c:	2000      	movs	r0, #0
+  8e:	f884 3042 	strb.w	r3, [r4, #66]	; 0x42
+  92:	b002      	add	sp, #8
+  94:	e8bd 87f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, pc}
+  98:	681a      	ldr	r2, [r3, #0]
+  9a:	0692      	lsls	r2, r2, #26
+  9c:	d50c      	bpl.n	b8 <HAL_UARTEx_ReceiveToIdle+0xb8>
+  9e:	b9e6      	cbnz	r6, da <HAL_UARTEx_ReceiveToIdle+0xda>
+  a0:	685b      	ldr	r3, [r3, #4]
+  a2:	f3c3 0308 	ubfx	r3, r3, #0, #9
+  a6:	f825 3b02 	strh.w	r3, [r5], #2
+  aa:	883b      	ldrh	r3, [r7, #0]
+  ac:	3301      	adds	r3, #1
+  ae:	803b      	strh	r3, [r7, #0]
+  b0:	8de3      	ldrh	r3, [r4, #46]	; 0x2e
+  b2:	3b01      	subs	r3, #1
+  b4:	b29b      	uxth	r3, r3
+  b6:	85e3      	strh	r3, [r4, #46]	; 0x2e
+  b8:	f1b8 3fff 	cmp.w	r8, #4294967295	; 0xffffffff
+  bc:	d0cb      	beq.n	56 <HAL_UARTEx_ReceiveToIdle+0x56>
+  be:	f7ff fffe 	bl	0 <HAL_GetTick>
+  c2:	eba0 0009 	sub.w	r0, r0, r9
+  c6:	4540      	cmp	r0, r8
+  c8:	d802      	bhi.n	d0 <HAL_UARTEx_ReceiveToIdle+0xd0>
+  ca:	f1b8 0f00 	cmp.w	r8, #0
+  ce:	d1c2      	bne.n	56 <HAL_UARTEx_ReceiveToIdle+0x56>
+  d0:	2320      	movs	r3, #32
+  d2:	2003      	movs	r0, #3
+  d4:	f884 3042 	strb.w	r3, [r4, #66]	; 0x42
+  d8:	e7db      	b.n	92 <HAL_UARTEx_ReceiveToIdle+0x92>
+  da:	68a2      	ldr	r2, [r4, #8]
+  dc:	f5b2 5f80 	cmp.w	r2, #4096	; 0x1000
+  e0:	d002      	beq.n	e8 <HAL_UARTEx_ReceiveToIdle+0xe8>
+  e2:	b932      	cbnz	r2, f2 <HAL_UARTEx_ReceiveToIdle+0xf2>
+  e4:	6922      	ldr	r2, [r4, #16]
+  e6:	b922      	cbnz	r2, f2 <HAL_UARTEx_ReceiveToIdle+0xf2>
+  e8:	685b      	ldr	r3, [r3, #4]
+  ea:	b2db      	uxtb	r3, r3
+  ec:	f806 3b01 	strb.w	r3, [r6], #1
+  f0:	e7db      	b.n	aa <HAL_UARTEx_ReceiveToIdle+0xaa>
+  f2:	685b      	ldr	r3, [r3, #4]
+  f4:	f003 037f 	and.w	r3, r3, #127	; 0x7f
+  f8:	e7f8      	b.n	ec <HAL_UARTEx_ReceiveToIdle+0xec>
+  fa:	2002      	movs	r0, #2
+  fc:	e7c9      	b.n	92 <HAL_UARTEx_ReceiveToIdle+0x92>
+  fe:	2001      	movs	r0, #1
+ 100:	e7c7      	b.n	92 <HAL_UARTEx_ReceiveToIdle+0x92>
+
+Disassembly of section .text.HAL_UARTEx_GetRxEventType:
+
+00000000 <HAL_UARTEx_GetRxEventType>:
+   0:	6b40      	ldr	r0, [r0, #52]	; 0x34
+   2:	4770      	bx	lr
+
+Disassembly of section .text.HAL_UART_Abort:
+
+00000000 <HAL_UART_Abort>:
+   0:	b510      	push	{r4, lr}
+   2:	4604      	mov	r4, r0
+   4:	6822      	ldr	r2, [r4, #0]
+   6:	f102 030c 	add.w	r3, r2, #12
+   a:	e853 3f00 	ldrex	r3, [r3]
+   e:	f423 73f0 	bic.w	r3, r3, #480	; 0x1e0
+  12:	320c      	adds	r2, #12
+  14:	e842 3100 	strex	r1, r3, [r2]
+  18:	6823      	ldr	r3, [r4, #0]
+  1a:	2900      	cmp	r1, #0
+  1c:	d1f2      	bne.n	4 <HAL_UART_Abort+0x4>
+  1e:	f103 0214 	add.w	r2, r3, #20
+  22:	e852 2f00 	ldrex	r2, [r2]
+  26:	f022 0201 	bic.w	r2, r2, #1
+  2a:	f103 0014 	add.w	r0, r3, #20
+  2e:	e840 2100 	strex	r1, r2, [r0]
+  32:	2900      	cmp	r1, #0
+  34:	d1f3      	bne.n	1e <HAL_UART_Abort+0x1e>
+  36:	6b22      	ldr	r2, [r4, #48]	; 0x30
+  38:	2a01      	cmp	r2, #1
+  3a:	d10b      	bne.n	54 <HAL_UART_Abort+0x54>
+  3c:	f103 020c 	add.w	r2, r3, #12
+  40:	e852 2f00 	ldrex	r2, [r2]
+  44:	f022 0210 	bic.w	r2, r2, #16
+  48:	f103 000c 	add.w	r0, r3, #12
+  4c:	e840 2100 	strex	r1, r2, [r0]
+  50:	2900      	cmp	r1, #0
+  52:	d1f3      	bne.n	3c <HAL_UART_Abort+0x3c>
+  54:	695a      	ldr	r2, [r3, #20]
+  56:	0612      	lsls	r2, r2, #24
+  58:	d51a      	bpl.n	90 <HAL_UART_Abort+0x90>
+  5a:	f103 0214 	add.w	r2, r3, #20
+  5e:	e852 2f00 	ldrex	r2, [r2]
+  62:	f022 0280 	bic.w	r2, r2, #128	; 0x80
+  66:	f103 0014 	add.w	r0, r3, #20
+  6a:	e840 2100 	strex	r1, r2, [r0]
+  6e:	2900      	cmp	r1, #0
+  70:	d1f3      	bne.n	5a <HAL_UART_Abort+0x5a>
+  72:	6ba0      	ldr	r0, [r4, #56]	; 0x38
+  74:	b160      	cbz	r0, 90 <HAL_UART_Abort+0x90>
+  76:	6341      	str	r1, [r0, #52]	; 0x34
+  78:	f7ff fffe 	bl	0 <HAL_DMA_Abort>
+  7c:	b140      	cbz	r0, 90 <HAL_UART_Abort+0x90>
+  7e:	6ba0      	ldr	r0, [r4, #56]	; 0x38
+  80:	f7ff fffe 	bl	0 <HAL_DMA_GetError>
+  84:	2820      	cmp	r0, #32
+  86:	d103      	bne.n	90 <HAL_UART_Abort+0x90>
+  88:	2310      	movs	r3, #16
+  8a:	2003      	movs	r0, #3
+  8c:	6463      	str	r3, [r4, #68]	; 0x44
+  8e:	bd10      	pop	{r4, pc}
+  90:	6822      	ldr	r2, [r4, #0]
+  92:	6953      	ldr	r3, [r2, #20]
+  94:	065b      	lsls	r3, r3, #25
+  96:	d516      	bpl.n	c6 <HAL_UART_Abort+0xc6>
+  98:	f102 0314 	add.w	r3, r2, #20
+  9c:	e853 3f00 	ldrex	r3, [r3]
+  a0:	f023 0340 	bic.w	r3, r3, #64	; 0x40
+  a4:	f102 0014 	add.w	r0, r2, #20
+  a8:	e840 3100 	strex	r1, r3, [r0]
+  ac:	2900      	cmp	r1, #0
+  ae:	d1f3      	bne.n	98 <HAL_UART_Abort+0x98>
+  b0:	6be0      	ldr	r0, [r4, #60]	; 0x3c
+  b2:	b140      	cbz	r0, c6 <HAL_UART_Abort+0xc6>
+  b4:	6341      	str	r1, [r0, #52]	; 0x34
+  b6:	f7ff fffe 	bl	0 <HAL_DMA_Abort>
+  ba:	b120      	cbz	r0, c6 <HAL_UART_Abort+0xc6>
+  bc:	6be0      	ldr	r0, [r4, #60]	; 0x3c
+  be:	f7ff fffe 	bl	0 <HAL_DMA_GetError>
+  c2:	2820      	cmp	r0, #32
+  c4:	d0e0      	beq.n	88 <HAL_UART_Abort+0x88>
+  c6:	2000      	movs	r0, #0
+  c8:	2320      	movs	r3, #32
+  ca:	84e0      	strh	r0, [r4, #38]	; 0x26
+  cc:	85e0      	strh	r0, [r4, #46]	; 0x2e
+  ce:	6460      	str	r0, [r4, #68]	; 0x44
+  d0:	f884 3042 	strb.w	r3, [r4, #66]	; 0x42
+  d4:	f884 3041 	strb.w	r3, [r4, #65]	; 0x41
+  d8:	6320      	str	r0, [r4, #48]	; 0x30
+  da:	e7d8      	b.n	8e <HAL_UART_Abort+0x8e>
+
+Disassembly of section .text.HAL_UART_AbortTransmit:
+
+00000000 <HAL_UART_AbortTransmit>:
+   0:	b510      	push	{r4, lr}
+   2:	4604      	mov	r4, r0
+   4:	6822      	ldr	r2, [r4, #0]
+   6:	f102 030c 	add.w	r3, r2, #12
+   a:	e853 3f00 	ldrex	r3, [r3]
+   e:	f023 03c0 	bic.w	r3, r3, #192	; 0xc0
+  12:	320c      	adds	r2, #12
+  14:	e842 3100 	strex	r1, r3, [r2]
+  18:	6822      	ldr	r2, [r4, #0]
+  1a:	2900      	cmp	r1, #0
+  1c:	d1f2      	bne.n	4 <HAL_UART_AbortTransmit+0x4>
+  1e:	6953      	ldr	r3, [r2, #20]
+  20:	061b      	lsls	r3, r3, #24
+  22:	d51a      	bpl.n	5a <HAL_UART_AbortTransmit+0x5a>
+  24:	f102 0314 	add.w	r3, r2, #20
+  28:	e853 3f00 	ldrex	r3, [r3]
+  2c:	f023 0380 	bic.w	r3, r3, #128	; 0x80
+  30:	f102 0014 	add.w	r0, r2, #20
+  34:	e840 3100 	strex	r1, r3, [r0]
+  38:	2900      	cmp	r1, #0
+  3a:	d1f3      	bne.n	24 <HAL_UART_AbortTransmit+0x24>
+  3c:	6ba0      	ldr	r0, [r4, #56]	; 0x38
+  3e:	b160      	cbz	r0, 5a <HAL_UART_AbortTransmit+0x5a>
+  40:	6341      	str	r1, [r0, #52]	; 0x34
+  42:	f7ff fffe 	bl	0 <HAL_DMA_Abort>
+  46:	b140      	cbz	r0, 5a <HAL_UART_AbortTransmit+0x5a>
+  48:	6ba0      	ldr	r0, [r4, #56]	; 0x38
+  4a:	f7ff fffe 	bl	0 <HAL_DMA_GetError>
+  4e:	2820      	cmp	r0, #32
+  50:	d103      	bne.n	5a <HAL_UART_AbortTransmit+0x5a>
+  52:	2310      	movs	r3, #16
+  54:	2003      	movs	r0, #3
+  56:	6463      	str	r3, [r4, #68]	; 0x44
+  58:	bd10      	pop	{r4, pc}
+  5a:	2000      	movs	r0, #0
+  5c:	2320      	movs	r3, #32
+  5e:	84e0      	strh	r0, [r4, #38]	; 0x26
+  60:	f884 3041 	strb.w	r3, [r4, #65]	; 0x41
+  64:	e7f8      	b.n	58 <HAL_UART_AbortTransmit+0x58>
+
+Disassembly of section .text.HAL_UART_AbortReceive:
+
+00000000 <HAL_UART_AbortReceive>:
+   0:	b510      	push	{r4, lr}
+   2:	4604      	mov	r4, r0
+   4:	6822      	ldr	r2, [r4, #0]
+   6:	f102 030c 	add.w	r3, r2, #12
+   a:	e853 3f00 	ldrex	r3, [r3]
+   e:	f423 7390 	bic.w	r3, r3, #288	; 0x120
+  12:	320c      	adds	r2, #12
+  14:	e842 3100 	strex	r1, r3, [r2]
+  18:	6823      	ldr	r3, [r4, #0]
+  1a:	2900      	cmp	r1, #0
+  1c:	d1f2      	bne.n	4 <HAL_UART_AbortReceive+0x4>
+  1e:	f103 0214 	add.w	r2, r3, #20
+  22:	e852 2f00 	ldrex	r2, [r2]
+  26:	f022 0201 	bic.w	r2, r2, #1
+  2a:	f103 0014 	add.w	r0, r3, #20
+  2e:	e840 2100 	strex	r1, r2, [r0]
+  32:	2900      	cmp	r1, #0
+  34:	d1f3      	bne.n	1e <HAL_UART_AbortReceive+0x1e>
+  36:	6b22      	ldr	r2, [r4, #48]	; 0x30
+  38:	2a01      	cmp	r2, #1
+  3a:	d10b      	bne.n	54 <HAL_UART_AbortReceive+0x54>
+  3c:	f103 020c 	add.w	r2, r3, #12
+  40:	e852 2f00 	ldrex	r2, [r2]
+  44:	f022 0210 	bic.w	r2, r2, #16
+  48:	f103 000c 	add.w	r0, r3, #12
+  4c:	e840 2100 	strex	r1, r2, [r0]
+  50:	2900      	cmp	r1, #0
+  52:	d1f3      	bne.n	3c <HAL_UART_AbortReceive+0x3c>
+  54:	695a      	ldr	r2, [r3, #20]
+  56:	0652      	lsls	r2, r2, #25
+  58:	d51a      	bpl.n	90 <HAL_UART_AbortReceive+0x90>
+  5a:	f103 0214 	add.w	r2, r3, #20
+  5e:	e852 2f00 	ldrex	r2, [r2]
+  62:	f022 0240 	bic.w	r2, r2, #64	; 0x40
+  66:	f103 0014 	add.w	r0, r3, #20
+  6a:	e840 2100 	strex	r1, r2, [r0]
+  6e:	2900      	cmp	r1, #0
+  70:	d1f3      	bne.n	5a <HAL_UART_AbortReceive+0x5a>
+  72:	6be0      	ldr	r0, [r4, #60]	; 0x3c
+  74:	b160      	cbz	r0, 90 <HAL_UART_AbortReceive+0x90>
+  76:	6341      	str	r1, [r0, #52]	; 0x34
+  78:	f7ff fffe 	bl	0 <HAL_DMA_Abort>
+  7c:	b140      	cbz	r0, 90 <HAL_UART_AbortReceive+0x90>
+  7e:	6be0      	ldr	r0, [r4, #60]	; 0x3c
+  80:	f7ff fffe 	bl	0 <HAL_DMA_GetError>
+  84:	2820      	cmp	r0, #32
+  86:	d103      	bne.n	90 <HAL_UART_AbortReceive+0x90>
+  88:	2310      	movs	r3, #16
+  8a:	2003      	movs	r0, #3
+  8c:	6463      	str	r3, [r4, #68]	; 0x44
+  8e:	bd10      	pop	{r4, pc}
+  90:	2000      	movs	r0, #0
+  92:	2320      	movs	r3, #32
+  94:	85e0      	strh	r0, [r4, #46]	; 0x2e
+  96:	f884 3042 	strb.w	r3, [r4, #66]	; 0x42
+  9a:	6320      	str	r0, [r4, #48]	; 0x30
+  9c:	e7f7      	b.n	8e <HAL_UART_AbortReceive+0x8e>
+
+Disassembly of section .text.HAL_UART_TxCpltCallback:
+
+00000000 <HAL_UART_TxCpltCallback>:
+   0:	4770      	bx	lr
+
+Disassembly of section .text.UART_DMATransmitCplt:
+
+00000000 <UART_DMATransmitCplt>:
+   0:	b508      	push	{r3, lr}
+   2:	4603      	mov	r3, r0
+   4:	681b      	ldr	r3, [r3, #0]
+   6:	6a40      	ldr	r0, [r0, #36]	; 0x24
+   8:	681b      	ldr	r3, [r3, #0]
+   a:	f013 0320 	ands.w	r3, r3, #32
+   e:	d11a      	bne.n	46 <UART_DMATransmitCplt+0x46>
+  10:	84c3      	strh	r3, [r0, #38]	; 0x26
+  12:	6802      	ldr	r2, [r0, #0]
+  14:	f102 0314 	add.w	r3, r2, #20
+  18:	e853 3f00 	ldrex	r3, [r3]
+  1c:	f023 0380 	bic.w	r3, r3, #128	; 0x80
+  20:	3214      	adds	r2, #20
+  22:	e842 3100 	strex	r1, r3, [r2]
+  26:	6802      	ldr	r2, [r0, #0]
+  28:	2900      	cmp	r1, #0
+  2a:	d1f2      	bne.n	12 <UART_DMATransmitCplt+0x12>
+  2c:	f102 030c 	add.w	r3, r2, #12
+  30:	e853 3f00 	ldrex	r3, [r3]
+  34:	f043 0340 	orr.w	r3, r3, #64	; 0x40
+  38:	f102 000c 	add.w	r0, r2, #12
+  3c:	e840 3100 	strex	r1, r3, [r0]
+  40:	2900      	cmp	r1, #0
+  42:	d1f3      	bne.n	2c <UART_DMATransmitCplt+0x2c>
+  44:	bd08      	pop	{r3, pc}
+  46:	f7ff fffe 	bl	0 <UART_DMATransmitCplt>
+  4a:	e7fb      	b.n	44 <UART_DMATransmitCplt+0x44>
+
+Disassembly of section .text.HAL_UART_TxHalfCpltCallback:
+
+00000000 <HAL_UART_TxHalfCpltCallback>:
+   0:	4770      	bx	lr
+
+Disassembly of section .text.UART_DMATxHalfCplt:
+
+00000000 <UART_DMATxHalfCplt>:
+   0:	b508      	push	{r3, lr}
+   2:	6a40      	ldr	r0, [r0, #36]	; 0x24
+   4:	f7ff fffe 	bl	0 <UART_DMATxHalfCplt>
+   8:	bd08      	pop	{r3, pc}
+
+Disassembly of section .text.HAL_UART_RxCpltCallback:
+
+00000000 <HAL_UART_RxCpltCallback>:
+   0:	4770      	bx	lr
+
+Disassembly of section .text.HAL_UART_RxHalfCpltCallback:
+
+00000000 <HAL_UART_RxHalfCpltCallback>:
+   0:	4770      	bx	lr
+
+Disassembly of section .text.HAL_UART_ErrorCallback:
+
+00000000 <HAL_UART_ErrorCallback>:
+   0:	4770      	bx	lr
+
+Disassembly of section .text.UART_DMAError:
+
+00000000 <UART_DMAError>:
+   0:	b508      	push	{r3, lr}
+   2:	6a40      	ldr	r0, [r0, #36]	; 0x24
+   4:	6803      	ldr	r3, [r0, #0]
+   6:	695a      	ldr	r2, [r3, #20]
+   8:	f890 1041 	ldrb.w	r1, [r0, #65]	; 0x41
+   c:	2921      	cmp	r1, #33	; 0x21
+   e:	d112      	bne.n	36 <UART_DMAError+0x36>
+  10:	0612      	lsls	r2, r2, #24
+  12:	d510      	bpl.n	36 <UART_DMAError+0x36>
+  14:	2200      	movs	r2, #0
+  16:	84c2      	strh	r2, [r0, #38]	; 0x26
+  18:	f103 020c 	add.w	r2, r3, #12
+  1c:	e852 2f00 	ldrex	r2, [r2]
+  20:	f022 02c0 	bic.w	r2, r2, #192	; 0xc0
+  24:	f103 0c0c 	add.w	ip, r3, #12
+  28:	e84c 2100 	strex	r1, r2, [ip]
+  2c:	2900      	cmp	r1, #0
+  2e:	d1f3      	bne.n	18 <UART_DMAError+0x18>
+  30:	2220      	movs	r2, #32
+  32:	f880 2041 	strb.w	r2, [r0, #65]	; 0x41
+  36:	695b      	ldr	r3, [r3, #20]
+  38:	f890 2042 	ldrb.w	r2, [r0, #66]	; 0x42
+  3c:	2a22      	cmp	r2, #34	; 0x22
+  3e:	d105      	bne.n	4c <UART_DMAError+0x4c>
+  40:	065b      	lsls	r3, r3, #25
+  42:	d503      	bpl.n	4c <UART_DMAError+0x4c>
+  44:	2300      	movs	r3, #0
+  46:	85c3      	strh	r3, [r0, #46]	; 0x2e
+  48:	f7ff fffe 	bl	0 <UART_DMAError>
+  4c:	6c43      	ldr	r3, [r0, #68]	; 0x44
+  4e:	f043 0310 	orr.w	r3, r3, #16
+  52:	6443      	str	r3, [r0, #68]	; 0x44
+  54:	f7ff fffe 	bl	0 <UART_DMAError>
+  58:	bd08      	pop	{r3, pc}
+
+Disassembly of section .text.UART_DMAAbortOnError:
+
+00000000 <UART_DMAAbortOnError>:
+   0:	b508      	push	{r3, lr}
+   2:	2300      	movs	r3, #0
+   4:	6a40      	ldr	r0, [r0, #36]	; 0x24
+   6:	85c3      	strh	r3, [r0, #46]	; 0x2e
+   8:	84c3      	strh	r3, [r0, #38]	; 0x26
+   a:	f7ff fffe 	bl	0 <UART_DMAAbortOnError>
+   e:	bd08      	pop	{r3, pc}
+
+Disassembly of section .text.HAL_UART_AbortCpltCallback:
+
+00000000 <HAL_UART_AbortCpltCallback>:
+   0:	4770      	bx	lr
+
+Disassembly of section .text.HAL_UART_Abort_IT:
+
+00000000 <HAL_UART_Abort_IT>:
+   0:	b570      	push	{r4, r5, r6, lr}
+   2:	4604      	mov	r4, r0
+   4:	6822      	ldr	r2, [r4, #0]
+   6:	f102 030c 	add.w	r3, r2, #12
+   a:	e853 3f00 	ldrex	r3, [r3]
+   e:	f423 73f0 	bic.w	r3, r3, #480	; 0x1e0
+  12:	320c      	adds	r2, #12
+  14:	e842 3100 	strex	r1, r3, [r2]
+  18:	6823      	ldr	r3, [r4, #0]
+  1a:	2900      	cmp	r1, #0
+  1c:	d1f2      	bne.n	4 <HAL_UART_Abort_IT+0x4>
+  1e:	f103 0214 	add.w	r2, r3, #20
+  22:	e852 2f00 	ldrex	r2, [r2]
+  26:	f022 0201 	bic.w	r2, r2, #1
+  2a:	f103 0014 	add.w	r0, r3, #20
+  2e:	e840 2100 	strex	r1, r2, [r0]
+  32:	2900      	cmp	r1, #0
+  34:	d1f3      	bne.n	1e <HAL_UART_Abort_IT+0x1e>
+  36:	6b22      	ldr	r2, [r4, #48]	; 0x30
+  38:	2a01      	cmp	r2, #1
+  3a:	d035      	beq.n	a8 <HAL_UART_Abort_IT+0xa8>
+  3c:	6ba0      	ldr	r0, [r4, #56]	; 0x38
+  3e:	2800      	cmp	r0, #0
+  40:	d13f      	bne.n	c2 <HAL_UART_Abort_IT+0xc2>
+  42:	6be1      	ldr	r1, [r4, #60]	; 0x3c
+  44:	b129      	cbz	r1, 52 <HAL_UART_Abort_IT+0x52>
+  46:	695a      	ldr	r2, [r3, #20]
+  48:	f012 0240 	ands.w	r2, r2, #64	; 0x40
+  4c:	bf18      	it	ne
+  4e:	4a2d      	ldrne	r2, [pc, #180]	; (104 <HAL_UART_Abort_IT+0x104>)
+  50:	634a      	str	r2, [r1, #52]	; 0x34
+  52:	695a      	ldr	r2, [r3, #20]
+  54:	0612      	lsls	r2, r2, #24
+  56:	d43b      	bmi.n	d0 <HAL_UART_Abort_IT+0xd0>
+  58:	2501      	movs	r5, #1
+  5a:	6822      	ldr	r2, [r4, #0]
+  5c:	6953      	ldr	r3, [r2, #20]
+  5e:	065b      	lsls	r3, r3, #25
+  60:	d54b      	bpl.n	fa <HAL_UART_Abort_IT+0xfa>
+  62:	f102 0314 	add.w	r3, r2, #20
+  66:	e853 3f00 	ldrex	r3, [r3]
+  6a:	f023 0340 	bic.w	r3, r3, #64	; 0x40
+  6e:	f102 0114 	add.w	r1, r2, #20
+  72:	e841 3600 	strex	r6, r3, [r1]
+  76:	2e00      	cmp	r6, #0
+  78:	d1f3      	bne.n	62 <HAL_UART_Abort_IT+0x62>
+  7a:	6be0      	ldr	r0, [r4, #60]	; 0x3c
+  7c:	2800      	cmp	r0, #0
+  7e:	d03c      	beq.n	fa <HAL_UART_Abort_IT+0xfa>
+  80:	f7ff fffe 	bl	0 <HAL_DMA_Abort_IT>
+  84:	2800      	cmp	r0, #0
+  86:	d03a      	beq.n	fe <HAL_UART_Abort_IT+0xfe>
+  88:	6be3      	ldr	r3, [r4, #60]	; 0x3c
+  8a:	635e      	str	r6, [r3, #52]	; 0x34
+  8c:	2300      	movs	r3, #0
+  8e:	2220      	movs	r2, #32
+  90:	84e3      	strh	r3, [r4, #38]	; 0x26
+  92:	4620      	mov	r0, r4
+  94:	85e3      	strh	r3, [r4, #46]	; 0x2e
+  96:	6463      	str	r3, [r4, #68]	; 0x44
+  98:	f884 2041 	strb.w	r2, [r4, #65]	; 0x41
+  9c:	f884 2042 	strb.w	r2, [r4, #66]	; 0x42
+  a0:	6323      	str	r3, [r4, #48]	; 0x30
+  a2:	f7ff fffe 	bl	0 <HAL_UART_Abort_IT>
+  a6:	e02a      	b.n	fe <HAL_UART_Abort_IT+0xfe>
+  a8:	f103 020c 	add.w	r2, r3, #12
+  ac:	e852 2f00 	ldrex	r2, [r2]
+  b0:	f022 0210 	bic.w	r2, r2, #16
+  b4:	f103 000c 	add.w	r0, r3, #12
+  b8:	e840 2100 	strex	r1, r2, [r0]
+  bc:	2900      	cmp	r1, #0
+  be:	d1f3      	bne.n	a8 <HAL_UART_Abort_IT+0xa8>
+  c0:	e7bc      	b.n	3c <HAL_UART_Abort_IT+0x3c>
+  c2:	695a      	ldr	r2, [r3, #20]
+  c4:	f012 0280 	ands.w	r2, r2, #128	; 0x80
+  c8:	bf18      	it	ne
+  ca:	4a0f      	ldrne	r2, [pc, #60]	; (108 <HAL_UART_Abort_IT+0x108>)
+  cc:	6342      	str	r2, [r0, #52]	; 0x34
+  ce:	e7b8      	b.n	42 <HAL_UART_Abort_IT+0x42>
+  d0:	f103 0214 	add.w	r2, r3, #20
+  d4:	e852 2f00 	ldrex	r2, [r2]
+  d8:	f022 0280 	bic.w	r2, r2, #128	; 0x80
+  dc:	f103 0114 	add.w	r1, r3, #20
+  e0:	e841 2500 	strex	r5, r2, [r1]
+  e4:	2d00      	cmp	r5, #0
+  e6:	d1f3      	bne.n	d0 <HAL_UART_Abort_IT+0xd0>
+  e8:	2800      	cmp	r0, #0
+  ea:	d0b5      	beq.n	58 <HAL_UART_Abort_IT+0x58>
+  ec:	f7ff fffe 	bl	0 <HAL_DMA_Abort_IT>
+  f0:	2800      	cmp	r0, #0
+  f2:	d0b2      	beq.n	5a <HAL_UART_Abort_IT+0x5a>
+  f4:	6ba3      	ldr	r3, [r4, #56]	; 0x38
+  f6:	635d      	str	r5, [r3, #52]	; 0x34
+  f8:	e7ae      	b.n	58 <HAL_UART_Abort_IT+0x58>
+  fa:	2d01      	cmp	r5, #1
+  fc:	d0c6      	beq.n	8c <HAL_UART_Abort_IT+0x8c>
+  fe:	2000      	movs	r0, #0
+ 100:	bd70      	pop	{r4, r5, r6, pc}
+ 102:	bf00      	nop
+	...
+
+Disassembly of section .text.UART_DMARxAbortCallback:
+
+00000000 <UART_DMARxAbortCallback>:
+   0:	b508      	push	{r3, lr}
+   2:	2300      	movs	r3, #0
+   4:	6a40      	ldr	r0, [r0, #36]	; 0x24
+   6:	6bc2      	ldr	r2, [r0, #60]	; 0x3c
+   8:	6353      	str	r3, [r2, #52]	; 0x34
+   a:	6b82      	ldr	r2, [r0, #56]	; 0x38
+   c:	b10a      	cbz	r2, 12 <UART_DMARxAbortCallback+0x12>
+   e:	6b52      	ldr	r2, [r2, #52]	; 0x34
+  10:	b952      	cbnz	r2, 28 <UART_DMARxAbortCallback+0x28>
+  12:	2220      	movs	r2, #32
+  14:	84c3      	strh	r3, [r0, #38]	; 0x26
+  16:	85c3      	strh	r3, [r0, #46]	; 0x2e
+  18:	6443      	str	r3, [r0, #68]	; 0x44
+  1a:	f880 2041 	strb.w	r2, [r0, #65]	; 0x41
+  1e:	f880 2042 	strb.w	r2, [r0, #66]	; 0x42
+  22:	6303      	str	r3, [r0, #48]	; 0x30
+  24:	f7ff fffe 	bl	0 <UART_DMARxAbortCallback>
+  28:	bd08      	pop	{r3, pc}
+
+Disassembly of section .text.UART_DMATxAbortCallback:
+
+00000000 <UART_DMATxAbortCallback>:
+   0:	b508      	push	{r3, lr}
+   2:	2300      	movs	r3, #0
+   4:	6a40      	ldr	r0, [r0, #36]	; 0x24
+   6:	6b82      	ldr	r2, [r0, #56]	; 0x38
+   8:	6353      	str	r3, [r2, #52]	; 0x34
+   a:	6bc2      	ldr	r2, [r0, #60]	; 0x3c
+   c:	b10a      	cbz	r2, 12 <UART_DMATxAbortCallback+0x12>
+   e:	6b52      	ldr	r2, [r2, #52]	; 0x34
+  10:	b952      	cbnz	r2, 28 <UART_DMATxAbortCallback+0x28>
+  12:	2220      	movs	r2, #32
+  14:	84c3      	strh	r3, [r0, #38]	; 0x26
+  16:	85c3      	strh	r3, [r0, #46]	; 0x2e
+  18:	6443      	str	r3, [r0, #68]	; 0x44
+  1a:	f880 2041 	strb.w	r2, [r0, #65]	; 0x41
+  1e:	f880 2042 	strb.w	r2, [r0, #66]	; 0x42
+  22:	6303      	str	r3, [r0, #48]	; 0x30
+  24:	f7ff fffe 	bl	0 <UART_DMATxAbortCallback>
+  28:	bd08      	pop	{r3, pc}
+
+Disassembly of section .text.HAL_UART_AbortTransmitCpltCallback:
+
+00000000 <HAL_UART_AbortTransmitCpltCallback>:
+   0:	4770      	bx	lr
+
+Disassembly of section .text.HAL_UART_AbortTransmit_IT:
+
+00000000 <HAL_UART_AbortTransmit_IT>:
+   0:	b510      	push	{r4, lr}
+   2:	4604      	mov	r4, r0
+   4:	6822      	ldr	r2, [r4, #0]
+   6:	f102 030c 	add.w	r3, r2, #12
+   a:	e853 3f00 	ldrex	r3, [r3]
+   e:	f023 03c0 	bic.w	r3, r3, #192	; 0xc0
+  12:	320c      	adds	r2, #12
+  14:	e842 3100 	strex	r1, r3, [r2]
+  18:	6822      	ldr	r2, [r4, #0]
+  1a:	2900      	cmp	r1, #0
+  1c:	d1f2      	bne.n	4 <HAL_UART_AbortTransmit_IT+0x4>
+  1e:	6953      	ldr	r3, [r2, #20]
+  20:	f013 0380 	ands.w	r3, r3, #128	; 0x80
+  24:	d01f      	beq.n	66 <HAL_UART_AbortTransmit_IT+0x66>
+  26:	f102 0314 	add.w	r3, r2, #20
+  2a:	e853 3f00 	ldrex	r3, [r3]
+  2e:	f023 0380 	bic.w	r3, r3, #128	; 0x80
+  32:	f102 0014 	add.w	r0, r2, #20
+  36:	e840 3100 	strex	r1, r3, [r0]
+  3a:	2900      	cmp	r1, #0
+  3c:	d1f3      	bne.n	26 <HAL_UART_AbortTransmit_IT+0x26>
+  3e:	6ba0      	ldr	r0, [r4, #56]	; 0x38
+  40:	b148      	cbz	r0, 56 <HAL_UART_AbortTransmit_IT+0x56>
+  42:	4b0a      	ldr	r3, [pc, #40]	; (6c <HAL_UART_AbortTransmit_IT+0x6c>)
+  44:	6343      	str	r3, [r0, #52]	; 0x34
+  46:	f7ff fffe 	bl	0 <HAL_DMA_Abort_IT>
+  4a:	b110      	cbz	r0, 52 <HAL_UART_AbortTransmit_IT+0x52>
+  4c:	6ba0      	ldr	r0, [r4, #56]	; 0x38
+  4e:	6b43      	ldr	r3, [r0, #52]	; 0x34
+  50:	4798      	blx	r3
+  52:	2000      	movs	r0, #0
+  54:	bd10      	pop	{r4, pc}
+  56:	84e0      	strh	r0, [r4, #38]	; 0x26
+  58:	2320      	movs	r3, #32
+  5a:	4620      	mov	r0, r4
+  5c:	f884 3041 	strb.w	r3, [r4, #65]	; 0x41
+  60:	f7ff fffe 	bl	0 <HAL_UART_AbortTransmit_IT>
+  64:	e7f5      	b.n	52 <HAL_UART_AbortTransmit_IT+0x52>
+  66:	84e3      	strh	r3, [r4, #38]	; 0x26
+  68:	e7f6      	b.n	58 <HAL_UART_AbortTransmit_IT+0x58>
+  6a:	bf00      	nop
+  6c:	00000000 	.word	0x00000000
+
+Disassembly of section .text.UART_DMATxOnlyAbortCallback:
+
+00000000 <UART_DMATxOnlyAbortCallback>:
+   0:	b508      	push	{r3, lr}
+   2:	2300      	movs	r3, #0
+   4:	6a40      	ldr	r0, [r0, #36]	; 0x24
+   6:	84c3      	strh	r3, [r0, #38]	; 0x26
+   8:	2320      	movs	r3, #32
+   a:	f880 3041 	strb.w	r3, [r0, #65]	; 0x41
+   e:	f7ff fffe 	bl	0 <UART_DMATxOnlyAbortCallback>
+  12:	bd08      	pop	{r3, pc}
+
+Disassembly of section .text.HAL_UART_AbortReceiveCpltCallback:
+
+00000000 <HAL_UART_AbortReceiveCpltCallback>:
+   0:	4770      	bx	lr
+
+Disassembly of section .text.HAL_UART_AbortReceive_IT:
+
+00000000 <HAL_UART_AbortReceive_IT>:
+   0:	b510      	push	{r4, lr}
+   2:	4604      	mov	r4, r0
+   4:	6822      	ldr	r2, [r4, #0]
+   6:	f102 030c 	add.w	r3, r2, #12
+   a:	e853 3f00 	ldrex	r3, [r3]
+   e:	f423 7390 	bic.w	r3, r3, #288	; 0x120
+  12:	320c      	adds	r2, #12
+  14:	e842 3100 	strex	r1, r3, [r2]
+  18:	6823      	ldr	r3, [r4, #0]
+  1a:	2900      	cmp	r1, #0
+  1c:	d1f2      	bne.n	4 <HAL_UART_AbortReceive_IT+0x4>
+  1e:	f103 0214 	add.w	r2, r3, #20
+  22:	e852 2f00 	ldrex	r2, [r2]
+  26:	f022 0201 	bic.w	r2, r2, #1
+  2a:	f103 0014 	add.w	r0, r3, #20
+  2e:	e840 2100 	strex	r1, r2, [r0]
+  32:	2900      	cmp	r1, #0
+  34:	d1f3      	bne.n	1e <HAL_UART_AbortReceive_IT+0x1e>
+  36:	6b22      	ldr	r2, [r4, #48]	; 0x30
+  38:	2a01      	cmp	r2, #1
+  3a:	d10b      	bne.n	54 <HAL_UART_AbortReceive_IT+0x54>
+  3c:	f103 020c 	add.w	r2, r3, #12
+  40:	e852 2f00 	ldrex	r2, [r2]
+  44:	f022 0210 	bic.w	r2, r2, #16
+  48:	f103 000c 	add.w	r0, r3, #12
+  4c:	e840 2100 	strex	r1, r2, [r0]
+  50:	2900      	cmp	r1, #0
+  52:	d1f3      	bne.n	3c <HAL_UART_AbortReceive_IT+0x3c>
+  54:	695a      	ldr	r2, [r3, #20]
+  56:	f012 0240 	ands.w	r2, r2, #64	; 0x40
+  5a:	d020      	beq.n	9e <HAL_UART_AbortReceive_IT+0x9e>
+  5c:	f103 0214 	add.w	r2, r3, #20
+  60:	e852 2f00 	ldrex	r2, [r2]
+  64:	f022 0240 	bic.w	r2, r2, #64	; 0x40
+  68:	f103 0014 	add.w	r0, r3, #20
+  6c:	e840 2100 	strex	r1, r2, [r0]
+  70:	2900      	cmp	r1, #0
+  72:	d1f3      	bne.n	5c <HAL_UART_AbortReceive_IT+0x5c>
+  74:	6be0      	ldr	r0, [r4, #60]	; 0x3c
+  76:	b148      	cbz	r0, 8c <HAL_UART_AbortReceive_IT+0x8c>
+  78:	4b0c      	ldr	r3, [pc, #48]	; (ac <HAL_UART_AbortReceive_IT+0xac>)
+  7a:	6343      	str	r3, [r0, #52]	; 0x34
+  7c:	f7ff fffe 	bl	0 <HAL_DMA_Abort_IT>
+  80:	b110      	cbz	r0, 88 <HAL_UART_AbortReceive_IT+0x88>
+  82:	6be0      	ldr	r0, [r4, #60]	; 0x3c
+  84:	6b43      	ldr	r3, [r0, #52]	; 0x34
+  86:	4798      	blx	r3
+  88:	2000      	movs	r0, #0
+  8a:	bd10      	pop	{r4, pc}
+  8c:	2320      	movs	r3, #32
+  8e:	85e0      	strh	r0, [r4, #46]	; 0x2e
+  90:	f884 3042 	strb.w	r3, [r4, #66]	; 0x42
+  94:	6320      	str	r0, [r4, #48]	; 0x30
+  96:	4620      	mov	r0, r4
+  98:	f7ff fffe 	bl	0 <HAL_UART_AbortReceive_IT>
+  9c:	e7f4      	b.n	88 <HAL_UART_AbortReceive_IT+0x88>
+  9e:	2320      	movs	r3, #32
+  a0:	85e2      	strh	r2, [r4, #46]	; 0x2e
+  a2:	f884 3042 	strb.w	r3, [r4, #66]	; 0x42
+  a6:	6322      	str	r2, [r4, #48]	; 0x30
+  a8:	e7f5      	b.n	96 <HAL_UART_AbortReceive_IT+0x96>
+  aa:	bf00      	nop
+  ac:	00000000 	.word	0x00000000
+
+Disassembly of section .text.UART_DMARxOnlyAbortCallback:
+
+00000000 <UART_DMARxOnlyAbortCallback>:
+   0:	b508      	push	{r3, lr}
+   2:	2220      	movs	r2, #32
+   4:	2300      	movs	r3, #0
+   6:	6a40      	ldr	r0, [r0, #36]	; 0x24
+   8:	85c3      	strh	r3, [r0, #46]	; 0x2e
+   a:	f880 2042 	strb.w	r2, [r0, #66]	; 0x42
+   e:	6303      	str	r3, [r0, #48]	; 0x30
+  10:	f7ff fffe 	bl	0 <UART_DMARxOnlyAbortCallback>
+  14:	bd08      	pop	{r3, pc}
+
+Disassembly of section .text.HAL_UARTEx_RxEventCallback:
+
+00000000 <HAL_UARTEx_RxEventCallback>:
+   0:	4770      	bx	lr
+
+Disassembly of section .text.UART_DMARxHalfCplt:
+
+00000000 <UART_DMARxHalfCplt>:
+   0:	b508      	push	{r3, lr}
+   2:	2301      	movs	r3, #1
+   4:	6a40      	ldr	r0, [r0, #36]	; 0x24
+   6:	6343      	str	r3, [r0, #52]	; 0x34
+   8:	6b03      	ldr	r3, [r0, #48]	; 0x30
+   a:	2b01      	cmp	r3, #1
+   c:	d104      	bne.n	18 <UART_DMARxHalfCplt+0x18>
+   e:	8d81      	ldrh	r1, [r0, #44]	; 0x2c
+  10:	0849      	lsrs	r1, r1, #1
+  12:	f7ff fffe 	bl	0 <UART_DMARxHalfCplt>
+  16:	bd08      	pop	{r3, pc}
+  18:	f7ff fffe 	bl	0 <UART_DMARxHalfCplt>
+  1c:	e7fb      	b.n	16 <UART_DMARxHalfCplt+0x16>
+
+Disassembly of section .text.UART_DMAReceiveCplt:
+
+00000000 <UART_DMAReceiveCplt>:
+   0:	b508      	push	{r3, lr}
+   2:	4603      	mov	r3, r0
+   4:	681b      	ldr	r3, [r3, #0]
+   6:	6a40      	ldr	r0, [r0, #36]	; 0x24
+   8:	681b      	ldr	r3, [r3, #0]
+   a:	f013 0320 	ands.w	r3, r3, #32
+   e:	d137      	bne.n	80 <UART_DMAReceiveCplt+0x80>
+  10:	85c3      	strh	r3, [r0, #46]	; 0x2e
+  12:	6802      	ldr	r2, [r0, #0]
+  14:	f102 030c 	add.w	r3, r2, #12
+  18:	e853 3f00 	ldrex	r3, [r3]
+  1c:	f423 7380 	bic.w	r3, r3, #256	; 0x100
+  20:	320c      	adds	r2, #12
+  22:	e842 3100 	strex	r1, r3, [r2]
+  26:	6803      	ldr	r3, [r0, #0]
+  28:	2900      	cmp	r1, #0
+  2a:	d1f2      	bne.n	12 <UART_DMAReceiveCplt+0x12>
+  2c:	f103 0214 	add.w	r2, r3, #20
+  30:	e852 2f00 	ldrex	r2, [r2]
+  34:	f022 0201 	bic.w	r2, r2, #1
+  38:	f103 0c14 	add.w	ip, r3, #20
+  3c:	e84c 2100 	strex	r1, r2, [ip]
+  40:	2900      	cmp	r1, #0
+  42:	d1f3      	bne.n	2c <UART_DMAReceiveCplt+0x2c>
+  44:	f103 0214 	add.w	r2, r3, #20
+  48:	e852 2f00 	ldrex	r2, [r2]
+  4c:	f022 0240 	bic.w	r2, r2, #64	; 0x40
+  50:	f103 0c14 	add.w	ip, r3, #20
+  54:	e84c 2100 	strex	r1, r2, [ip]
+  58:	2900      	cmp	r1, #0
+  5a:	d1f3      	bne.n	44 <UART_DMAReceiveCplt+0x44>
+  5c:	2220      	movs	r2, #32
+  5e:	f880 2042 	strb.w	r2, [r0, #66]	; 0x42
+  62:	6b02      	ldr	r2, [r0, #48]	; 0x30
+  64:	2a01      	cmp	r2, #1
+  66:	d10b      	bne.n	80 <UART_DMAReceiveCplt+0x80>
+  68:	f103 020c 	add.w	r2, r3, #12
+  6c:	e852 2f00 	ldrex	r2, [r2]
+  70:	f022 0210 	bic.w	r2, r2, #16
+  74:	f103 0c0c 	add.w	ip, r3, #12
+  78:	e84c 2100 	strex	r1, r2, [ip]
+  7c:	2900      	cmp	r1, #0
+  7e:	d1f3      	bne.n	68 <UART_DMAReceiveCplt+0x68>
+  80:	2300      	movs	r3, #0
+  82:	6343      	str	r3, [r0, #52]	; 0x34
+  84:	6b03      	ldr	r3, [r0, #48]	; 0x30
+  86:	2b01      	cmp	r3, #1
+  88:	d103      	bne.n	92 <UART_DMAReceiveCplt+0x92>
+  8a:	8d81      	ldrh	r1, [r0, #44]	; 0x2c
+  8c:	f7ff fffe 	bl	0 <UART_DMAReceiveCplt>
+  90:	bd08      	pop	{r3, pc}
+  92:	f7ff fffe 	bl	0 <UART_DMAReceiveCplt>
+  96:	e7fb      	b.n	90 <UART_DMAReceiveCplt+0x90>
+
+Disassembly of section .text.UART_Receive_IT.part.0.isra.0:
+
+00000000 <UART_Receive_IT.part.0.isra.0>:
+   0:	b507      	push	{r0, r1, r2, lr}
+   2:	6881      	ldr	r1, [r0, #8]
+   4:	6a83      	ldr	r3, [r0, #40]	; 0x28
+   6:	f5b1 5f80 	cmp.w	r1, #4096	; 0x1000
+   a:	6802      	ldr	r2, [r0, #0]
+   c:	d13f      	bne.n	8e <UART_Receive_IT.part.0.isra.0+0x8e>
+   e:	6901      	ldr	r1, [r0, #16]
+  10:	2900      	cmp	r1, #0
+  12:	d13f      	bne.n	94 <UART_Receive_IT.part.0.isra.0+0x94>
+  14:	6852      	ldr	r2, [r2, #4]
+  16:	f3c2 0208 	ubfx	r2, r2, #0, #9
+  1a:	f823 2b02 	strh.w	r2, [r3], #2
+  1e:	6283      	str	r3, [r0, #40]	; 0x28
+  20:	8dc3      	ldrh	r3, [r0, #46]	; 0x2e
+  22:	3b01      	subs	r3, #1
+  24:	b29b      	uxth	r3, r3
+  26:	85c3      	strh	r3, [r0, #46]	; 0x2e
+  28:	2b00      	cmp	r3, #0
+  2a:	d12d      	bne.n	88 <UART_Receive_IT.part.0.isra.0+0x88>
+  2c:	6802      	ldr	r2, [r0, #0]
+  2e:	68d1      	ldr	r1, [r2, #12]
+  30:	f021 0120 	bic.w	r1, r1, #32
+  34:	60d1      	str	r1, [r2, #12]
+  36:	68d1      	ldr	r1, [r2, #12]
+  38:	f421 7180 	bic.w	r1, r1, #256	; 0x100
+  3c:	60d1      	str	r1, [r2, #12]
+  3e:	6951      	ldr	r1, [r2, #20]
+  40:	f021 0101 	bic.w	r1, r1, #1
+  44:	6151      	str	r1, [r2, #20]
+  46:	2220      	movs	r2, #32
+  48:	f880 2042 	strb.w	r2, [r0, #66]	; 0x42
+  4c:	6343      	str	r3, [r0, #52]	; 0x34
+  4e:	6b02      	ldr	r2, [r0, #48]	; 0x30
+  50:	2a01      	cmp	r2, #1
+  52:	6802      	ldr	r2, [r0, #0]
+  54:	d128      	bne.n	a8 <UART_Receive_IT.part.0.isra.0+0xa8>
+  56:	6303      	str	r3, [r0, #48]	; 0x30
+  58:	f102 030c 	add.w	r3, r2, #12
+  5c:	e853 3f00 	ldrex	r3, [r3]
+  60:	f023 0310 	bic.w	r3, r3, #16
+  64:	f102 0c0c 	add.w	ip, r2, #12
+  68:	e84c 3100 	strex	r1, r3, [ip]
+  6c:	2900      	cmp	r1, #0
+  6e:	d1f3      	bne.n	58 <UART_Receive_IT.part.0.isra.0+0x58>
+  70:	6813      	ldr	r3, [r2, #0]
+  72:	06db      	lsls	r3, r3, #27
+  74:	d505      	bpl.n	82 <UART_Receive_IT.part.0.isra.0+0x82>
+  76:	9101      	str	r1, [sp, #4]
+  78:	6813      	ldr	r3, [r2, #0]
+  7a:	9301      	str	r3, [sp, #4]
+  7c:	6853      	ldr	r3, [r2, #4]
+  7e:	9301      	str	r3, [sp, #4]
+  80:	9b01      	ldr	r3, [sp, #4]
+  82:	8d81      	ldrh	r1, [r0, #44]	; 0x2c
+  84:	f7ff fffe 	bl	0 <UART_Receive_IT.part.0.isra.0>
+  88:	b003      	add	sp, #12
+  8a:	f85d fb04 	ldr.w	pc, [sp], #4
+  8e:	b939      	cbnz	r1, a0 <UART_Receive_IT.part.0.isra.0+0xa0>
+  90:	6901      	ldr	r1, [r0, #16]
+  92:	b929      	cbnz	r1, a0 <UART_Receive_IT.part.0.isra.0+0xa0>
+  94:	6852      	ldr	r2, [r2, #4]
+  96:	b2d2      	uxtb	r2, r2
+  98:	701a      	strb	r2, [r3, #0]
+  9a:	6a83      	ldr	r3, [r0, #40]	; 0x28
+  9c:	3301      	adds	r3, #1
+  9e:	e7be      	b.n	1e <UART_Receive_IT.part.0.isra.0+0x1e>
+  a0:	6852      	ldr	r2, [r2, #4]
+  a2:	f002 027f 	and.w	r2, r2, #127	; 0x7f
+  a6:	e7f7      	b.n	98 <UART_Receive_IT.part.0.isra.0+0x98>
+  a8:	f7ff fffe 	bl	0 <UART_Receive_IT.part.0.isra.0>
+  ac:	e7ec      	b.n	88 <UART_Receive_IT.part.0.isra.0+0x88>
+
+Disassembly of section .text.HAL_UART_IRQHandler:
+
+00000000 <HAL_UART_IRQHandler>:
+   0:	6803      	ldr	r3, [r0, #0]
+   2:	b537      	push	{r0, r1, r2, r4, r5, lr}
+   4:	681a      	ldr	r2, [r3, #0]
+   6:	4604      	mov	r4, r0
+   8:	f012 0f0f 	tst.w	r2, #15
+   c:	68d9      	ldr	r1, [r3, #12]
+   e:	695d      	ldr	r5, [r3, #20]
+  10:	d10c      	bne.n	2c <HAL_UART_IRQHandler+0x2c>
+  12:	0695      	lsls	r5, r2, #26
+  14:	d570      	bpl.n	f8 <HAL_UART_IRQHandler+0xf8>
+  16:	068d      	lsls	r5, r1, #26
+  18:	d56e      	bpl.n	f8 <HAL_UART_IRQHandler+0xf8>
+  1a:	f890 3042 	ldrb.w	r3, [r0, #66]	; 0x42
+  1e:	2b22      	cmp	r3, #34	; 0x22
+  20:	d164      	bne.n	ec <HAL_UART_IRQHandler+0xec>
+  22:	b003      	add	sp, #12
+  24:	e8bd 4030 	ldmia.w	sp!, {r4, r5, lr}
+  28:	f7ff bffe 	b.w	0 <HAL_UART_IRQHandler>
+  2c:	f005 0001 	and.w	r0, r5, #1
+  30:	f401 7590 	and.w	r5, r1, #288	; 0x120
+  34:	4305      	orrs	r5, r0
+  36:	d05f      	beq.n	f8 <HAL_UART_IRQHandler+0xf8>
+  38:	07d5      	lsls	r5, r2, #31
+  3a:	d505      	bpl.n	48 <HAL_UART_IRQHandler+0x48>
+  3c:	05cb      	lsls	r3, r1, #23
+  3e:	bf42      	ittt	mi
+  40:	6c63      	ldrmi	r3, [r4, #68]	; 0x44
+  42:	f043 0301 	orrmi.w	r3, r3, #1
+  46:	6463      	strmi	r3, [r4, #68]	; 0x44
+  48:	0755      	lsls	r5, r2, #29
+  4a:	d504      	bpl.n	56 <HAL_UART_IRQHandler+0x56>
+  4c:	b118      	cbz	r0, 56 <HAL_UART_IRQHandler+0x56>
+  4e:	6c63      	ldr	r3, [r4, #68]	; 0x44
+  50:	f043 0302 	orr.w	r3, r3, #2
+  54:	6463      	str	r3, [r4, #68]	; 0x44
+  56:	0793      	lsls	r3, r2, #30
+  58:	d504      	bpl.n	64 <HAL_UART_IRQHandler+0x64>
+  5a:	b118      	cbz	r0, 64 <HAL_UART_IRQHandler+0x64>
+  5c:	6c63      	ldr	r3, [r4, #68]	; 0x44
+  5e:	f043 0304 	orr.w	r3, r3, #4
+  62:	6463      	str	r3, [r4, #68]	; 0x44
+  64:	0715      	lsls	r5, r2, #28
+  66:	d507      	bpl.n	78 <HAL_UART_IRQHandler+0x78>
+  68:	f001 0320 	and.w	r3, r1, #32
+  6c:	4303      	orrs	r3, r0
+  6e:	bf1e      	ittt	ne
+  70:	6c63      	ldrne	r3, [r4, #68]	; 0x44
+  72:	f043 0308 	orrne.w	r3, r3, #8
+  76:	6463      	strne	r3, [r4, #68]	; 0x44
+  78:	6c63      	ldr	r3, [r4, #68]	; 0x44
+  7a:	2b00      	cmp	r3, #0
+  7c:	d036      	beq.n	ec <HAL_UART_IRQHandler+0xec>
+  7e:	0690      	lsls	r0, r2, #26
+  80:	d508      	bpl.n	94 <HAL_UART_IRQHandler+0x94>
+  82:	068a      	lsls	r2, r1, #26
+  84:	d506      	bpl.n	94 <HAL_UART_IRQHandler+0x94>
+  86:	f894 3042 	ldrb.w	r3, [r4, #66]	; 0x42
+  8a:	2b22      	cmp	r3, #34	; 0x22
+  8c:	d102      	bne.n	94 <HAL_UART_IRQHandler+0x94>
+  8e:	4620      	mov	r0, r4
+  90:	f7ff fffe 	bl	0 <HAL_UART_IRQHandler>
+  94:	6823      	ldr	r3, [r4, #0]
+  96:	4620      	mov	r0, r4
+  98:	695b      	ldr	r3, [r3, #20]
+  9a:	6c65      	ldr	r5, [r4, #68]	; 0x44
+  9c:	f003 0340 	and.w	r3, r3, #64	; 0x40
+  a0:	f005 0508 	and.w	r5, r5, #8
+  a4:	431d      	orrs	r5, r3
+  a6:	d023      	beq.n	f0 <HAL_UART_IRQHandler+0xf0>
+  a8:	f7ff fffe 	bl	0 <HAL_UART_IRQHandler>
+  ac:	6822      	ldr	r2, [r4, #0]
+  ae:	6953      	ldr	r3, [r2, #20]
+  b0:	065b      	lsls	r3, r3, #25
+  b2:	d518      	bpl.n	e6 <HAL_UART_IRQHandler+0xe6>
+  b4:	f102 0314 	add.w	r3, r2, #20
+  b8:	e853 3f00 	ldrex	r3, [r3]
+  bc:	f023 0340 	bic.w	r3, r3, #64	; 0x40
+  c0:	f102 0014 	add.w	r0, r2, #20
+  c4:	e840 3100 	strex	r1, r3, [r0]
+  c8:	2900      	cmp	r1, #0
+  ca:	d1f3      	bne.n	b4 <HAL_UART_IRQHandler+0xb4>
+  cc:	6be0      	ldr	r0, [r4, #60]	; 0x3c
+  ce:	b150      	cbz	r0, e6 <HAL_UART_IRQHandler+0xe6>
+  d0:	4b73      	ldr	r3, [pc, #460]	; (2a0 <HAL_UART_IRQHandler+0x2a0>)
+  d2:	6343      	str	r3, [r0, #52]	; 0x34
+  d4:	f7ff fffe 	bl	0 <HAL_DMA_Abort_IT>
+  d8:	b140      	cbz	r0, ec <HAL_UART_IRQHandler+0xec>
+  da:	6be0      	ldr	r0, [r4, #60]	; 0x3c
+  dc:	6b43      	ldr	r3, [r0, #52]	; 0x34
+  de:	b003      	add	sp, #12
+  e0:	e8bd 4030 	ldmia.w	sp!, {r4, r5, lr}
+  e4:	4718      	bx	r3
+  e6:	4620      	mov	r0, r4
+  e8:	f7ff fffe 	bl	0 <HAL_UART_IRQHandler>
+  ec:	b003      	add	sp, #12
+  ee:	bd30      	pop	{r4, r5, pc}
+  f0:	f7ff fffe 	bl	0 <HAL_UART_IRQHandler>
+  f4:	6465      	str	r5, [r4, #68]	; 0x44
+  f6:	e7f9      	b.n	ec <HAL_UART_IRQHandler+0xec>
+  f8:	6b20      	ldr	r0, [r4, #48]	; 0x30
+  fa:	2801      	cmp	r0, #1
+  fc:	f040 8094 	bne.w	228 <HAL_UART_IRQHandler+0x228>
+ 100:	06d5      	lsls	r5, r2, #27
+ 102:	f140 8091 	bpl.w	228 <HAL_UART_IRQHandler+0x228>
+ 106:	06c8      	lsls	r0, r1, #27
+ 108:	f140 808e 	bpl.w	228 <HAL_UART_IRQHandler+0x228>
+ 10c:	2200      	movs	r2, #0
+ 10e:	9201      	str	r2, [sp, #4]
+ 110:	681a      	ldr	r2, [r3, #0]
+ 112:	9201      	str	r2, [sp, #4]
+ 114:	685a      	ldr	r2, [r3, #4]
+ 116:	9201      	str	r2, [sp, #4]
+ 118:	9a01      	ldr	r2, [sp, #4]
+ 11a:	695a      	ldr	r2, [r3, #20]
+ 11c:	0655      	lsls	r5, r2, #25
+ 11e:	d54d      	bpl.n	1bc <HAL_UART_IRQHandler+0x1bc>
+ 120:	6be1      	ldr	r1, [r4, #60]	; 0x3c
+ 122:	680a      	ldr	r2, [r1, #0]
+ 124:	6852      	ldr	r2, [r2, #4]
+ 126:	b292      	uxth	r2, r2
+ 128:	2a00      	cmp	r2, #0
+ 12a:	d0df      	beq.n	ec <HAL_UART_IRQHandler+0xec>
+ 12c:	8da0      	ldrh	r0, [r4, #44]	; 0x2c
+ 12e:	4290      	cmp	r0, r2
+ 130:	d9dc      	bls.n	ec <HAL_UART_IRQHandler+0xec>
+ 132:	85e2      	strh	r2, [r4, #46]	; 0x2e
+ 134:	698a      	ldr	r2, [r1, #24]
+ 136:	2a20      	cmp	r2, #32
+ 138:	d036      	beq.n	1a8 <HAL_UART_IRQHandler+0x1a8>
+ 13a:	f103 020c 	add.w	r2, r3, #12
+ 13e:	e852 2f00 	ldrex	r2, [r2]
+ 142:	f422 7280 	bic.w	r2, r2, #256	; 0x100
+ 146:	f103 000c 	add.w	r0, r3, #12
+ 14a:	e840 2100 	strex	r1, r2, [r0]
+ 14e:	2900      	cmp	r1, #0
+ 150:	d1f3      	bne.n	13a <HAL_UART_IRQHandler+0x13a>
+ 152:	f103 0214 	add.w	r2, r3, #20
+ 156:	e852 2f00 	ldrex	r2, [r2]
+ 15a:	f022 0201 	bic.w	r2, r2, #1
+ 15e:	f103 0014 	add.w	r0, r3, #20
+ 162:	e840 2100 	strex	r1, r2, [r0]
+ 166:	2900      	cmp	r1, #0
+ 168:	d1f3      	bne.n	152 <HAL_UART_IRQHandler+0x152>
+ 16a:	f103 0214 	add.w	r2, r3, #20
+ 16e:	e852 2f00 	ldrex	r2, [r2]
+ 172:	f022 0240 	bic.w	r2, r2, #64	; 0x40
+ 176:	f103 0014 	add.w	r0, r3, #20
+ 17a:	e840 2100 	strex	r1, r2, [r0]
+ 17e:	2900      	cmp	r1, #0
+ 180:	d1f3      	bne.n	16a <HAL_UART_IRQHandler+0x16a>
+ 182:	2220      	movs	r2, #32
+ 184:	f884 2042 	strb.w	r2, [r4, #66]	; 0x42
+ 188:	6321      	str	r1, [r4, #48]	; 0x30
+ 18a:	f103 020c 	add.w	r2, r3, #12
+ 18e:	e852 2f00 	ldrex	r2, [r2]
+ 192:	f022 0210 	bic.w	r2, r2, #16
+ 196:	f103 000c 	add.w	r0, r3, #12
+ 19a:	e840 2100 	strex	r1, r2, [r0]
+ 19e:	2900      	cmp	r1, #0
+ 1a0:	d1f3      	bne.n	18a <HAL_UART_IRQHandler+0x18a>
+ 1a2:	6be0      	ldr	r0, [r4, #60]	; 0x3c
+ 1a4:	f7ff fffe 	bl	0 <HAL_DMA_Abort>
+ 1a8:	2302      	movs	r3, #2
+ 1aa:	6363      	str	r3, [r4, #52]	; 0x34
+ 1ac:	8de3      	ldrh	r3, [r4, #46]	; 0x2e
+ 1ae:	8da1      	ldrh	r1, [r4, #44]	; 0x2c
+ 1b0:	1ac9      	subs	r1, r1, r3
+ 1b2:	b289      	uxth	r1, r1
+ 1b4:	4620      	mov	r0, r4
+ 1b6:	f7ff fffe 	bl	0 <HAL_UART_IRQHandler>
+ 1ba:	e797      	b.n	ec <HAL_UART_IRQHandler+0xec>
+ 1bc:	8de1      	ldrh	r1, [r4, #46]	; 0x2e
+ 1be:	b28a      	uxth	r2, r1
+ 1c0:	8de1      	ldrh	r1, [r4, #46]	; 0x2e
+ 1c2:	b289      	uxth	r1, r1
+ 1c4:	2900      	cmp	r1, #0
+ 1c6:	d091      	beq.n	ec <HAL_UART_IRQHandler+0xec>
+ 1c8:	8da1      	ldrh	r1, [r4, #44]	; 0x2c
+ 1ca:	1a89      	subs	r1, r1, r2
+ 1cc:	b289      	uxth	r1, r1
+ 1ce:	2900      	cmp	r1, #0
+ 1d0:	d08c      	beq.n	ec <HAL_UART_IRQHandler+0xec>
+ 1d2:	f103 020c 	add.w	r2, r3, #12
+ 1d6:	e852 2f00 	ldrex	r2, [r2]
+ 1da:	f422 7290 	bic.w	r2, r2, #288	; 0x120
+ 1de:	f103 050c 	add.w	r5, r3, #12
+ 1e2:	e845 2000 	strex	r0, r2, [r5]
+ 1e6:	2800      	cmp	r0, #0
+ 1e8:	d1f3      	bne.n	1d2 <HAL_UART_IRQHandler+0x1d2>
+ 1ea:	f103 0214 	add.w	r2, r3, #20
+ 1ee:	e852 2f00 	ldrex	r2, [r2]
+ 1f2:	f022 0201 	bic.w	r2, r2, #1
+ 1f6:	f103 0514 	add.w	r5, r3, #20
+ 1fa:	e845 2000 	strex	r0, r2, [r5]
+ 1fe:	2800      	cmp	r0, #0
+ 200:	d1f3      	bne.n	1ea <HAL_UART_IRQHandler+0x1ea>
+ 202:	2220      	movs	r2, #32
+ 204:	f884 2042 	strb.w	r2, [r4, #66]	; 0x42
+ 208:	6320      	str	r0, [r4, #48]	; 0x30
+ 20a:	f103 020c 	add.w	r2, r3, #12
+ 20e:	e852 2f00 	ldrex	r2, [r2]
+ 212:	f022 0210 	bic.w	r2, r2, #16
+ 216:	f103 050c 	add.w	r5, r3, #12
+ 21a:	e845 2000 	strex	r0, r2, [r5]
+ 21e:	2800      	cmp	r0, #0
+ 220:	d1f3      	bne.n	20a <HAL_UART_IRQHandler+0x20a>
+ 222:	2302      	movs	r3, #2
+ 224:	6363      	str	r3, [r4, #52]	; 0x34
+ 226:	e7c5      	b.n	1b4 <HAL_UART_IRQHandler+0x1b4>
+ 228:	0610      	lsls	r0, r2, #24
+ 22a:	d528      	bpl.n	27e <HAL_UART_IRQHandler+0x27e>
+ 22c:	060d      	lsls	r5, r1, #24
+ 22e:	d526      	bpl.n	27e <HAL_UART_IRQHandler+0x27e>
+ 230:	f894 2041 	ldrb.w	r2, [r4, #65]	; 0x41
+ 234:	2a21      	cmp	r2, #33	; 0x21
+ 236:	f47f af59 	bne.w	ec <HAL_UART_IRQHandler+0xec>
+ 23a:	68a1      	ldr	r1, [r4, #8]
+ 23c:	6a22      	ldr	r2, [r4, #32]
+ 23e:	f5b1 5f80 	cmp.w	r1, #4096	; 0x1000
+ 242:	d117      	bne.n	274 <HAL_UART_IRQHandler+0x274>
+ 244:	6921      	ldr	r1, [r4, #16]
+ 246:	b9a9      	cbnz	r1, 274 <HAL_UART_IRQHandler+0x274>
+ 248:	f832 1b02 	ldrh.w	r1, [r2], #2
+ 24c:	f3c1 0108 	ubfx	r1, r1, #0, #9
+ 250:	6059      	str	r1, [r3, #4]
+ 252:	6222      	str	r2, [r4, #32]
+ 254:	8ce2      	ldrh	r2, [r4, #38]	; 0x26
+ 256:	3a01      	subs	r2, #1
+ 258:	b292      	uxth	r2, r2
+ 25a:	84e2      	strh	r2, [r4, #38]	; 0x26
+ 25c:	2a00      	cmp	r2, #0
+ 25e:	f47f af45 	bne.w	ec <HAL_UART_IRQHandler+0xec>
+ 262:	68da      	ldr	r2, [r3, #12]
+ 264:	f022 0280 	bic.w	r2, r2, #128	; 0x80
+ 268:	60da      	str	r2, [r3, #12]
+ 26a:	68da      	ldr	r2, [r3, #12]
+ 26c:	f042 0240 	orr.w	r2, r2, #64	; 0x40
+ 270:	60da      	str	r2, [r3, #12]
+ 272:	e73b      	b.n	ec <HAL_UART_IRQHandler+0xec>
+ 274:	1c51      	adds	r1, r2, #1
+ 276:	6221      	str	r1, [r4, #32]
+ 278:	7812      	ldrb	r2, [r2, #0]
+ 27a:	605a      	str	r2, [r3, #4]
+ 27c:	e7ea      	b.n	254 <HAL_UART_IRQHandler+0x254>
+ 27e:	0650      	lsls	r0, r2, #25
+ 280:	f57f af34 	bpl.w	ec <HAL_UART_IRQHandler+0xec>
+ 284:	064a      	lsls	r2, r1, #25
+ 286:	f57f af31 	bpl.w	ec <HAL_UART_IRQHandler+0xec>
+ 28a:	68da      	ldr	r2, [r3, #12]
+ 28c:	4620      	mov	r0, r4
+ 28e:	f022 0240 	bic.w	r2, r2, #64	; 0x40
+ 292:	60da      	str	r2, [r3, #12]
+ 294:	2320      	movs	r3, #32
+ 296:	f884 3041 	strb.w	r3, [r4, #65]	; 0x41
+ 29a:	f7ff fffe 	bl	0 <HAL_UART_IRQHandler>
+ 29e:	e725      	b.n	ec <HAL_UART_IRQHandler+0xec>
+ 2a0:	00000000 	.word	0x00000000
+
+Disassembly of section .text.HAL_LIN_SendBreak:
+
+00000000 <HAL_LIN_SendBreak>:
+   0:	f890 3040 	ldrb.w	r3, [r0, #64]	; 0x40
+   4:	2b01      	cmp	r3, #1
+   6:	d018      	beq.n	3a <HAL_LIN_SendBreak+0x3a>
+   8:	2301      	movs	r3, #1
+   a:	f880 3040 	strb.w	r3, [r0, #64]	; 0x40
+   e:	2324      	movs	r3, #36	; 0x24
+  10:	f880 3041 	strb.w	r3, [r0, #65]	; 0x41
+  14:	6801      	ldr	r1, [r0, #0]
+  16:	f101 030c 	add.w	r3, r1, #12
+  1a:	e853 2f00 	ldrex	r2, [r3]
+  1e:	4619      	mov	r1, r3
+  20:	f042 0201 	orr.w	r2, r2, #1
+  24:	e841 2300 	strex	r3, r2, [r1]
+  28:	2b00      	cmp	r3, #0
+  2a:	d1f3      	bne.n	14 <HAL_LIN_SendBreak+0x14>
+  2c:	2220      	movs	r2, #32
+  2e:	f880 3040 	strb.w	r3, [r0, #64]	; 0x40
+  32:	f880 2041 	strb.w	r2, [r0, #65]	; 0x41
+  36:	4618      	mov	r0, r3
+  38:	4770      	bx	lr
+  3a:	2002      	movs	r0, #2
+  3c:	4770      	bx	lr
+
+Disassembly of section .text.HAL_MultiProcessor_EnterMuteMode:
+
+00000000 <HAL_MultiProcessor_EnterMuteMode>:
+   0:	f890 3040 	ldrb.w	r3, [r0, #64]	; 0x40
+   4:	2b01      	cmp	r3, #1
+   6:	d019      	beq.n	3c <HAL_MultiProcessor_EnterMuteMode+0x3c>
+   8:	2301      	movs	r3, #1
+   a:	f880 3040 	strb.w	r3, [r0, #64]	; 0x40
+   e:	2324      	movs	r3, #36	; 0x24
+  10:	f880 3041 	strb.w	r3, [r0, #65]	; 0x41
+  14:	6801      	ldr	r1, [r0, #0]
+  16:	f101 030c 	add.w	r3, r1, #12
+  1a:	e853 2f00 	ldrex	r2, [r3]
+  1e:	4619      	mov	r1, r3
+  20:	f042 0202 	orr.w	r2, r2, #2
+  24:	e841 2300 	strex	r3, r2, [r1]
+  28:	2b00      	cmp	r3, #0
+  2a:	d1f3      	bne.n	14 <HAL_MultiProcessor_EnterMuteMode+0x14>
+  2c:	2220      	movs	r2, #32
+  2e:	f880 3040 	strb.w	r3, [r0, #64]	; 0x40
+  32:	f880 2041 	strb.w	r2, [r0, #65]	; 0x41
+  36:	6343      	str	r3, [r0, #52]	; 0x34
+  38:	4618      	mov	r0, r3
+  3a:	4770      	bx	lr
+  3c:	2002      	movs	r0, #2
+  3e:	4770      	bx	lr
+
+Disassembly of section .text.HAL_MultiProcessor_ExitMuteMode:
+
+00000000 <HAL_MultiProcessor_ExitMuteMode>:
+   0:	f890 3040 	ldrb.w	r3, [r0, #64]	; 0x40
+   4:	2b01      	cmp	r3, #1
+   6:	d019      	beq.n	3c <HAL_MultiProcessor_ExitMuteMode+0x3c>
+   8:	2301      	movs	r3, #1
+   a:	f880 3040 	strb.w	r3, [r0, #64]	; 0x40
+   e:	2324      	movs	r3, #36	; 0x24
+  10:	f880 3041 	strb.w	r3, [r0, #65]	; 0x41
+  14:	6801      	ldr	r1, [r0, #0]
+  16:	f101 030c 	add.w	r3, r1, #12
+  1a:	e853 2f00 	ldrex	r2, [r3]
+  1e:	4619      	mov	r1, r3
+  20:	f022 0202 	bic.w	r2, r2, #2
+  24:	e841 2300 	strex	r3, r2, [r1]
+  28:	2b00      	cmp	r3, #0
+  2a:	d1f3      	bne.n	14 <HAL_MultiProcessor_ExitMuteMode+0x14>
+  2c:	2220      	movs	r2, #32
+  2e:	f880 3040 	strb.w	r3, [r0, #64]	; 0x40
+  32:	f880 2041 	strb.w	r2, [r0, #65]	; 0x41
+  36:	6343      	str	r3, [r0, #52]	; 0x34
+  38:	4618      	mov	r0, r3
+  3a:	4770      	bx	lr
+  3c:	2002      	movs	r0, #2
+  3e:	4770      	bx	lr
+
+Disassembly of section .text.HAL_HalfDuplex_EnableTransmitter:
+
+00000000 <HAL_HalfDuplex_EnableTransmitter>:
+   0:	f890 3040 	ldrb.w	r3, [r0, #64]	; 0x40
+   4:	2b01      	cmp	r3, #1
+   6:	d011      	beq.n	2c <HAL_HalfDuplex_EnableTransmitter+0x2c>
+   8:	2324      	movs	r3, #36	; 0x24
+   a:	6802      	ldr	r2, [r0, #0]
+   c:	f880 3041 	strb.w	r3, [r0, #65]	; 0x41
+  10:	68d3      	ldr	r3, [r2, #12]
+  12:	f023 030c 	bic.w	r3, r3, #12
+  16:	f043 0308 	orr.w	r3, r3, #8
+  1a:	60d3      	str	r3, [r2, #12]
+  1c:	2320      	movs	r3, #32
+  1e:	f880 3041 	strb.w	r3, [r0, #65]	; 0x41
+  22:	2300      	movs	r3, #0
+  24:	f880 3040 	strb.w	r3, [r0, #64]	; 0x40
+  28:	4618      	mov	r0, r3
+  2a:	4770      	bx	lr
+  2c:	2002      	movs	r0, #2
+  2e:	4770      	bx	lr
+
+Disassembly of section .text.HAL_HalfDuplex_EnableReceiver:
+
+00000000 <HAL_HalfDuplex_EnableReceiver>:
+   0:	f890 3040 	ldrb.w	r3, [r0, #64]	; 0x40
+   4:	2b01      	cmp	r3, #1
+   6:	d011      	beq.n	2c <HAL_HalfDuplex_EnableReceiver+0x2c>
+   8:	2324      	movs	r3, #36	; 0x24
+   a:	6802      	ldr	r2, [r0, #0]
+   c:	f880 3041 	strb.w	r3, [r0, #65]	; 0x41
+  10:	68d3      	ldr	r3, [r2, #12]
+  12:	f023 030c 	bic.w	r3, r3, #12
+  16:	f043 0304 	orr.w	r3, r3, #4
+  1a:	60d3      	str	r3, [r2, #12]
+  1c:	2320      	movs	r3, #32
+  1e:	f880 3041 	strb.w	r3, [r0, #65]	; 0x41
+  22:	2300      	movs	r3, #0
+  24:	f880 3040 	strb.w	r3, [r0, #64]	; 0x40
+  28:	4618      	mov	r0, r3
+  2a:	4770      	bx	lr
+  2c:	2002      	movs	r0, #2
+  2e:	4770      	bx	lr
+
+Disassembly of section .text.HAL_UART_GetState:
+
+00000000 <HAL_UART_GetState>:
+   0:	f890 2041 	ldrb.w	r2, [r0, #65]	; 0x41
+   4:	f890 0042 	ldrb.w	r0, [r0, #66]	; 0x42
+   8:	4310      	orrs	r0, r2
+   a:	4770      	bx	lr
+
+Disassembly of section .text.HAL_UART_GetError:
+
+00000000 <HAL_UART_GetError>:
+   0:	6c40      	ldr	r0, [r0, #68]	; 0x44
+   2:	4770      	bx	lr
+
+Disassembly of section .text.UART_Start_Receive_IT:
+
+00000000 <UART_Start_Receive_IT>:
+   0:	2300      	movs	r3, #0
+   2:	85c2      	strh	r2, [r0, #46]	; 0x2e
+   4:	6443      	str	r3, [r0, #68]	; 0x44
+   6:	2322      	movs	r3, #34	; 0x22
+   8:	8582      	strh	r2, [r0, #44]	; 0x2c
+   a:	6902      	ldr	r2, [r0, #16]
+   c:	f880 3042 	strb.w	r3, [r0, #66]	; 0x42
+  10:	6281      	str	r1, [r0, #40]	; 0x28
+  12:	6803      	ldr	r3, [r0, #0]
+  14:	b11a      	cbz	r2, 1e <UART_Start_Receive_IT+0x1e>
+  16:	68da      	ldr	r2, [r3, #12]
+  18:	f442 7280 	orr.w	r2, r2, #256	; 0x100
+  1c:	60da      	str	r2, [r3, #12]
+  1e:	695a      	ldr	r2, [r3, #20]
+  20:	2000      	movs	r0, #0
+  22:	f042 0201 	orr.w	r2, r2, #1
+  26:	615a      	str	r2, [r3, #20]
+  28:	68da      	ldr	r2, [r3, #12]
+  2a:	f042 0220 	orr.w	r2, r2, #32
+  2e:	60da      	str	r2, [r3, #12]
+  30:	4770      	bx	lr
+
+Disassembly of section .text.HAL_UART_Receive_IT:
+
+00000000 <HAL_UART_Receive_IT>:
+   0:	b470      	push	{r4, r5, r6}
+   2:	f890 6042 	ldrb.w	r6, [r0, #66]	; 0x42
+   6:	2e20      	cmp	r6, #32
+   8:	d106      	bne.n	18 <HAL_UART_Receive_IT+0x18>
+   a:	b141      	cbz	r1, 1e <HAL_UART_Receive_IT+0x1e>
+   c:	b13a      	cbz	r2, 1e <HAL_UART_Receive_IT+0x1e>
+   e:	2400      	movs	r4, #0
+  10:	6304      	str	r4, [r0, #48]	; 0x30
+  12:	bc70      	pop	{r4, r5, r6}
+  14:	f7ff bffe 	b.w	0 <HAL_UART_Receive_IT>
+  18:	2002      	movs	r0, #2
+  1a:	bc70      	pop	{r4, r5, r6}
+  1c:	4770      	bx	lr
+  1e:	2001      	movs	r0, #1
+  20:	e7fb      	b.n	1a <HAL_UART_Receive_IT+0x1a>
+
+Disassembly of section .text.HAL_UARTEx_ReceiveToIdle_IT:
+
+00000000 <HAL_UARTEx_ReceiveToIdle_IT>:
+   0:	b573      	push	{r0, r1, r4, r5, r6, lr}
+   2:	f890 6042 	ldrb.w	r6, [r0, #66]	; 0x42
+   6:	4604      	mov	r4, r0
+   8:	2e20      	cmp	r6, #32
+   a:	d124      	bne.n	56 <HAL_UARTEx_ReceiveToIdle_IT+0x56>
+   c:	b911      	cbnz	r1, 14 <HAL_UARTEx_ReceiveToIdle_IT+0x14>
+   e:	2001      	movs	r0, #1
+  10:	b002      	add	sp, #8
+  12:	bd70      	pop	{r4, r5, r6, pc}
+  14:	2a00      	cmp	r2, #0
+  16:	d0fa      	beq.n	e <HAL_UARTEx_ReceiveToIdle_IT+0xe>
+  18:	2301      	movs	r3, #1
+  1a:	6303      	str	r3, [r0, #48]	; 0x30
+  1c:	2300      	movs	r3, #0
+  1e:	6343      	str	r3, [r0, #52]	; 0x34
+  20:	f7ff fffe 	bl	0 <HAL_UARTEx_ReceiveToIdle_IT>
+  24:	2800      	cmp	r0, #0
+  26:	d1f3      	bne.n	10 <HAL_UARTEx_ReceiveToIdle_IT+0x10>
+  28:	6b23      	ldr	r3, [r4, #48]	; 0x30
+  2a:	2b01      	cmp	r3, #1
+  2c:	d1ef      	bne.n	e <HAL_UARTEx_ReceiveToIdle_IT+0xe>
+  2e:	6822      	ldr	r2, [r4, #0]
+  30:	9001      	str	r0, [sp, #4]
+  32:	6813      	ldr	r3, [r2, #0]
+  34:	9301      	str	r3, [sp, #4]
+  36:	6853      	ldr	r3, [r2, #4]
+  38:	9301      	str	r3, [sp, #4]
+  3a:	9b01      	ldr	r3, [sp, #4]
+  3c:	f102 030c 	add.w	r3, r2, #12
+  40:	e853 3f00 	ldrex	r3, [r3]
+  44:	f043 0310 	orr.w	r3, r3, #16
+  48:	f102 040c 	add.w	r4, r2, #12
+  4c:	e844 3100 	strex	r1, r3, [r4]
+  50:	2900      	cmp	r1, #0
+  52:	d1f3      	bne.n	3c <HAL_UARTEx_ReceiveToIdle_IT+0x3c>
+  54:	e7dc      	b.n	10 <HAL_UARTEx_ReceiveToIdle_IT+0x10>
+  56:	2002      	movs	r0, #2
+  58:	e7da      	b.n	10 <HAL_UARTEx_ReceiveToIdle_IT+0x10>
+
+Disassembly of section .text.UART_Start_Receive_DMA:
+
+00000000 <UART_Start_Receive_DMA>:
+   0:	b573      	push	{r0, r1, r4, r5, r6, lr}
+   2:	4613      	mov	r3, r2
+   4:	8582      	strh	r2, [r0, #44]	; 0x2c
+   6:	2500      	movs	r5, #0
+   8:	2222      	movs	r2, #34	; 0x22
+   a:	4604      	mov	r4, r0
+   c:	6281      	str	r1, [r0, #40]	; 0x28
+   e:	6445      	str	r5, [r0, #68]	; 0x44
+  10:	f880 2042 	strb.w	r2, [r0, #66]	; 0x42
+  14:	6bc0      	ldr	r0, [r0, #60]	; 0x3c
+  16:	4a1d      	ldr	r2, [pc, #116]	; (8c <UART_Start_Receive_DMA+0x8c>)
+  18:	6826      	ldr	r6, [r4, #0]
+  1a:	6282      	str	r2, [r0, #40]	; 0x28
+  1c:	4a1c      	ldr	r2, [pc, #112]	; (90 <UART_Start_Receive_DMA+0x90>)
+  1e:	62c2      	str	r2, [r0, #44]	; 0x2c
+  20:	4a1c      	ldr	r2, [pc, #112]	; (94 <UART_Start_Receive_DMA+0x94>)
+  22:	e9c0 250c 	strd	r2, r5, [r0, #48]	; 0x30
+  26:	460a      	mov	r2, r1
+  28:	1d31      	adds	r1, r6, #4
+  2a:	f7ff fffe 	bl	0 <HAL_DMA_Start_IT>
+  2e:	6823      	ldr	r3, [r4, #0]
+  30:	9501      	str	r5, [sp, #4]
+  32:	681a      	ldr	r2, [r3, #0]
+  34:	9201      	str	r2, [sp, #4]
+  36:	685a      	ldr	r2, [r3, #4]
+  38:	9201      	str	r2, [sp, #4]
+  3a:	9a01      	ldr	r2, [sp, #4]
+  3c:	6922      	ldr	r2, [r4, #16]
+  3e:	b15a      	cbz	r2, 58 <UART_Start_Receive_DMA+0x58>
+  40:	f103 020c 	add.w	r2, r3, #12
+  44:	e852 2f00 	ldrex	r2, [r2]
+  48:	f442 7280 	orr.w	r2, r2, #256	; 0x100
+  4c:	f103 000c 	add.w	r0, r3, #12
+  50:	e840 2100 	strex	r1, r2, [r0]
+  54:	2900      	cmp	r1, #0
+  56:	d1f3      	bne.n	40 <UART_Start_Receive_DMA+0x40>
+  58:	f103 0214 	add.w	r2, r3, #20
+  5c:	e852 2f00 	ldrex	r2, [r2]
+  60:	f042 0201 	orr.w	r2, r2, #1
+  64:	f103 0014 	add.w	r0, r3, #20
+  68:	e840 2100 	strex	r1, r2, [r0]
+  6c:	2900      	cmp	r1, #0
+  6e:	d1f3      	bne.n	58 <UART_Start_Receive_DMA+0x58>
+  70:	f103 0214 	add.w	r2, r3, #20
+  74:	e852 2f00 	ldrex	r2, [r2]
+  78:	f042 0240 	orr.w	r2, r2, #64	; 0x40
+  7c:	f103 0114 	add.w	r1, r3, #20
+  80:	e841 2000 	strex	r0, r2, [r1]
+  84:	2800      	cmp	r0, #0
+  86:	d1f3      	bne.n	70 <UART_Start_Receive_DMA+0x70>
+  88:	b002      	add	sp, #8
+  8a:	bd70      	pop	{r4, r5, r6, pc}
+	...
+
+Disassembly of section .text.HAL_UART_Receive_DMA:
+
+00000000 <HAL_UART_Receive_DMA>:
+   0:	b470      	push	{r4, r5, r6}
+   2:	f890 6042 	ldrb.w	r6, [r0, #66]	; 0x42
+   6:	2e20      	cmp	r6, #32
+   8:	d106      	bne.n	18 <HAL_UART_Receive_DMA+0x18>
+   a:	b141      	cbz	r1, 1e <HAL_UART_Receive_DMA+0x1e>
+   c:	b13a      	cbz	r2, 1e <HAL_UART_Receive_DMA+0x1e>
+   e:	2400      	movs	r4, #0
+  10:	6304      	str	r4, [r0, #48]	; 0x30
+  12:	bc70      	pop	{r4, r5, r6}
+  14:	f7ff bffe 	b.w	0 <HAL_UART_Receive_DMA>
+  18:	2002      	movs	r0, #2
+  1a:	bc70      	pop	{r4, r5, r6}
+  1c:	4770      	bx	lr
+  1e:	2001      	movs	r0, #1
+  20:	e7fb      	b.n	1a <HAL_UART_Receive_DMA+0x1a>
+
+Disassembly of section .text.HAL_UARTEx_ReceiveToIdle_DMA:
+
+00000000 <HAL_UARTEx_ReceiveToIdle_DMA>:
+   0:	b573      	push	{r0, r1, r4, r5, r6, lr}
+   2:	f890 6042 	ldrb.w	r6, [r0, #66]	; 0x42
+   6:	4604      	mov	r4, r0
+   8:	2e20      	cmp	r6, #32
+   a:	d124      	bne.n	56 <HAL_UARTEx_ReceiveToIdle_DMA+0x56>
+   c:	b911      	cbnz	r1, 14 <HAL_UARTEx_ReceiveToIdle_DMA+0x14>
+   e:	2001      	movs	r0, #1
+  10:	b002      	add	sp, #8
+  12:	bd70      	pop	{r4, r5, r6, pc}
+  14:	2a00      	cmp	r2, #0
+  16:	d0fa      	beq.n	e <HAL_UARTEx_ReceiveToIdle_DMA+0xe>
+  18:	2301      	movs	r3, #1
+  1a:	6303      	str	r3, [r0, #48]	; 0x30
+  1c:	2300      	movs	r3, #0
+  1e:	6343      	str	r3, [r0, #52]	; 0x34
+  20:	f7ff fffe 	bl	0 <HAL_UARTEx_ReceiveToIdle_DMA>
+  24:	2800      	cmp	r0, #0
+  26:	d1f3      	bne.n	10 <HAL_UARTEx_ReceiveToIdle_DMA+0x10>
+  28:	6b23      	ldr	r3, [r4, #48]	; 0x30
+  2a:	2b01      	cmp	r3, #1
+  2c:	d1ef      	bne.n	e <HAL_UARTEx_ReceiveToIdle_DMA+0xe>
+  2e:	6822      	ldr	r2, [r4, #0]
+  30:	9001      	str	r0, [sp, #4]
+  32:	6813      	ldr	r3, [r2, #0]
+  34:	9301      	str	r3, [sp, #4]
+  36:	6853      	ldr	r3, [r2, #4]
+  38:	9301      	str	r3, [sp, #4]
+  3a:	9b01      	ldr	r3, [sp, #4]
+  3c:	f102 030c 	add.w	r3, r2, #12
+  40:	e853 3f00 	ldrex	r3, [r3]
+  44:	f043 0310 	orr.w	r3, r3, #16
+  48:	f102 040c 	add.w	r4, r2, #12
+  4c:	e844 3100 	strex	r1, r3, [r4]
+  50:	2900      	cmp	r1, #0
+  52:	d1f3      	bne.n	3c <HAL_UARTEx_ReceiveToIdle_DMA+0x3c>
+  54:	e7dc      	b.n	10 <HAL_UARTEx_ReceiveToIdle_DMA+0x10>
+  56:	2002      	movs	r0, #2
+  58:	e7da      	b.n	10 <HAL_UARTEx_ReceiveToIdle_DMA+0x10>

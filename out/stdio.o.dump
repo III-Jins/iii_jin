@@ -1,0 +1,132 @@
+
+out/stdio.o:     file format elf32-littlearm
+
+
+Disassembly of section .text.putstr:
+
+00000000 <putstr>:
+   0:	b538      	push	{r3, r4, r5, lr}
+   2:	4605      	mov	r5, r0
+   4:	2400      	movs	r4, #0
+   6:	5d28      	ldrb	r0, [r5, r4]
+   8:	b908      	cbnz	r0, e <putstr+0xe>
+   a:	4620      	mov	r0, r4
+   c:	bd38      	pop	{r3, r4, r5, pc}
+   e:	f7ff fffe 	bl	0 <Hal_uart_put_char>
+  12:	3401      	adds	r4, #1
+  14:	e7f7      	b.n	6 <putstr+0x6>
+
+Disassembly of section .text.utoa:
+
+00000000 <utoa>:
+   0:	b5f0      	push	{r4, r5, r6, r7, lr}
+   2:	b085      	sub	sp, #20
+   4:	ae01      	add	r6, sp, #4
+   6:	4603      	mov	r3, r0
+   8:	2500      	movs	r5, #0
+   a:	4634      	mov	r4, r6
+   c:	fbb1 f7f2 	udiv	r7, r1, r2
+  10:	fb02 1017 	mls	r0, r2, r7, r1
+  14:	2809      	cmp	r0, #9
+  16:	bf88      	it	hi
+  18:	3027      	addhi	r0, #39	; 0x27
+  1a:	3030      	adds	r0, #48	; 0x30
+  1c:	428a      	cmp	r2, r1
+  1e:	f806 0b01 	strb.w	r0, [r6], #1
+  22:	f105 0001 	add.w	r0, r5, #1
+  26:	d90a      	bls.n	3e <utoa+0x3e>
+  28:	1e59      	subs	r1, r3, #1
+  2a:	1962      	adds	r2, r4, r5
+  2c:	442b      	add	r3, r5
+  2e:	f812 4901 	ldrb.w	r4, [r2], #-1
+  32:	f801 4f01 	strb.w	r4, [r1, #1]!
+  36:	4299      	cmp	r1, r3
+  38:	d1f9      	bne.n	2e <utoa+0x2e>
+  3a:	b005      	add	sp, #20
+  3c:	bdf0      	pop	{r4, r5, r6, r7, pc}
+  3e:	4605      	mov	r5, r0
+  40:	4639      	mov	r1, r7
+  42:	e7e3      	b.n	c <utoa+0xc>
+
+Disassembly of section .text.vsprintf:
+
+00000000 <vsprintf>:
+   0:	e92d 43f8 	stmdb	sp!, {r3, r4, r5, r6, r7, r8, r9, lr}
+   4:	f04f 0900 	mov.w	r9, #0
+   8:	4606      	mov	r6, r0
+   a:	460f      	mov	r7, r1
+   c:	464d      	mov	r5, r9
+   e:	f8df 8084 	ldr.w	r8, [pc, #132]	; 94 <vsprintf+0x94>
+  12:	f817 3009 	ldrb.w	r3, [r7, r9]
+  16:	b94b      	cbnz	r3, 2c <vsprintf+0x2c>
+  18:	f5b5 6f80 	cmp.w	r5, #1024	; 0x400
+  1c:	bf24      	itt	cs
+  1e:	461d      	movcs	r5, r3
+  20:	7033      	strbcs	r3, [r6, #0]
+  22:	4628      	mov	r0, r5
+  24:	bf38      	it	cc
+  26:	5573      	strbcc	r3, [r6, r5]
+  28:	e8bd 83f8 	ldmia.w	sp!, {r3, r4, r5, r6, r7, r8, r9, pc}
+  2c:	2b25      	cmp	r3, #37	; 0x25
+  2e:	d114      	bne.n	5a <vsprintf+0x5a>
+  30:	f109 0901 	add.w	r9, r9, #1
+  34:	f817 3009 	ldrb.w	r3, [r7, r9]
+  38:	2b75      	cmp	r3, #117	; 0x75
+  3a:	d020      	beq.n	7e <vsprintf+0x7e>
+  3c:	d806      	bhi.n	4c <vsprintf+0x4c>
+  3e:	2b63      	cmp	r3, #99	; 0x63
+  40:	d009      	beq.n	56 <vsprintf+0x56>
+  42:	2b73      	cmp	r3, #115	; 0x73
+  44:	d00c      	beq.n	60 <vsprintf+0x60>
+  46:	f109 0901 	add.w	r9, r9, #1
+  4a:	e7e2      	b.n	12 <vsprintf+0x12>
+  4c:	2b78      	cmp	r3, #120	; 0x78
+  4e:	d1fa      	bne.n	46 <vsprintf+0x46>
+  50:	4614      	mov	r4, r2
+  52:	2210      	movs	r2, #16
+  54:	e015      	b.n	82 <vsprintf+0x82>
+  56:	f852 3b04 	ldr.w	r3, [r2], #4
+  5a:	5573      	strb	r3, [r6, r5]
+  5c:	3501      	adds	r5, #1
+  5e:	e7f2      	b.n	46 <vsprintf+0x46>
+  60:	f852 3b04 	ldr.w	r3, [r2], #4
+  64:	1971      	adds	r1, r6, r5
+  66:	2b00      	cmp	r3, #0
+  68:	bf08      	it	eq
+  6a:	4643      	moveq	r3, r8
+  6c:	3b01      	subs	r3, #1
+  6e:	f813 0f01 	ldrb.w	r0, [r3, #1]!
+  72:	1b8d      	subs	r5, r1, r6
+  74:	2800      	cmp	r0, #0
+  76:	d0e6      	beq.n	46 <vsprintf+0x46>
+  78:	f801 0b01 	strb.w	r0, [r1], #1
+  7c:	e7f7      	b.n	6e <vsprintf+0x6e>
+  7e:	4614      	mov	r4, r2
+  80:	220a      	movs	r2, #10
+  82:	f854 1b04 	ldr.w	r1, [r4], #4
+  86:	1970      	adds	r0, r6, r5
+  88:	f7ff fffe 	bl	0 <vsprintf>
+  8c:	4622      	mov	r2, r4
+  8e:	4405      	add	r5, r0
+  90:	e7d9      	b.n	46 <vsprintf+0x46>
+  92:	bf00      	nop
+  94:	00000000 	.word	0x00000000
+
+Disassembly of section .text.debug_printf:
+
+00000000 <debug_printf>:
+   0:	b40f      	push	{r0, r1, r2, r3}
+   2:	b513      	push	{r0, r1, r4, lr}
+   4:	4c07      	ldr	r4, [pc, #28]	; (24 <debug_printf+0x24>)
+   6:	aa04      	add	r2, sp, #16
+   8:	f852 1b04 	ldr.w	r1, [r2], #4
+   c:	4620      	mov	r0, r4
+   e:	9201      	str	r2, [sp, #4]
+  10:	f7ff fffe 	bl	0 <debug_printf>
+  14:	4620      	mov	r0, r4
+  16:	f7ff fffe 	bl	0 <debug_printf>
+  1a:	b002      	add	sp, #8
+  1c:	e8bd 4010 	ldmia.w	sp!, {r4, lr}
+  20:	b004      	add	sp, #16
+  22:	4770      	bx	lr
+  24:	00000000 	.word	0x00000000

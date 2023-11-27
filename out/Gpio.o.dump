@@ -1,0 +1,40 @@
+
+out/Gpio.o:     file format elf32-littlearm
+
+
+Disassembly of section .text.hal_gpio_init:
+
+00000000 <hal_gpio_init>:
+   0:	4b13      	ldr	r3, [pc, #76]	; (50 <hal_gpio_init+0x50>)
+   2:	b084      	sub	sp, #16
+   4:	699a      	ldr	r2, [r3, #24]
+   6:	f042 0210 	orr.w	r2, r2, #16
+   a:	619a      	str	r2, [r3, #24]
+   c:	699a      	ldr	r2, [r3, #24]
+   e:	f002 0210 	and.w	r2, r2, #16
+  12:	9200      	str	r2, [sp, #0]
+  14:	9a00      	ldr	r2, [sp, #0]
+  16:	699a      	ldr	r2, [r3, #24]
+  18:	f042 0220 	orr.w	r2, r2, #32
+  1c:	619a      	str	r2, [r3, #24]
+  1e:	699a      	ldr	r2, [r3, #24]
+  20:	f002 0220 	and.w	r2, r2, #32
+  24:	9201      	str	r2, [sp, #4]
+  26:	9a01      	ldr	r2, [sp, #4]
+  28:	699a      	ldr	r2, [r3, #24]
+  2a:	f042 0204 	orr.w	r2, r2, #4
+  2e:	619a      	str	r2, [r3, #24]
+  30:	699a      	ldr	r2, [r3, #24]
+  32:	f002 0204 	and.w	r2, r2, #4
+  36:	9202      	str	r2, [sp, #8]
+  38:	9a02      	ldr	r2, [sp, #8]
+  3a:	699a      	ldr	r2, [r3, #24]
+  3c:	f042 0208 	orr.w	r2, r2, #8
+  40:	619a      	str	r2, [r3, #24]
+  42:	699b      	ldr	r3, [r3, #24]
+  44:	f003 0308 	and.w	r3, r3, #8
+  48:	9303      	str	r3, [sp, #12]
+  4a:	9b03      	ldr	r3, [sp, #12]
+  4c:	b004      	add	sp, #16
+  4e:	4770      	bx	lr
+  50:	40021000 	.word	0x40021000

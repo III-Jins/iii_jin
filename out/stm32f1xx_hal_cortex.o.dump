@@ -1,0 +1,265 @@
+
+out/stm32f1xx_hal_cortex.o:     file format elf32-littlearm
+
+
+Disassembly of section .text.HAL_NVIC_SetPriorityGrouping:
+
+00000000 <HAL_NVIC_SetPriorityGrouping>:
+   0:	4907      	ldr	r1, [pc, #28]	; (20 <HAL_NVIC_SetPriorityGrouping+0x20>)
+   2:	0203      	lsls	r3, r0, #8
+   4:	68ca      	ldr	r2, [r1, #12]
+   6:	f403 63e0 	and.w	r3, r3, #1792	; 0x700
+   a:	f422 62e0 	bic.w	r2, r2, #1792	; 0x700
+   e:	0412      	lsls	r2, r2, #16
+  10:	0c12      	lsrs	r2, r2, #16
+  12:	4313      	orrs	r3, r2
+  14:	f043 63bf 	orr.w	r3, r3, #100139008	; 0x5f80000
+  18:	f443 3300 	orr.w	r3, r3, #131072	; 0x20000
+  1c:	60cb      	str	r3, [r1, #12]
+  1e:	4770      	bx	lr
+  20:	e000ed00 	.word	0xe000ed00
+
+Disassembly of section .text.HAL_NVIC_SetPriority:
+
+00000000 <HAL_NVIC_SetPriority>:
+   0:	4b16      	ldr	r3, [pc, #88]	; (5c <HAL_NVIC_SetPriority+0x5c>)
+   2:	b530      	push	{r4, r5, lr}
+   4:	68dc      	ldr	r4, [r3, #12]
+   6:	f3c4 2402 	ubfx	r4, r4, #8, #3
+   a:	f1c4 0307 	rsb	r3, r4, #7
+   e:	1d25      	adds	r5, r4, #4
+  10:	2b04      	cmp	r3, #4
+  12:	bf28      	it	cs
+  14:	2304      	movcs	r3, #4
+  16:	2d06      	cmp	r5, #6
+  18:	f04f 35ff 	mov.w	r5, #4294967295	; 0xffffffff
+  1c:	bf98      	it	ls
+  1e:	2400      	movls	r4, #0
+  20:	fa05 f303 	lsl.w	r3, r5, r3
+  24:	bf88      	it	hi
+  26:	3c03      	subhi	r4, #3
+  28:	ea21 0303 	bic.w	r3, r1, r3
+  2c:	40a3      	lsls	r3, r4
+  2e:	fa05 f404 	lsl.w	r4, r5, r4
+  32:	ea22 0204 	bic.w	r2, r2, r4
+  36:	2800      	cmp	r0, #0
+  38:	ea43 0302 	orr.w	r3, r3, r2
+  3c:	bfac      	ite	ge
+  3e:	f100 4060 	addge.w	r0, r0, #3758096384	; 0xe0000000
+  42:	4a07      	ldrlt	r2, [pc, #28]	; (60 <HAL_NVIC_SetPriority+0x60>)
+  44:	ea4f 1303 	mov.w	r3, r3, lsl #4
+  48:	b2db      	uxtb	r3, r3
+  4a:	bfab      	itete	ge
+  4c:	f500 4061 	addge.w	r0, r0, #57600	; 0xe100
+  50:	f000 000f 	andlt.w	r0, r0, #15
+  54:	f880 3300 	strbge.w	r3, [r0, #768]	; 0x300
+  58:	5413      	strblt	r3, [r2, r0]
+  5a:	bd30      	pop	{r4, r5, pc}
+  5c:	e000ed00 	.word	0xe000ed00
+  60:	e000ed14 	.word	0xe000ed14
+
+Disassembly of section .text.HAL_NVIC_EnableIRQ:
+
+00000000 <HAL_NVIC_EnableIRQ>:
+   0:	2800      	cmp	r0, #0
+   2:	db08      	blt.n	16 <HAL_NVIC_EnableIRQ+0x16>
+   4:	2301      	movs	r3, #1
+   6:	0942      	lsrs	r2, r0, #5
+   8:	f000 001f 	and.w	r0, r0, #31
+   c:	fa03 f000 	lsl.w	r0, r3, r0
+  10:	4b01      	ldr	r3, [pc, #4]	; (18 <HAL_NVIC_EnableIRQ+0x18>)
+  12:	f843 0022 	str.w	r0, [r3, r2, lsl #2]
+  16:	4770      	bx	lr
+  18:	e000e100 	.word	0xe000e100
+
+Disassembly of section .text.HAL_NVIC_DisableIRQ:
+
+00000000 <HAL_NVIC_DisableIRQ>:
+   0:	2800      	cmp	r0, #0
+   2:	db0d      	blt.n	20 <HAL_NVIC_DisableIRQ+0x20>
+   4:	2201      	movs	r2, #1
+   6:	0943      	lsrs	r3, r0, #5
+   8:	f000 001f 	and.w	r0, r0, #31
+   c:	fa02 f000 	lsl.w	r0, r2, r0
+  10:	4a04      	ldr	r2, [pc, #16]	; (24 <HAL_NVIC_DisableIRQ+0x24>)
+  12:	3320      	adds	r3, #32
+  14:	f842 0023 	str.w	r0, [r2, r3, lsl #2]
+  18:	f3bf 8f4f 	dsb	sy
+  1c:	f3bf 8f6f 	isb	sy
+  20:	4770      	bx	lr
+  22:	bf00      	nop
+  24:	e000e100 	.word	0xe000e100
+
+Disassembly of section .text.HAL_NVIC_SystemReset:
+
+00000000 <HAL_NVIC_SystemReset>:
+   0:	f3bf 8f4f 	dsb	sy
+   4:	4905      	ldr	r1, [pc, #20]	; (1c <HAL_NVIC_SystemReset+0x1c>)
+   6:	4b06      	ldr	r3, [pc, #24]	; (20 <HAL_NVIC_SystemReset+0x20>)
+   8:	68ca      	ldr	r2, [r1, #12]
+   a:	f402 62e0 	and.w	r2, r2, #1792	; 0x700
+   e:	4313      	orrs	r3, r2
+  10:	60cb      	str	r3, [r1, #12]
+  12:	f3bf 8f4f 	dsb	sy
+  16:	bf00      	nop
+  18:	e7fd      	b.n	16 <HAL_NVIC_SystemReset+0x16>
+  1a:	bf00      	nop
+  1c:	e000ed00 	.word	0xe000ed00
+  20:	05fa0004 	.word	0x05fa0004
+
+Disassembly of section .text.HAL_SYSTICK_Config:
+
+00000000 <HAL_SYSTICK_Config>:
+   0:	3801      	subs	r0, #1
+   2:	f1b0 7f80 	cmp.w	r0, #16777216	; 0x1000000
+   6:	d20b      	bcs.n	20 <HAL_SYSTICK_Config+0x20>
+   8:	f04f 23e0 	mov.w	r3, #3758153728	; 0xe000e000
+   c:	21f0      	movs	r1, #240	; 0xf0
+   e:	4a05      	ldr	r2, [pc, #20]	; (24 <HAL_SYSTICK_Config+0x24>)
+  10:	6158      	str	r0, [r3, #20]
+  12:	f882 1023 	strb.w	r1, [r2, #35]	; 0x23
+  16:	2000      	movs	r0, #0
+  18:	2207      	movs	r2, #7
+  1a:	6198      	str	r0, [r3, #24]
+  1c:	611a      	str	r2, [r3, #16]
+  1e:	4770      	bx	lr
+  20:	2001      	movs	r0, #1
+  22:	4770      	bx	lr
+  24:	e000ed00 	.word	0xe000ed00
+
+Disassembly of section .text.HAL_NVIC_GetPriorityGrouping:
+
+00000000 <HAL_NVIC_GetPriorityGrouping>:
+   0:	4b02      	ldr	r3, [pc, #8]	; (c <HAL_NVIC_GetPriorityGrouping+0xc>)
+   2:	68d8      	ldr	r0, [r3, #12]
+   4:	f3c0 2002 	ubfx	r0, r0, #8, #3
+   8:	4770      	bx	lr
+   a:	bf00      	nop
+   c:	e000ed00 	.word	0xe000ed00
+
+Disassembly of section .text.HAL_NVIC_GetPriority:
+
+00000000 <HAL_NVIC_GetPriority>:
+   0:	b570      	push	{r4, r5, r6, lr}
+   2:	2800      	cmp	r0, #0
+   4:	bfb8      	it	lt
+   6:	4c15      	ldrlt	r4, [pc, #84]	; (5c <HAL_NVIC_GetPriority+0x5c>)
+   8:	f001 0107 	and.w	r1, r1, #7
+   c:	bfad      	iteet	ge
+   e:	f100 4060 	addge.w	r0, r0, #3758096384	; 0xe0000000
+  12:	f000 000f 	andlt.w	r0, r0, #15
+  16:	5c20      	ldrblt	r0, [r4, r0]
+  18:	f500 4061 	addge.w	r0, r0, #57600	; 0xe100
+  1c:	f1c1 0407 	rsb	r4, r1, #7
+  20:	f101 0504 	add.w	r5, r1, #4
+  24:	bfa8      	it	ge
+  26:	f890 0300 	ldrbge.w	r0, [r0, #768]	; 0x300
+  2a:	2c04      	cmp	r4, #4
+  2c:	bf28      	it	cs
+  2e:	2404      	movcs	r4, #4
+  30:	2d06      	cmp	r5, #6
+  32:	bf98      	it	ls
+  34:	2100      	movls	r1, #0
+  36:	f04f 35ff 	mov.w	r5, #4294967295	; 0xffffffff
+  3a:	ea4f 1010 	mov.w	r0, r0, lsr #4
+  3e:	bf88      	it	hi
+  40:	3903      	subhi	r1, #3
+  42:	fa20 f601 	lsr.w	r6, r0, r1
+  46:	fa05 f404 	lsl.w	r4, r5, r4
+  4a:	fa05 f101 	lsl.w	r1, r5, r1
+  4e:	ea26 0404 	bic.w	r4, r6, r4
+  52:	ea20 0001 	bic.w	r0, r0, r1
+  56:	6014      	str	r4, [r2, #0]
+  58:	6018      	str	r0, [r3, #0]
+  5a:	bd70      	pop	{r4, r5, r6, pc}
+  5c:	e000ed14 	.word	0xe000ed14
+
+Disassembly of section .text.HAL_NVIC_SetPendingIRQ:
+
+00000000 <HAL_NVIC_SetPendingIRQ>:
+   0:	2800      	cmp	r0, #0
+   2:	db09      	blt.n	18 <HAL_NVIC_SetPendingIRQ+0x18>
+   4:	2201      	movs	r2, #1
+   6:	0943      	lsrs	r3, r0, #5
+   8:	f000 001f 	and.w	r0, r0, #31
+   c:	fa02 f000 	lsl.w	r0, r2, r0
+  10:	4a02      	ldr	r2, [pc, #8]	; (1c <HAL_NVIC_SetPendingIRQ+0x1c>)
+  12:	3340      	adds	r3, #64	; 0x40
+  14:	f842 0023 	str.w	r0, [r2, r3, lsl #2]
+  18:	4770      	bx	lr
+  1a:	bf00      	nop
+  1c:	e000e100 	.word	0xe000e100
+
+Disassembly of section .text.HAL_NVIC_GetPendingIRQ:
+
+00000000 <HAL_NVIC_GetPendingIRQ>:
+   0:	2800      	cmp	r0, #0
+   2:	bfa1      	itttt	ge
+   4:	0943      	lsrge	r3, r0, #5
+   6:	4a06      	ldrge	r2, [pc, #24]	; (20 <HAL_NVIC_GetPendingIRQ+0x20>)
+   8:	3340      	addge	r3, #64	; 0x40
+   a:	f852 3023 	ldrge.w	r3, [r2, r3, lsl #2]
+   e:	bfa3      	ittte	ge
+  10:	f000 001f 	andge.w	r0, r0, #31
+  14:	fa23 f000 	lsrge.w	r0, r3, r0
+  18:	f000 0001 	andge.w	r0, r0, #1
+  1c:	2000      	movlt	r0, #0
+  1e:	4770      	bx	lr
+  20:	e000e100 	.word	0xe000e100
+
+Disassembly of section .text.HAL_NVIC_ClearPendingIRQ:
+
+00000000 <HAL_NVIC_ClearPendingIRQ>:
+   0:	2800      	cmp	r0, #0
+   2:	db09      	blt.n	18 <HAL_NVIC_ClearPendingIRQ+0x18>
+   4:	2201      	movs	r2, #1
+   6:	0943      	lsrs	r3, r0, #5
+   8:	f000 001f 	and.w	r0, r0, #31
+   c:	fa02 f000 	lsl.w	r0, r2, r0
+  10:	4a02      	ldr	r2, [pc, #8]	; (1c <HAL_NVIC_ClearPendingIRQ+0x1c>)
+  12:	3360      	adds	r3, #96	; 0x60
+  14:	f842 0023 	str.w	r0, [r2, r3, lsl #2]
+  18:	4770      	bx	lr
+  1a:	bf00      	nop
+  1c:	e000e100 	.word	0xe000e100
+
+Disassembly of section .text.HAL_NVIC_GetActive:
+
+00000000 <HAL_NVIC_GetActive>:
+   0:	2800      	cmp	r0, #0
+   2:	bfa1      	itttt	ge
+   4:	0943      	lsrge	r3, r0, #5
+   6:	4a06      	ldrge	r2, [pc, #24]	; (20 <HAL_NVIC_GetActive+0x20>)
+   8:	3380      	addge	r3, #128	; 0x80
+   a:	f852 3023 	ldrge.w	r3, [r2, r3, lsl #2]
+   e:	bfa3      	ittte	ge
+  10:	f000 001f 	andge.w	r0, r0, #31
+  14:	fa23 f000 	lsrge.w	r0, r3, r0
+  18:	f000 0001 	andge.w	r0, r0, #1
+  1c:	2000      	movlt	r0, #0
+  1e:	4770      	bx	lr
+  20:	e000e100 	.word	0xe000e100
+
+Disassembly of section .text.HAL_SYSTICK_CLKSourceConfig:
+
+00000000 <HAL_SYSTICK_CLKSourceConfig>:
+   0:	f04f 23e0 	mov.w	r3, #3758153728	; 0xe000e000
+   4:	691a      	ldr	r2, [r3, #16]
+   6:	2804      	cmp	r0, #4
+   8:	bf0c      	ite	eq
+   a:	f042 0204 	orreq.w	r2, r2, #4
+   e:	f022 0204 	bicne.w	r2, r2, #4
+  12:	611a      	str	r2, [r3, #16]
+  14:	4770      	bx	lr
+
+Disassembly of section .text.HAL_SYSTICK_Callback:
+
+00000000 <HAL_SYSTICK_Callback>:
+   0:	4770      	bx	lr
+
+Disassembly of section .text.HAL_SYSTICK_IRQHandler:
+
+00000000 <HAL_SYSTICK_IRQHandler>:
+   0:	b508      	push	{r3, lr}
+   2:	f7ff fffe 	bl	0 <HAL_SYSTICK_IRQHandler>
+   6:	bd08      	pop	{r3, pc}

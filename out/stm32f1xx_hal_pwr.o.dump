@@ -1,0 +1,257 @@
+
+out/stm32f1xx_hal_pwr.o:     file format elf32-littlearm
+
+
+Disassembly of section .text.PWR_OverloadWfe:
+
+00000000 <PWR_OverloadWfe>:
+   0:	bf20      	wfe
+   2:	bf00      	nop
+   4:	4770      	bx	lr
+
+Disassembly of section .text.HAL_PWR_DeInit:
+
+00000000 <HAL_PWR_DeInit>:
+   0:	4b04      	ldr	r3, [pc, #16]	; (14 <HAL_PWR_DeInit+0x14>)
+   2:	691a      	ldr	r2, [r3, #16]
+   4:	f042 5280 	orr.w	r2, r2, #268435456	; 0x10000000
+   8:	611a      	str	r2, [r3, #16]
+   a:	691a      	ldr	r2, [r3, #16]
+   c:	f022 5280 	bic.w	r2, r2, #268435456	; 0x10000000
+  10:	611a      	str	r2, [r3, #16]
+  12:	4770      	bx	lr
+  14:	40021000 	.word	0x40021000
+
+Disassembly of section .text.HAL_PWR_EnableBkUpAccess:
+
+00000000 <HAL_PWR_EnableBkUpAccess>:
+   0:	2201      	movs	r2, #1
+   2:	4b01      	ldr	r3, [pc, #4]	; (8 <HAL_PWR_EnableBkUpAccess+0x8>)
+   4:	621a      	str	r2, [r3, #32]
+   6:	4770      	bx	lr
+   8:	420e0000 	.word	0x420e0000
+
+Disassembly of section .text.HAL_PWR_DisableBkUpAccess:
+
+00000000 <HAL_PWR_DisableBkUpAccess>:
+   0:	2200      	movs	r2, #0
+   2:	4b01      	ldr	r3, [pc, #4]	; (8 <HAL_PWR_DisableBkUpAccess+0x8>)
+   4:	621a      	str	r2, [r3, #32]
+   6:	4770      	bx	lr
+   8:	420e0000 	.word	0x420e0000
+
+Disassembly of section .text.HAL_PWR_ConfigPVD:
+
+00000000 <HAL_PWR_ConfigPVD>:
+   0:	4a18      	ldr	r2, [pc, #96]	; (64 <HAL_PWR_ConfigPVD+0x64>)
+   2:	6801      	ldr	r1, [r0, #0]
+   4:	6813      	ldr	r3, [r2, #0]
+   6:	f023 03e0 	bic.w	r3, r3, #224	; 0xe0
+   a:	430b      	orrs	r3, r1
+   c:	6013      	str	r3, [r2, #0]
+   e:	4b16      	ldr	r3, [pc, #88]	; (68 <HAL_PWR_ConfigPVD+0x68>)
+  10:	685a      	ldr	r2, [r3, #4]
+  12:	f422 3280 	bic.w	r2, r2, #65536	; 0x10000
+  16:	605a      	str	r2, [r3, #4]
+  18:	681a      	ldr	r2, [r3, #0]
+  1a:	f422 3280 	bic.w	r2, r2, #65536	; 0x10000
+  1e:	601a      	str	r2, [r3, #0]
+  20:	68da      	ldr	r2, [r3, #12]
+  22:	f422 3280 	bic.w	r2, r2, #65536	; 0x10000
+  26:	60da      	str	r2, [r3, #12]
+  28:	689a      	ldr	r2, [r3, #8]
+  2a:	f422 3280 	bic.w	r2, r2, #65536	; 0x10000
+  2e:	609a      	str	r2, [r3, #8]
+  30:	6842      	ldr	r2, [r0, #4]
+  32:	03d1      	lsls	r1, r2, #15
+  34:	bf42      	ittt	mi
+  36:	6819      	ldrmi	r1, [r3, #0]
+  38:	f441 3180 	orrmi.w	r1, r1, #65536	; 0x10000
+  3c:	6019      	strmi	r1, [r3, #0]
+  3e:	0390      	lsls	r0, r2, #14
+  40:	bf42      	ittt	mi
+  42:	6859      	ldrmi	r1, [r3, #4]
+  44:	f441 3180 	orrmi.w	r1, r1, #65536	; 0x10000
+  48:	6059      	strmi	r1, [r3, #4]
+  4a:	07d1      	lsls	r1, r2, #31
+  4c:	bf42      	ittt	mi
+  4e:	6899      	ldrmi	r1, [r3, #8]
+  50:	f441 3180 	orrmi.w	r1, r1, #65536	; 0x10000
+  54:	6099      	strmi	r1, [r3, #8]
+  56:	0792      	lsls	r2, r2, #30
+  58:	bf42      	ittt	mi
+  5a:	68da      	ldrmi	r2, [r3, #12]
+  5c:	f442 3280 	orrmi.w	r2, r2, #65536	; 0x10000
+  60:	60da      	strmi	r2, [r3, #12]
+  62:	4770      	bx	lr
+  64:	40007000 	.word	0x40007000
+  68:	40010400 	.word	0x40010400
+
+Disassembly of section .text.HAL_PWR_EnablePVD:
+
+00000000 <HAL_PWR_EnablePVD>:
+   0:	2201      	movs	r2, #1
+   2:	4b01      	ldr	r3, [pc, #4]	; (8 <HAL_PWR_EnablePVD+0x8>)
+   4:	611a      	str	r2, [r3, #16]
+   6:	4770      	bx	lr
+   8:	420e0000 	.word	0x420e0000
+
+Disassembly of section .text.HAL_PWR_DisablePVD:
+
+00000000 <HAL_PWR_DisablePVD>:
+   0:	2200      	movs	r2, #0
+   2:	4b01      	ldr	r3, [pc, #4]	; (8 <HAL_PWR_DisablePVD+0x8>)
+   4:	611a      	str	r2, [r3, #16]
+   6:	4770      	bx	lr
+   8:	420e0000 	.word	0x420e0000
+
+Disassembly of section .text.HAL_PWR_EnableWakeUpPin:
+
+00000000 <HAL_PWR_EnableWakeUpPin>:
+   0:	fa90 f0a0 	rbit	r0, r0
+   4:	fab0 f080 	clz	r0, r0
+   8:	2201      	movs	r2, #1
+   a:	4b02      	ldr	r3, [pc, #8]	; (14 <HAL_PWR_EnableWakeUpPin+0x14>)
+   c:	4403      	add	r3, r0
+   e:	009b      	lsls	r3, r3, #2
+  10:	601a      	str	r2, [r3, #0]
+  12:	4770      	bx	lr
+  14:	10838020 	.word	0x10838020
+
+Disassembly of section .text.HAL_PWR_DisableWakeUpPin:
+
+00000000 <HAL_PWR_DisableWakeUpPin>:
+   0:	fa90 f0a0 	rbit	r0, r0
+   4:	fab0 f080 	clz	r0, r0
+   8:	2200      	movs	r2, #0
+   a:	4b02      	ldr	r3, [pc, #8]	; (14 <HAL_PWR_DisableWakeUpPin+0x14>)
+   c:	4403      	add	r3, r0
+   e:	009b      	lsls	r3, r3, #2
+  10:	601a      	str	r2, [r3, #0]
+  12:	4770      	bx	lr
+  14:	10838020 	.word	0x10838020
+
+Disassembly of section .text.HAL_PWR_EnterSLEEPMode:
+
+00000000 <HAL_PWR_EnterSLEEPMode>:
+   0:	4a06      	ldr	r2, [pc, #24]	; (1c <HAL_PWR_EnterSLEEPMode+0x1c>)
+   2:	2901      	cmp	r1, #1
+   4:	6913      	ldr	r3, [r2, #16]
+   6:	f023 0304 	bic.w	r3, r3, #4
+   a:	6113      	str	r3, [r2, #16]
+   c:	d101      	bne.n	12 <HAL_PWR_EnterSLEEPMode+0x12>
+   e:	bf30      	wfi
+  10:	4770      	bx	lr
+  12:	bf40      	sev
+  14:	bf20      	wfe
+  16:	bf20      	wfe
+  18:	4770      	bx	lr
+  1a:	bf00      	nop
+  1c:	e000ed00 	.word	0xe000ed00
+
+Disassembly of section .text.HAL_PWR_EnterSTOPMode:
+
+00000000 <HAL_PWR_EnterSTOPMode>:
+   0:	4a0f      	ldr	r2, [pc, #60]	; (40 <HAL_PWR_EnterSTOPMode+0x40>)
+   2:	b510      	push	{r4, lr}
+   4:	6814      	ldr	r4, [r2, #0]
+   6:	2901      	cmp	r1, #1
+   8:	f024 0402 	bic.w	r4, r4, #2
+   c:	6014      	str	r4, [r2, #0]
+   e:	6813      	ldr	r3, [r2, #0]
+  10:	f023 0301 	bic.w	r3, r3, #1
+  14:	ea43 0300 	orr.w	r3, r3, r0
+  18:	6013      	str	r3, [r2, #0]
+  1a:	4b0a      	ldr	r3, [pc, #40]	; (44 <HAL_PWR_EnterSTOPMode+0x44>)
+  1c:	691a      	ldr	r2, [r3, #16]
+  1e:	f042 0204 	orr.w	r2, r2, #4
+  22:	611a      	str	r2, [r3, #16]
+  24:	d105      	bne.n	32 <HAL_PWR_EnterSTOPMode+0x32>
+  26:	bf30      	wfi
+  28:	691a      	ldr	r2, [r3, #16]
+  2a:	f022 0204 	bic.w	r2, r2, #4
+  2e:	611a      	str	r2, [r3, #16]
+  30:	bd10      	pop	{r4, pc}
+  32:	bf40      	sev
+  34:	f7ff fffe 	bl	0 <HAL_PWR_EnterSTOPMode>
+  38:	f7ff fffe 	bl	0 <HAL_PWR_EnterSTOPMode>
+  3c:	e7f4      	b.n	28 <HAL_PWR_EnterSTOPMode+0x28>
+  3e:	bf00      	nop
+  40:	40007000 	.word	0x40007000
+  44:	e000ed00 	.word	0xe000ed00
+
+Disassembly of section .text.HAL_PWR_EnterSTANDBYMode:
+
+00000000 <HAL_PWR_EnterSTANDBYMode>:
+   0:	4a05      	ldr	r2, [pc, #20]	; (18 <HAL_PWR_EnterSTANDBYMode+0x18>)
+   2:	6813      	ldr	r3, [r2, #0]
+   4:	f043 0302 	orr.w	r3, r3, #2
+   8:	6013      	str	r3, [r2, #0]
+   a:	4a04      	ldr	r2, [pc, #16]	; (1c <HAL_PWR_EnterSTANDBYMode+0x1c>)
+   c:	6913      	ldr	r3, [r2, #16]
+   e:	f043 0304 	orr.w	r3, r3, #4
+  12:	6113      	str	r3, [r2, #16]
+  14:	bf30      	wfi
+  16:	4770      	bx	lr
+  18:	40007000 	.word	0x40007000
+  1c:	e000ed00 	.word	0xe000ed00
+
+Disassembly of section .text.HAL_PWR_EnableSleepOnExit:
+
+00000000 <HAL_PWR_EnableSleepOnExit>:
+   0:	4a02      	ldr	r2, [pc, #8]	; (c <HAL_PWR_EnableSleepOnExit+0xc>)
+   2:	6913      	ldr	r3, [r2, #16]
+   4:	f043 0302 	orr.w	r3, r3, #2
+   8:	6113      	str	r3, [r2, #16]
+   a:	4770      	bx	lr
+   c:	e000ed00 	.word	0xe000ed00
+
+Disassembly of section .text.HAL_PWR_DisableSleepOnExit:
+
+00000000 <HAL_PWR_DisableSleepOnExit>:
+   0:	4a02      	ldr	r2, [pc, #8]	; (c <HAL_PWR_DisableSleepOnExit+0xc>)
+   2:	6913      	ldr	r3, [r2, #16]
+   4:	f023 0302 	bic.w	r3, r3, #2
+   8:	6113      	str	r3, [r2, #16]
+   a:	4770      	bx	lr
+   c:	e000ed00 	.word	0xe000ed00
+
+Disassembly of section .text.HAL_PWR_EnableSEVOnPend:
+
+00000000 <HAL_PWR_EnableSEVOnPend>:
+   0:	4a02      	ldr	r2, [pc, #8]	; (c <HAL_PWR_EnableSEVOnPend+0xc>)
+   2:	6913      	ldr	r3, [r2, #16]
+   4:	f043 0310 	orr.w	r3, r3, #16
+   8:	6113      	str	r3, [r2, #16]
+   a:	4770      	bx	lr
+   c:	e000ed00 	.word	0xe000ed00
+
+Disassembly of section .text.HAL_PWR_DisableSEVOnPend:
+
+00000000 <HAL_PWR_DisableSEVOnPend>:
+   0:	4a02      	ldr	r2, [pc, #8]	; (c <HAL_PWR_DisableSEVOnPend+0xc>)
+   2:	6913      	ldr	r3, [r2, #16]
+   4:	f023 0310 	bic.w	r3, r3, #16
+   8:	6113      	str	r3, [r2, #16]
+   a:	4770      	bx	lr
+   c:	e000ed00 	.word	0xe000ed00
+
+Disassembly of section .text.HAL_PWR_PVDCallback:
+
+00000000 <HAL_PWR_PVDCallback>:
+   0:	4770      	bx	lr
+
+Disassembly of section .text.HAL_PWR_PVD_IRQHandler:
+
+00000000 <HAL_PWR_PVD_IRQHandler>:
+   0:	b510      	push	{r4, lr}
+   2:	4c05      	ldr	r4, [pc, #20]	; (18 <HAL_PWR_PVD_IRQHandler+0x18>)
+   4:	6963      	ldr	r3, [r4, #20]
+   6:	03db      	lsls	r3, r3, #15
+   8:	d504      	bpl.n	14 <HAL_PWR_PVD_IRQHandler+0x14>
+   a:	f7ff fffe 	bl	0 <HAL_PWR_PVD_IRQHandler>
+   e:	f44f 3380 	mov.w	r3, #65536	; 0x10000
+  12:	6163      	str	r3, [r4, #20]
+  14:	bd10      	pop	{r4, pc}
+  16:	bf00      	nop
+  18:	40010400 	.word	0x40010400

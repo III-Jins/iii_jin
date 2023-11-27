@@ -1,0 +1,44 @@
+
+out/switch.o:     file format elf32-littlearm
+
+
+Disassembly of section .text.Arch_start:
+
+00000000 <Arch_start>:
+   0:	f04f 0002 	mov.w	r0, #2
+   4:	f380 8814 	msr	CONTROL, r0
+   8:	f7ff bffe 	b.w	0 <Arch_start>
+
+Disassembly of section .text.Arch_context_switching:
+
+00000000 <Arch_context_switching>:
+   0:	f7ff bffe 	b.w	0 <Arch_context_switching>
+   4:	f7ff bffe 	b.w	0 <Arch_context_switching>
+
+Disassembly of section .text.Arch_Save_context:
+
+00000000 <Arch_Save_context>:
+   0:	b500      	push	{lr}
+   2:	e92d 1fff 	stmdb	sp!, {r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, sl, fp, ip}
+   6:	f3ef 8003 	mrs	r0, PSR
+   a:	b401      	push	{r0}
+   c:	4802      	ldr	r0, [pc, #8]	; (18 <Arch_Save_context+0x18>)
+   e:	6800      	ldr	r0, [r0, #0]
+  10:	f3ef 8109 	mrs	r1, PSP
+  14:	c002      	stmia	r0!, {r1}
+  16:	0000      	.short	0x0000
+  18:	00000000 	.word	0x00000000
+
+Disassembly of section .text.Arch_Restore_context:
+
+00000000 <Arch_Restore_context>:
+   0:	4805      	ldr	r0, [pc, #20]	; (18 <Arch_Restore_context+0x18>)
+   2:	6800      	ldr	r0, [r0, #0]
+   4:	c802      	ldmia	r0!, {r1}
+   6:	f381 8809 	msr	PSP, r1
+   a:	bc01      	pop	{r0}
+   c:	f380 8803 	msr	PSR, r0
+  10:	e8bd 1fff 	ldmia.w	sp!, {r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, sl, fp, ip}
+  14:	bd00      	pop	{pc}
+  16:	0000      	.short	0x0000
+  18:	00000000 	.word	0x00000000

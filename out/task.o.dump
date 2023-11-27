@@ -1,0 +1,133 @@
+
+out/task.o:     file format elf32-littlearm
+
+
+Disassembly of section .text.Kernel_task_init:
+
+00000000 <Kernel_task_init>:
+   0:	2300      	movs	r3, #0
+   2:	b530      	push	{r4, r5, lr}
+   4:	f04f 7080 	mov.w	r0, #16777216	; 0x1000000
+   8:	461c      	mov	r4, r3
+   a:	4a0a      	ldr	r2, [pc, #40]	; (34 <Kernel_task_init+0x34>)
+   c:	490a      	ldr	r1, [pc, #40]	; (38 <Kernel_task_init+0x38>)
+   e:	6013      	str	r3, [r2, #0]
+  10:	4a0a      	ldr	r2, [pc, #40]	; (3c <Kernel_task_init+0x3c>)
+  12:	6013      	str	r3, [r2, #0]
+  14:	4a0a      	ldr	r2, [pc, #40]	; (40 <Kernel_task_init+0x40>)
+  16:	3301      	adds	r3, #1
+  18:	f202 75bc 	addw	r5, r2, #1980	; 0x7bc
+  1c:	2b03      	cmp	r3, #3
+  1e:	604a      	str	r2, [r1, #4]
+  20:	f841 5b0c 	str.w	r5, [r1], #12
+  24:	f502 6200 	add.w	r2, r2, #2048	; 0x800
+  28:	f842 4c0c 	str.w	r4, [r2, #-12]
+  2c:	f842 0c44 	str.w	r0, [r2, #-68]
+  30:	d1f1      	bne.n	16 <Kernel_task_init+0x16>
+  32:	bd30      	pop	{r4, r5, pc}
+	...
+
+Disassembly of section .text.Kernel_task_start:
+
+00000000 <Kernel_task_start>:
+   0:	210c      	movs	r1, #12
+   2:	4b04      	ldr	r3, [pc, #16]	; (14 <Kernel_task_start+0x14>)
+   4:	681a      	ldr	r2, [r3, #0]
+   6:	4b04      	ldr	r3, [pc, #16]	; (18 <Kernel_task_start+0x18>)
+   8:	fb01 3302 	mla	r3, r1, r2, r3
+   c:	4a03      	ldr	r2, [pc, #12]	; (1c <Kernel_task_start+0x1c>)
+   e:	6013      	str	r3, [r2, #0]
+  10:	f7ff bffe 	b.w	0 <Arch_start>
+	...
+
+Disassembly of section .text.Kernel_task_create:
+
+00000000 <Kernel_task_create>:
+   0:	4907      	ldr	r1, [pc, #28]	; (20 <Kernel_task_create+0x20>)
+   2:	4603      	mov	r3, r0
+   4:	6808      	ldr	r0, [r1, #0]
+   6:	1c42      	adds	r2, r0, #1
+   8:	2a03      	cmp	r2, #3
+   a:	600a      	str	r2, [r1, #0]
+   c:	bf9d      	ittte	ls
+   e:	220c      	movls	r2, #12
+  10:	4342      	mulls	r2, r0
+  12:	4904      	ldrls	r1, [pc, #16]	; (24 <Kernel_task_create+0x24>)
+  14:	f04f 30ff 	movhi.w	r0, #4294967295	; 0xffffffff
+  18:	bf9c      	itt	ls
+  1a:	588a      	ldrls	r2, [r1, r2]
+  1c:	6393      	strls	r3, [r2, #56]	; 0x38
+  1e:	4770      	bx	lr
+	...
+
+Disassembly of section .text.Kernel_task_recover:
+
+00000000 <Kernel_task_recover>:
+   0:	4b09      	ldr	r3, [pc, #36]	; (28 <Kernel_task_recover+0x28>)
+   2:	b510      	push	{r4, lr}
+   4:	240c      	movs	r4, #12
+   6:	681a      	ldr	r2, [r3, #0]
+   8:	4b08      	ldr	r3, [pc, #32]	; (2c <Kernel_task_recover+0x2c>)
+   a:	fab2 f182 	clz	r1, r2
+   e:	fb04 3202 	mla	r2, r4, r2, r3
+  12:	0949      	lsrs	r1, r1, #5
+  14:	6890      	ldr	r0, [r2, #8]
+  16:	fb04 3301 	mla	r3, r4, r1, r3
+  1a:	380a      	subs	r0, #10
+  1c:	6090      	str	r0, [r2, #8]
+  1e:	689a      	ldr	r2, [r3, #8]
+  20:	3a0a      	subs	r2, #10
+  22:	609a      	str	r2, [r3, #8]
+  24:	bd10      	pop	{r4, pc}
+  26:	bf00      	nop
+	...
+
+Disassembly of section .text.Kernel_task_get_current_task_id:
+
+00000000 <Kernel_task_get_current_task_id>:
+   0:	4b01      	ldr	r3, [pc, #4]	; (8 <Kernel_task_get_current_task_id+0x8>)
+   2:	6818      	ldr	r0, [r3, #0]
+   4:	4770      	bx	lr
+   6:	bf00      	nop
+   8:	00000000 	.word	0x00000000
+
+Disassembly of section .text.Kernel_task_scheduler:
+
+00000000 <Kernel_task_scheduler>:
+   0:	210c      	movs	r1, #12
+   2:	480b      	ldr	r0, [pc, #44]	; (30 <Kernel_task_scheduler+0x30>)
+   4:	4a0b      	ldr	r2, [pc, #44]	; (34 <Kernel_task_scheduler+0x34>)
+   6:	6803      	ldr	r3, [r0, #0]
+   8:	b430      	push	{r4, r5}
+   a:	fb01 2503 	mla	r5, r1, r3, r2
+   e:	4c0a      	ldr	r4, [pc, #40]	; (38 <Kernel_task_scheduler+0x38>)
+  10:	3301      	adds	r3, #1
+  12:	6025      	str	r5, [r4, #0]
+  14:	4c09      	ldr	r4, [pc, #36]	; (3c <Kernel_task_scheduler+0x3c>)
+  16:	6824      	ldr	r4, [r4, #0]
+  18:	fbb3 f5f4 	udiv	r5, r3, r4
+  1c:	fb04 3315 	mls	r3, r4, r5, r3
+  20:	bc30      	pop	{r4, r5}
+  22:	6003      	str	r3, [r0, #0]
+  24:	fb01 2303 	mla	r3, r1, r3, r2
+  28:	4a05      	ldr	r2, [pc, #20]	; (40 <Kernel_task_scheduler+0x40>)
+  2a:	6013      	str	r3, [r2, #0]
+  2c:	f7ff bffe 	b.w	0 <Arch_context_switching>
+	...
+
+Disassembly of section .text.Kernel_task_clear:
+
+00000000 <Kernel_task_clear>:
+   0:	210c      	movs	r1, #12
+   2:	b508      	push	{r3, lr}
+   4:	4b05      	ldr	r3, [pc, #20]	; (1c <Kernel_task_clear+0x1c>)
+   6:	681a      	ldr	r2, [r3, #0]
+   8:	4b05      	ldr	r3, [pc, #20]	; (20 <Kernel_task_clear+0x20>)
+   a:	fb01 3302 	mla	r3, r1, r2, r3
+   e:	689a      	ldr	r2, [r3, #8]
+  10:	320a      	adds	r2, #10
+  12:	609a      	str	r2, [r3, #8]
+  14:	f7ff fffe 	bl	0 <Kernel_task_clear>
+  18:	bd08      	pop	{r3, pc}
+  1a:	bf00      	nop
+	...

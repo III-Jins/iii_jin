@@ -1,0 +1,283 @@
+
+out/stm32f1xx_hal.o:     file format elf32-littlearm
+
+
+Disassembly of section .text.HAL_MspInit:
+
+00000000 <HAL_MspInit>:
+   0:	4770      	bx	lr
+
+Disassembly of section .text.HAL_MspDeInit:
+
+00000000 <HAL_MspDeInit>:
+   0:	4770      	bx	lr
+
+Disassembly of section .text.HAL_DeInit:
+
+00000000 <HAL_DeInit>:
+   0:	b510      	push	{r4, lr}
+   2:	f04f 32ff 	mov.w	r2, #4294967295	; 0xffffffff
+   6:	2400      	movs	r4, #0
+   8:	4b04      	ldr	r3, [pc, #16]	; (1c <HAL_DeInit+0x1c>)
+   a:	611a      	str	r2, [r3, #16]
+   c:	611c      	str	r4, [r3, #16]
+   e:	60da      	str	r2, [r3, #12]
+  10:	60dc      	str	r4, [r3, #12]
+  12:	f7ff fffe 	bl	0 <HAL_DeInit>
+  16:	4620      	mov	r0, r4
+  18:	bd10      	pop	{r4, pc}
+  1a:	bf00      	nop
+  1c:	40021000 	.word	0x40021000
+
+Disassembly of section .text.HAL_InitTick:
+
+00000000 <HAL_InitTick>:
+   0:	b538      	push	{r3, r4, r5, lr}
+   2:	4b0e      	ldr	r3, [pc, #56]	; (3c <HAL_InitTick+0x3c>)
+   4:	4605      	mov	r5, r0
+   6:	7818      	ldrb	r0, [r3, #0]
+   8:	f44f 737a 	mov.w	r3, #1000	; 0x3e8
+   c:	fbb3 f3f0 	udiv	r3, r3, r0
+  10:	4a0b      	ldr	r2, [pc, #44]	; (40 <HAL_InitTick+0x40>)
+  12:	6810      	ldr	r0, [r2, #0]
+  14:	fbb0 f0f3 	udiv	r0, r0, r3
+  18:	f7ff fffe 	bl	0 <HAL_SYSTICK_Config>
+  1c:	4604      	mov	r4, r0
+  1e:	b958      	cbnz	r0, 38 <HAL_InitTick+0x38>
+  20:	2d0f      	cmp	r5, #15
+  22:	d809      	bhi.n	38 <HAL_InitTick+0x38>
+  24:	4602      	mov	r2, r0
+  26:	4629      	mov	r1, r5
+  28:	f04f 30ff 	mov.w	r0, #4294967295	; 0xffffffff
+  2c:	f7ff fffe 	bl	0 <HAL_NVIC_SetPriority>
+  30:	4620      	mov	r0, r4
+  32:	4b04      	ldr	r3, [pc, #16]	; (44 <HAL_InitTick+0x44>)
+  34:	601d      	str	r5, [r3, #0]
+  36:	bd38      	pop	{r3, r4, r5, pc}
+  38:	2001      	movs	r0, #1
+  3a:	e7fc      	b.n	36 <HAL_InitTick+0x36>
+	...
+
+Disassembly of section .text.HAL_Init:
+
+00000000 <HAL_Init>:
+   0:	4a07      	ldr	r2, [pc, #28]	; (20 <HAL_Init+0x20>)
+   2:	b508      	push	{r3, lr}
+   4:	6813      	ldr	r3, [r2, #0]
+   6:	2003      	movs	r0, #3
+   8:	f043 0310 	orr.w	r3, r3, #16
+   c:	6013      	str	r3, [r2, #0]
+   e:	f7ff fffe 	bl	0 <HAL_NVIC_SetPriorityGrouping>
+  12:	2000      	movs	r0, #0
+  14:	f7ff fffe 	bl	0 <HAL_Init>
+  18:	f7ff fffe 	bl	0 <HAL_Init>
+  1c:	2000      	movs	r0, #0
+  1e:	bd08      	pop	{r3, pc}
+  20:	40022000 	.word	0x40022000
+
+Disassembly of section .text.HAL_IncTick:
+
+00000000 <HAL_IncTick>:
+   0:	4a03      	ldr	r2, [pc, #12]	; (10 <HAL_IncTick+0x10>)
+   2:	4b04      	ldr	r3, [pc, #16]	; (14 <HAL_IncTick+0x14>)
+   4:	6811      	ldr	r1, [r2, #0]
+   6:	781b      	ldrb	r3, [r3, #0]
+   8:	440b      	add	r3, r1
+   a:	6013      	str	r3, [r2, #0]
+   c:	4770      	bx	lr
+   e:	bf00      	nop
+	...
+
+Disassembly of section .text.HAL_GetTick:
+
+00000000 <HAL_GetTick>:
+   0:	4b01      	ldr	r3, [pc, #4]	; (8 <HAL_GetTick+0x8>)
+   2:	6818      	ldr	r0, [r3, #0]
+   4:	4770      	bx	lr
+   6:	bf00      	nop
+   8:	00000000 	.word	0x00000000
+
+Disassembly of section .text.HAL_GetTickPrio:
+
+00000000 <HAL_GetTickPrio>:
+   0:	4b01      	ldr	r3, [pc, #4]	; (8 <HAL_GetTickPrio+0x8>)
+   2:	6818      	ldr	r0, [r3, #0]
+   4:	4770      	bx	lr
+   6:	bf00      	nop
+   8:	00000000 	.word	0x00000000
+
+Disassembly of section .text.HAL_SetTickFreq:
+
+00000000 <HAL_SetTickFreq>:
+   0:	b538      	push	{r3, r4, r5, lr}
+   2:	4c07      	ldr	r4, [pc, #28]	; (20 <HAL_SetTickFreq+0x20>)
+   4:	7825      	ldrb	r5, [r4, #0]
+   6:	4285      	cmp	r5, r0
+   8:	d007      	beq.n	1a <HAL_SetTickFreq+0x1a>
+   a:	4b06      	ldr	r3, [pc, #24]	; (24 <HAL_SetTickFreq+0x24>)
+   c:	7020      	strb	r0, [r4, #0]
+   e:	6818      	ldr	r0, [r3, #0]
+  10:	f7ff fffe 	bl	0 <HAL_SetTickFreq>
+  14:	b100      	cbz	r0, 18 <HAL_SetTickFreq+0x18>
+  16:	7025      	strb	r5, [r4, #0]
+  18:	bd38      	pop	{r3, r4, r5, pc}
+  1a:	2000      	movs	r0, #0
+  1c:	e7fc      	b.n	18 <HAL_SetTickFreq+0x18>
+  1e:	bf00      	nop
+	...
+
+Disassembly of section .text.HAL_GetTickFreq:
+
+00000000 <HAL_GetTickFreq>:
+   0:	4b01      	ldr	r3, [pc, #4]	; (8 <HAL_GetTickFreq+0x8>)
+   2:	7818      	ldrb	r0, [r3, #0]
+   4:	4770      	bx	lr
+   6:	bf00      	nop
+   8:	00000000 	.word	0x00000000
+
+Disassembly of section .text.HAL_Delay:
+
+00000000 <HAL_Delay>:
+   0:	b538      	push	{r3, r4, r5, lr}
+   2:	4604      	mov	r4, r0
+   4:	f7ff fffe 	bl	0 <HAL_Delay>
+   8:	4605      	mov	r5, r0
+   a:	1c63      	adds	r3, r4, #1
+   c:	bf1e      	ittt	ne
+   e:	4b04      	ldrne	r3, [pc, #16]	; (20 <HAL_Delay+0x20>)
+  10:	781b      	ldrbne	r3, [r3, #0]
+  12:	18e4      	addne	r4, r4, r3
+  14:	f7ff fffe 	bl	0 <HAL_Delay>
+  18:	1b43      	subs	r3, r0, r5
+  1a:	42a3      	cmp	r3, r4
+  1c:	d3fa      	bcc.n	14 <HAL_Delay+0x14>
+  1e:	bd38      	pop	{r3, r4, r5, pc}
+  20:	00000000 	.word	0x00000000
+
+Disassembly of section .text.HAL_SuspendTick:
+
+00000000 <HAL_SuspendTick>:
+   0:	f04f 22e0 	mov.w	r2, #3758153728	; 0xe000e000
+   4:	6913      	ldr	r3, [r2, #16]
+   6:	f023 0302 	bic.w	r3, r3, #2
+   a:	6113      	str	r3, [r2, #16]
+   c:	4770      	bx	lr
+
+Disassembly of section .text.HAL_ResumeTick:
+
+00000000 <HAL_ResumeTick>:
+   0:	f04f 22e0 	mov.w	r2, #3758153728	; 0xe000e000
+   4:	6913      	ldr	r3, [r2, #16]
+   6:	f043 0302 	orr.w	r3, r3, #2
+   a:	6113      	str	r3, [r2, #16]
+   c:	4770      	bx	lr
+
+Disassembly of section .text.HAL_GetHalVersion:
+
+00000000 <HAL_GetHalVersion>:
+   0:	4800      	ldr	r0, [pc, #0]	; (4 <HAL_GetHalVersion+0x4>)
+   2:	4770      	bx	lr
+   4:	01010900 	.word	0x01010900
+
+Disassembly of section .text.HAL_GetREVID:
+
+00000000 <HAL_GetREVID>:
+   0:	4b01      	ldr	r3, [pc, #4]	; (8 <HAL_GetREVID+0x8>)
+   2:	6818      	ldr	r0, [r3, #0]
+   4:	0c00      	lsrs	r0, r0, #16
+   6:	4770      	bx	lr
+   8:	e0042000 	.word	0xe0042000
+
+Disassembly of section .text.HAL_GetDEVID:
+
+00000000 <HAL_GetDEVID>:
+   0:	4b02      	ldr	r3, [pc, #8]	; (c <HAL_GetDEVID+0xc>)
+   2:	6818      	ldr	r0, [r3, #0]
+   4:	f3c0 000b 	ubfx	r0, r0, #0, #12
+   8:	4770      	bx	lr
+   a:	bf00      	nop
+   c:	e0042000 	.word	0xe0042000
+
+Disassembly of section .text.HAL_GetUIDw0:
+
+00000000 <HAL_GetUIDw0>:
+   0:	4b01      	ldr	r3, [pc, #4]	; (8 <HAL_GetUIDw0+0x8>)
+   2:	f8d3 07e8 	ldr.w	r0, [r3, #2024]	; 0x7e8
+   6:	4770      	bx	lr
+   8:	1ffff000 	.word	0x1ffff000
+
+Disassembly of section .text.HAL_GetUIDw1:
+
+00000000 <HAL_GetUIDw1>:
+   0:	4b01      	ldr	r3, [pc, #4]	; (8 <HAL_GetUIDw1+0x8>)
+   2:	f8d3 07ec 	ldr.w	r0, [r3, #2028]	; 0x7ec
+   6:	4770      	bx	lr
+   8:	1ffff000 	.word	0x1ffff000
+
+Disassembly of section .text.HAL_GetUIDw2:
+
+00000000 <HAL_GetUIDw2>:
+   0:	4b01      	ldr	r3, [pc, #4]	; (8 <HAL_GetUIDw2+0x8>)
+   2:	f8d3 07f0 	ldr.w	r0, [r3, #2032]	; 0x7f0
+   6:	4770      	bx	lr
+   8:	1ffff000 	.word	0x1ffff000
+
+Disassembly of section .text.HAL_DBGMCU_EnableDBGSleepMode:
+
+00000000 <HAL_DBGMCU_EnableDBGSleepMode>:
+   0:	4a02      	ldr	r2, [pc, #8]	; (c <HAL_DBGMCU_EnableDBGSleepMode+0xc>)
+   2:	6853      	ldr	r3, [r2, #4]
+   4:	f043 0301 	orr.w	r3, r3, #1
+   8:	6053      	str	r3, [r2, #4]
+   a:	4770      	bx	lr
+   c:	e0042000 	.word	0xe0042000
+
+Disassembly of section .text.HAL_DBGMCU_DisableDBGSleepMode:
+
+00000000 <HAL_DBGMCU_DisableDBGSleepMode>:
+   0:	4a02      	ldr	r2, [pc, #8]	; (c <HAL_DBGMCU_DisableDBGSleepMode+0xc>)
+   2:	6853      	ldr	r3, [r2, #4]
+   4:	f023 0301 	bic.w	r3, r3, #1
+   8:	6053      	str	r3, [r2, #4]
+   a:	4770      	bx	lr
+   c:	e0042000 	.word	0xe0042000
+
+Disassembly of section .text.HAL_DBGMCU_EnableDBGStopMode:
+
+00000000 <HAL_DBGMCU_EnableDBGStopMode>:
+   0:	4a02      	ldr	r2, [pc, #8]	; (c <HAL_DBGMCU_EnableDBGStopMode+0xc>)
+   2:	6853      	ldr	r3, [r2, #4]
+   4:	f043 0302 	orr.w	r3, r3, #2
+   8:	6053      	str	r3, [r2, #4]
+   a:	4770      	bx	lr
+   c:	e0042000 	.word	0xe0042000
+
+Disassembly of section .text.HAL_DBGMCU_DisableDBGStopMode:
+
+00000000 <HAL_DBGMCU_DisableDBGStopMode>:
+   0:	4a02      	ldr	r2, [pc, #8]	; (c <HAL_DBGMCU_DisableDBGStopMode+0xc>)
+   2:	6853      	ldr	r3, [r2, #4]
+   4:	f023 0302 	bic.w	r3, r3, #2
+   8:	6053      	str	r3, [r2, #4]
+   a:	4770      	bx	lr
+   c:	e0042000 	.word	0xe0042000
+
+Disassembly of section .text.HAL_DBGMCU_EnableDBGStandbyMode:
+
+00000000 <HAL_DBGMCU_EnableDBGStandbyMode>:
+   0:	4a02      	ldr	r2, [pc, #8]	; (c <HAL_DBGMCU_EnableDBGStandbyMode+0xc>)
+   2:	6853      	ldr	r3, [r2, #4]
+   4:	f043 0304 	orr.w	r3, r3, #4
+   8:	6053      	str	r3, [r2, #4]
+   a:	4770      	bx	lr
+   c:	e0042000 	.word	0xe0042000
+
+Disassembly of section .text.HAL_DBGMCU_DisableDBGStandbyMode:
+
+00000000 <HAL_DBGMCU_DisableDBGStandbyMode>:
+   0:	4a02      	ldr	r2, [pc, #8]	; (c <HAL_DBGMCU_DisableDBGStandbyMode+0xc>)
+   2:	6853      	ldr	r3, [r2, #4]
+   4:	f023 0304 	bic.w	r3, r3, #4
+   8:	6053      	str	r3, [r2, #4]
+   a:	4770      	bx	lr
+   c:	e0042000 	.word	0xe0042000
