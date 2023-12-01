@@ -25,7 +25,7 @@ LINKER_SCRIPT = $(PRJ_HOME)/build/$(BOARD)/$(SOC).ld
 MAP_FILE = $(OUTPUT_DIR)/$(OUTNAME).map
 SYM_FILE = $(OUTPUT_DIR)/$(OUTNAME).sym
 
-ASM_SRCS = $(wildcard $(PRJ_HOME)/boot/$(BOARD)/*.S)
+ASM_SRCS = $(wildcard $(PRJ_HOME)/boot/$(BOARD)/*.s)
 ASM_OBJS = $(patsubst $(PRJ_HOME)/boot/$(BOARD)/%.S, $(OUTPUT_DIR)/%.os, $(ASM_SRCS))
 
 VPATH = boot/$(BOARD) 				\
@@ -71,6 +71,7 @@ LDFLAGS += -lc -lm -lnosys
 
 iiijin = $(OUTPUT_DIR)/$(OUTNAME).axf
 iiijin_bin = $(OUTPUT_DIR)/$(OUTNAME).bin
+iiijin_hex = $(OUTPUT_DIR)/$(OUTNAME).hex
 
 .PHONY: all clean run debug gdb
 
@@ -79,8 +80,8 @@ all: $(iiijin)
 burn: $(iiijin)
 	sudo stm32flash -w $(iiijin) -v -g 0x0 /dev/ttyACM0
 
-flash: $(iiijin_bin)
-	$(STFLASH) --reset  write $(iiijin_bin) 0x08000000
+flash: $(iiijin_hex)
+	$(STFLASH) --reset --format ihex write $(iiijin_hex)
 
 clean:
 	@echo "Delete.. " $(OUTPUT_DIR) 
@@ -93,6 +94,7 @@ $(iiijin): $(ASM_OBJS) $(CC_OBJS) $(C_OBJS)
 	@$(OD) -t $(iiijin) > $(SYM_FILE)
 	@$(OD) -d $(iiijin) > $(iiijin).dump
 	@$(OC) -O binary $(iiijin) $(iiijin_bin)
+	@$(OC) -O ihex $ $(iiijin) $(iiijin_hex)
 	
 $(OUTPUT_DIR)/%.os: %.S
 	@echo "compile " $<
