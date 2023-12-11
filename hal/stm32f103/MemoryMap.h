@@ -8,5 +8,3 @@ extern uint32_t __bss_end__;
 #define TASK_STACK_SIZE     (USR_TASK_STACK_SIZE * 3)
 //use 3 task
 #endif /*_HAL_MEMORYMAP_H_ */
-
-

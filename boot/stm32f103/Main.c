@@ -26,6 +26,7 @@
 
 #include "HalGpio.h"
 #include "HalUart.h"
+#include "HalInterrupt.h"
 
 #include "Kernel.h"
 #include "MemoryMap.h"
@@ -70,6 +71,21 @@ void Error_Handler(void);
   * @brief  The application entry point.
   * @retval int
   */
+
+static void Printf_test(){
+    char* str = "printf pointre test";
+    char* nullptr = 0;
+    //uint32_t i = 5;
+
+    debug_printf("%s\n\r", "Hello printf");
+    debug_printf("output string pointer: %s\n\r", str);
+    debug_printf("%s is null pointer, %u number\n\r", nullptr, 10);
+    debug_printf("dec = %u hex = %x \n\r", 0xff, 0xff);
+    debug_printf("print zero %u\n\r", 0);
+}
+
+
+
 int main(void)
 {
   /* USER CODE BEGIN 1 */
@@ -93,23 +109,35 @@ int main(void)
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
+  //Hal_interrupt_init();
   hal_gpio_init();
   hal_uart_init();
-  //MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
-  //uint8_t str[] = "Hello World!\n\r";
+
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  while (1)
+  uint32_t i = 20;
+  while (i--)
   {
     /* USER CODE END WHILE */
-    //HAL_UART_Transmit(&huart2, "Hello..\n", 8, 10000);
-    //HAL_UART_Transmit(&huart2, (uint8_t*)str, 16, 1000);
-    debug_printf("hajin\n");
+    uint8_t ch = Hal_uart_get_char();
+    Hal_uart_put_char(ch);
     //printf("hajin\n");
     /* USER CODE BEGIN 3 */
+  }
+  debug_printf("\n\rhajin\n\r");
+  Printf_test();
+  uint32_t j = 0;
+  while(1){
+    //delay(1000);
+    //debug_printf(".");	  
+    //j++;
+    //if(j == 20){
+	//debug_printf("\n\r Waiting Interrupt");
+	//j = 0;
+    //}
   }
   /* USER CODE END 3 */
 }

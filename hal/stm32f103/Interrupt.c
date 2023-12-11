@@ -13,7 +13,7 @@ void Hal_interrupt_init(void)
     enable_irq();
 }
 
-/*void Hal_interrupt_enable(uint32_t interrupt_num)
+void Hal_interrupt_enable(uint32_t interrupt_num)
 {
 
 }
@@ -21,7 +21,7 @@ void Hal_interrupt_init(void)
 void Hal_interrupt_disable(uint32_t interrupt_num)
 {
 
-}*/
+}
 
 /* CortexM3 enable/disable interrupt by control cpsie bit*/
 

@@ -1,12 +1,15 @@
 #include "stdint.h"
 #include "stdbool.h"
+#include "stdio.h"
 
 #include "stm32f1xx_hal.h"
 
 #include "Kernel.h"
 
+#define HAL_MAX_DELAY      0xFFFFFFFFU
 
 UART_HandleTypeDef huart2;
+
 
 void hal_uart_init(void)
 {
@@ -25,13 +28,13 @@ void hal_uart_init(void)
   huart2.Init.Parity = UART_PARITY_NONE;
   huart2.Init.Mode = UART_MODE_TX_RX;
   huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  huart2.gState = HAL_UART_STATE_RESET;
   huart2.Init.OverSampling = UART_OVERSAMPLING_16;
-  if (HAL_UART_Init(&huart2) != HAL_OK)
-  {
-    Error_Handler();
-  }
+  HAL_UART_Init(&huart2);
   /* USER CODE BEGIN USART2_Init 2 */
-
+  __HAL_UART_ENABLE_IT(&huart2, UART_IT_RXNE);
+  HAL_NVIC_SetPriority(USART2_IRQn, 0, 1);
+  HAL_NVIC_EnableIRQ(USART2_IRQn);
   /* USER CODE END USART2_Init 2 */
 
 }
@@ -47,4 +50,24 @@ uint8_t Hal_uart_get_char(void)
 	uint8_t ch;
 	HAL_UART_Receive(&huart2, &ch, 1, 1000);
 	return ch;
+}
+
+void Hal_uart_isr(void)
+{
+	debug_printf("Interrupt Cause\n\r");
+	uint8_t ch = Hal_uart_get_char();
+
+	if (ch == '\r' || ch == '\n')
+	{
+		Hal_uart_put_char('\n');
+
+		ch = '\0';
+		Kernel_send_msg(KernelMsgQ_DebugCmd, &ch, 1);
+	    	Kernel_send_events(KernelEventFlag_CmdIn);
+	}
+	else
+	{
+		Hal_uart_put_char(ch);
+	    	Kernel_send_msg(KernelMsgQ_DebugCmd, &ch, 1);
+	}
 }

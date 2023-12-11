@@ -5,7 +5,7 @@
 
 #define PRINTF_BUF_LEN 1024
 
-static char printf_buf[PRINTF_BUF_LEN];
+//static char printf_buf[PRINTF_BUF_LEN];
 
 uint32_t putstr(const char* s)
 {
@@ -22,19 +22,19 @@ uint32_t putstr(const char* s)
 
 uint32_t debug_printf(const char* format, ...)
 {
-	//disable_irq();
+	char printf_buf[PRINTF_BUF_LEN];
+	disable_irq();
 	va_list args;
 	va_start(args, format);
 	vsprintf(printf_buf, format, args);
 	va_end(args);
 
-	//uint32_t outnum = putstr(printf_buf);
+	uint32_t outnum = putstr(printf_buf);
 
-	//enable_irq;
-
-	//return outnum;
+	enable_irq();
+	return outnum;
 	
-	return putstr(printf_buf);
+	//return putstr(printf_buf);
 }
 
 uint32_t vsprintf(char* buf, const char* format, va_list arg)

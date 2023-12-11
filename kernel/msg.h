@@ -8,6 +8,7 @@ typedef enum KernelMsgQ_t
     KernelMsgQ_Task0,
     KernelMsgQ_Task1,
     KernelMsgQ_Task2,
+    KernelMsgQ_DebugCmd,
 
     KernelMsgQ_Num
 } KernelMsgQ_t;
