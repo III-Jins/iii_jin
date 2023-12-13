@@ -58,6 +58,13 @@
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 void Error_Handler(void);
+
+static void Kernel_init(void);
+
+void User_task0(void);
+void User_task1(void);
+void User_task2(void);
+
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -85,6 +92,7 @@ static void Printf_test(){
 }
 
 
+extern UART_HandleTypeDef huart2;
 
 int main(void)
 {
@@ -118,6 +126,7 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  
   uint32_t i = 20;
   while (i--)
   {
@@ -127,10 +136,14 @@ int main(void)
     //printf("hajin\n");
     /* USER CODE BEGIN 3 */
   }
-  debug_printf("\n\rhajin\n\r");
+
   Printf_test();
-  uint32_t j = 0;
-  while(1){
+  debug_printf("\n\rhajin\n\r");
+  //uint8_t ch;
+  //HAL_UART_Receive_IT(&huart2, &rx_data, 1);
+  //uint32_t j = 0;
+  Kernel_init();
+  while(true);
     //delay(1000);
     //debug_printf(".");	  
     //j++;
@@ -138,7 +151,6 @@ int main(void)
 	//debug_printf("\n\r Waiting Interrupt");
 	//j = 0;
     //}
-  }
   /* USER CODE END 3 */
 }
 
@@ -178,6 +190,35 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
+}
+
+static void Kernel_init(void)
+{
+    uint32_t taskId;
+
+    Kernel_task_init();
+    Kernel_event_flag_init();
+    Kernel_msgQ_init();
+
+    taskId = Kernel_task_create(User_task0);
+    if (NOT_ENOUGH_TASK_NUM == taskId)
+    {
+        putstr("Task0 creation fail\n");
+    }
+
+    taskId = Kernel_task_create(User_task1);
+    if (NOT_ENOUGH_TASK_NUM == taskId)
+    {
+        putstr("Task1 creation fail\n");
+    }
+
+    taskId = Kernel_task_create(User_task2);
+    if (NOT_ENOUGH_TASK_NUM == taskId)
+    {
+        putstr("Task2 creation fail\n");
+    }
+
+    Kernel_start();
 }
 
 /* USER CODE BEGIN 4 */

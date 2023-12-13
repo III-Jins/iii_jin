@@ -25,7 +25,7 @@ LINKER_SCRIPT = $(PRJ_HOME)/build/$(BOARD)/$(SOC).ld
 MAP_FILE = $(OUTPUT_DIR)/$(OUTNAME).map
 SYM_FILE = $(OUTPUT_DIR)/$(OUTNAME).sym
 
-ASM_SRCS = $(wildcard $(PRJ_HOME)/boot/$(BOARD)/*.s)
+ASM_SRCS = $(wildcard $(PRJ_HOME)/boot/$(BOARD)/*.S)
 ASM_OBJS = $(patsubst $(PRJ_HOME)/boot/$(BOARD)/%.S, $(OUTPUT_DIR)/%.os, $(ASM_SRCS))
 
 VPATH = boot/$(BOARD) 				\
