@@ -53,25 +53,31 @@ uint8_t Hal_uart_get_char(void)
 	return ch;
 }
 
-void Hal_uart_isr(void)
+void Hal_uart_isr(uint8_t ch_it)
 {
-	debug_printf("Interrupt Cause\n\r");
-	uint8_t ch = Hal_uart_get_char();
-	Hal_uart_put_char(ch);
+	//debug_printf("Interrupt Cause\n\r");
+	//uint8_t isr_ch;
+	//HAL_UART_Receive(&huart2, &isr_ch, 1,1000);
+	//debug_printf("Input value : %d\n\r", isr_ch);
 
-	if (ch == '\r' || ch == '\n')
+	if (ch_it == '\r' || ch_it == '\n')
 	{
 		Hal_uart_put_char('\n');
 		debug_printf("Enter input \n\r");
 
-		ch = '\0';
+		ch_it = '\0';
 		//Kernel_send_msg(KernelMsgQ_DebugCmd, &ch, 1);
-	    	//Kernel_send_events(KernelEventFlag_CmdIn);
+	    	Kernel_send_events(KernelEventFlag_CmdIn);
+	}
+	else if (ch_it == 'x')
+	{
+	    	Kernel_send_events(KernelEventFlag_CmdOut);
 	}
 	else
 	{
-		Hal_uart_put_char(ch);
-		debug_printf("Normal input \n\r");
+		Hal_uart_put_char(ch_it);
+		//debug_printf("Normal input \n\r");
+	    	Kernel_send_events(KernelEventFlag_UartIn);
 	    	//Kernel_send_msg(KernelMsgQ_DebugCmd, &ch, 1);
 	}
 }

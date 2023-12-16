@@ -141,31 +141,21 @@ int main(void)
 
   Printf_test();
   debug_printf("\n\rhajin\n\r");
-  //uint8_t ch;
-  //HAL_UART_Receive_IT(&huart2, &ch_it, 1);
-  //Hal_uart_put_char(ch_it);
-  //uint32_t j = 0;
-  //Kernel_init();
-  uint8_t bef_ch_it;
-  ch_it = 0;
-  bef_ch_it = 0;
-  while(1){
-  if(bef_ch_it != ch_it){
-	Hal_uart_put_char(ch_it);
-  	bef_ch_it = ch_it;
-  
-  }else{
   HAL_UART_Receive_IT(&huart2, &ch_it, 1);
+  Kernel_init();
+  //uint8_t bef_ch_it;
+  //ch_it = 0;
+  //bef_ch_it = 0;
+  while(1){
+  //if(bef_ch_it != ch_it){
+	//Hal_uart_put_char(ch_it);
+  	//bef_ch_it = ch_it;
+  
+  //}else{
+  //HAL_UART_Receive_IT(&huart2, &ch_it, 1);
 	  
-  }//uint32_t j = 0;
+  //}//uint32_t j = 0;
   }
-    //delay(1000);
-    //debug_printf(".");	  
-    //j++;
-    //if(j == 20){
-	//debug_printf("\n\r Waiting Interrupt");
-	//j = 0;
-    //}
   /* USER CODE END 3 */
 }
 
@@ -173,6 +163,8 @@ static void Kernel_init(void)
 {
     uint32_t taskId;
     Kernel_task_init();
+    Kernel_event_flag_init();
+
     taskId = Kernel_task_create(User_task0);
     if (NOT_ENOUGH_TASK_NUM == taskId)
     {
@@ -195,36 +187,57 @@ static void Kernel_init(void)
 void User_task0(void)
 {
     uint32_t local = 0;
-
-    //debug_printf("User Task #0 SP=0x%x\n", &local);
+    debug_printf("User Task #0 SP=0x%x\n\r", &local);
 
     while(true)
     {
-        debug_printf("User Task #0 SP=0x%x\n\r", &local);
+        KernelEventFlag_t handle_event = Kernel_wait_events(KernelEventFlag_UartIn|KernelEventFlag_CmdOut);
+	//debug_printf("Wait for events %x <<\n\r", handle_event);
+        switch(handle_event)
+        {
+        case KernelEventFlag_UartIn:
+            debug_printf("Event handled\n\r");
+            debug_printf("Event handled by Task0\n\r");
+	    Kernel_send_events(KernelEventFlag_CmdIn);
+            break;
+        case KernelEventFlag_CmdOut:
+            debug_printf("CmdOut Event by Task0\n\r");
+            break;
+        }
         Kernel_yield();
     }
 }
+
+
 void User_task1(void)
 {
     uint32_t local = 0;
-
-    //debug_printf("User Task #1 SP=0x%x\n", &local);
+    debug_printf("User Task #1 SP=0x%x\n\r", &local);
 
     while(true)
     {
-        debug_printf("User Task #1 SP=0x%x\n\r", &local);
+
+        KernelEventFlag_t handle_event = Kernel_wait_events(KernelEventFlag_CmdIn);
+        switch(handle_event)
+        {
+        case KernelEventFlag_CmdIn:
+            debug_printf("Event handled by Task1\n\r");
+            break;
+        }
         Kernel_yield();
     }
 }
+
+
 void User_task2(void)
 {
     uint32_t local = 0;
 
-    //debug_printf("User Task #2 SP=0x%x\n", &local);
+    debug_printf("User Task #2 SP=0x%x\n\r", &local);
 
     while(true)
     {
-        debug_printf("User Task #2 SP=0x%x\n\r", &local);
+        //debug_printf("User Task #2 SP=0x%x\n\r", &local);
         Kernel_yield();
     }
 }
