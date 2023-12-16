@@ -208,10 +208,13 @@ void USART2_IRQHandler(void)
 
   /* USER CODE END USART2_IRQn 0 */
   //HAL_UART_IRQHandler(&huart2);
-  extern void Hal_uart_isr(void);
-  Hal_uart_isr();
+  //extern void Hal_uart_isr(void);
+  //Hal_uart_isr();
   /* USER CODE BEGIN USART2_IRQn 1 */
-
+  HAL_UART_IRQHandler(&huart2);
+  //uint8_t ch;
+  //HAL_UART_Receive_IT(&huart2, &ch, 1);
+  //Hal_uart_put_char(ch);
   /* USER CODE END USART2_IRQn 1 */
 }
 
@@ -230,5 +233,4 @@ void EXTI15_10_IRQHandler(void)
 }
 
 /* USER CODE BEGIN 1 */
-
 /* USER CODE END 1 */

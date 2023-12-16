@@ -93,7 +93,7 @@ static void Printf_test(){
 }
 
 
-//extern UART_HandleTypeDef huart2;
+extern UART_HandleTypeDef huart2;
 
 int main(void)
 {
@@ -128,7 +128,8 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   
-  uint32_t i = 20;
+  int i = 20;
+  uint8_t ch_it;
   while (i--)
   {
     /* USER CODE END WHILE */
@@ -141,10 +142,23 @@ int main(void)
   Printf_test();
   debug_printf("\n\rhajin\n\r");
   //uint8_t ch;
-  //HAL_UART_Receive_IT(&huart2, &rx_data, 1);
+  //HAL_UART_Receive_IT(&huart2, &ch_it, 1);
+  //Hal_uart_put_char(ch_it);
   //uint32_t j = 0;
-  Kernel_init();
-  while(true);
+  //Kernel_init();
+  uint8_t bef_ch_it;
+  ch_it = 0;
+  bef_ch_it = 0;
+  while(1){
+  if(bef_ch_it != ch_it){
+	Hal_uart_put_char(ch_it);
+  	bef_ch_it = ch_it;
+  
+  }else{
+  HAL_UART_Receive_IT(&huart2, &ch_it, 1);
+	  
+  }//uint32_t j = 0;
+  }
     //delay(1000);
     //debug_printf(".");	  
     //j++;

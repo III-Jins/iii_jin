@@ -55,13 +55,14 @@ uint8_t Hal_uart_get_char(void)
 
 void Hal_uart_isr(void)
 {
-	//debug_printf("Interrupt Cause\n\r");
+	debug_printf("Interrupt Cause\n\r");
 	uint8_t ch = Hal_uart_get_char();
+	Hal_uart_put_char(ch);
 
 	if (ch == '\r' || ch == '\n')
 	{
 		Hal_uart_put_char('\n');
-		//debug_printf("Enter input \n\r");
+		debug_printf("Enter input \n\r");
 
 		ch = '\0';
 		//Kernel_send_msg(KernelMsgQ_DebugCmd, &ch, 1);
@@ -70,7 +71,7 @@ void Hal_uart_isr(void)
 	else
 	{
 		Hal_uart_put_char(ch);
-		//debug_printf("Normal input \n\r");
+		debug_printf("Normal input \n\r");
 	    	//Kernel_send_msg(KernelMsgQ_DebugCmd, &ch, 1);
 	}
 }
