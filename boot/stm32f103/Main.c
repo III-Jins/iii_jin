@@ -60,6 +60,7 @@ void SystemClock_Config(void);
 void Error_Handler(void);
 
 static void Kernel_init(void);
+static void Printf_test(void);
 
 void User_task0(void);
 void User_task1(void);
@@ -92,7 +93,7 @@ static void Printf_test(){
 }
 
 
-extern UART_HandleTypeDef huart2;
+//extern UART_HandleTypeDef huart2;
 
 int main(void)
 {
@@ -154,6 +155,67 @@ int main(void)
   /* USER CODE END 3 */
 }
 
+static void Kernel_init(void)
+{
+    uint32_t taskId;
+    Kernel_task_init();
+    taskId = Kernel_task_create(User_task0);
+    if (NOT_ENOUGH_TASK_NUM == taskId)
+    {
+        putstr("Task0 creation fail\n");
+    }
+    taskId = Kernel_task_create(User_task1);
+    if (NOT_ENOUGH_TASK_NUM == taskId)
+    {
+        putstr("Task1 creation fail\n");
+    }
+    taskId = Kernel_task_create(User_task2);
+    if (NOT_ENOUGH_TASK_NUM == taskId)
+    {
+        putstr("Task2 creation fail\n");
+    }
+    Kernel_start();
+}
+
+
+void User_task0(void)
+{
+    uint32_t local = 0;
+
+    //debug_printf("User Task #0 SP=0x%x\n", &local);
+
+    while(true)
+    {
+        debug_printf("User Task #0 SP=0x%x\n\r", &local);
+        Kernel_yield();
+    }
+}
+void User_task1(void)
+{
+    uint32_t local = 0;
+
+    //debug_printf("User Task #1 SP=0x%x\n", &local);
+
+    while(true)
+    {
+        debug_printf("User Task #1 SP=0x%x\n\r", &local);
+        Kernel_yield();
+    }
+}
+void User_task2(void)
+{
+    uint32_t local = 0;
+
+    //debug_printf("User Task #2 SP=0x%x\n", &local);
+
+    while(true)
+    {
+        debug_printf("User Task #2 SP=0x%x\n\r", &local);
+        Kernel_yield();
+    }
+}
+
+
 /**
   * @brief System Clock Configuration
   * @retval None
@@ -192,34 +254,6 @@ void SystemClock_Config(void)
   }
 }
 
-static void Kernel_init(void)
-{
-    uint32_t taskId;
-
-    Kernel_task_init();
-    Kernel_event_flag_init();
-    Kernel_msgQ_init();
-
-    taskId = Kernel_task_create(User_task0);
-    if (NOT_ENOUGH_TASK_NUM == taskId)
-    {
-        putstr("Task0 creation fail\n");
-    }
-
-    taskId = Kernel_task_create(User_task1);
-    if (NOT_ENOUGH_TASK_NUM == taskId)
-    {
-        putstr("Task1 creation fail\n");
-    }
-
-    taskId = Kernel_task_create(User_task2);
-    if (NOT_ENOUGH_TASK_NUM == taskId)
-    {
-        putstr("Task2 creation fail\n");
-    }
-
-    Kernel_start();
-}
 
 /* USER CODE BEGIN 4 */
 

@@ -64,13 +64,13 @@ void Hal_uart_isr(void)
 		//debug_printf("Enter input \n\r");
 
 		ch = '\0';
-		Kernel_send_msg(KernelMsgQ_DebugCmd, &ch, 1);
-	    	Kernel_send_events(KernelEventFlag_CmdIn);
+		//Kernel_send_msg(KernelMsgQ_DebugCmd, &ch, 1);
+	    	//Kernel_send_events(KernelEventFlag_CmdIn);
 	}
 	else
 	{
 		Hal_uart_put_char(ch);
 		//debug_printf("Normal input \n\r");
-	    	Kernel_send_msg(KernelMsgQ_DebugCmd, &ch, 1);
+	    	//Kernel_send_msg(KernelMsgQ_DebugCmd, &ch, 1);
 	}
 }
