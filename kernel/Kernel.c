@@ -74,7 +74,6 @@ bool Kernel_send_msg(KernelMsgQ_t Qname, void* data, uint32_t count)
 uint32_t Kernel_recv_msg(KernelMsgQ_t Qname, void* out_data, uint32_t count)
 {
     uint8_t* d = (uint8_t*)out_data;
-
     for (uint32_t i = 0 ; i < count ; i++)
     {
         if (false == Kernel_msgQ_dequeue(Qname, d))
@@ -86,6 +85,8 @@ uint32_t Kernel_recv_msg(KernelMsgQ_t Qname, void* out_data, uint32_t count)
 
     return count;
 }
+
+
 void Kernel_lock_sem(void)
 {
     while(false == Kernel_sem_test())
